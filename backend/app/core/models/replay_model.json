@@ -1,0 +1,237 @@
+{
+  "predictors": [
+    "lead_time",
+    "antecedent_1d",
+    "antecedent_3d",
+    "antecedent_7d",
+    "antecedent_anomaly",
+    "origin_departure",
+    "wet_day_fraction",
+    "wet_spell_length",
+    "dry_spell_length",
+    "trend_3d",
+    "large_excess_recency",
+    "state_wet_fraction",
+    "state_anomaly",
+    "rain_climatology",
+    "annual_variability",
+    "monsoon_share",
+    "climate_trend",
+    "convective_index",
+    "historical_skill",
+    "doy_sin",
+    "doy_cos"
+  ],
+  "intercept": -2.2561441512771445,
+  "coefficients": {
+    "lead_time": -0.034222281252279364,
+    "antecedent_1d": -0.027649736083772483,
+    "antecedent_3d": -0.9696574210007182,
+    "antecedent_7d": 0.7602725091273144,
+    "antecedent_anomaly": 0.5528010512885542,
+    "origin_departure": 0.2631823489679522,
+    "wet_day_fraction": 0.09531545965460446,
+    "wet_spell_length": 0.050063287421407046,
+    "dry_spell_length": 0.11008130636683447,
+    "trend_3d": 0.4671259208208703,
+    "large_excess_recency": -0.2791134812153789,
+    "state_wet_fraction": 0.5839064071935415,
+    "state_anomaly": -0.5585090697848114,
+    "rain_climatology": -0.3752729811894056,
+    "annual_variability": -0.628002639538197,
+    "monsoon_share": 1.0032405561556985,
+    "climate_trend": -1.0012079060687058,
+    "convective_index": 0.3510323042574946,
+    "historical_skill": 0.6280026395381909,
+    "doy_sin": 0.6252226294559657,
+    "doy_cos": 0.5835832615537162
+  },
+  "feature_mean": {
+    "lead_time": 4.0,
+    "antecedent_1d": 0.8196826295119919,
+    "antecedent_3d": 0.798040339555236,
+    "antecedent_7d": 0.7361977749690916,
+    "antecedent_anomaly": 0.3764255866405538,
+    "origin_departure": -0.199564240394262,
+    "wet_day_fraction": 0.6000179018975986,
+    "wet_spell_length": 0.3814655686836207,
+    "dry_spell_length": 0.19823666308628776,
+    "trend_3d": 0.0012609354956052725,
+    "large_excess_recency": 0.25230371991127026,
+    "state_wet_fraction": 0.14138689379491204,
+    "state_anomaly": 0.7839605058149165,
+    "rain_climatology": 0.5445781778474689,
+    "annual_variability": 0.20321257631017364,
+    "monsoon_share": 0.7722261773829574,
+    "climate_trend": -0.017236842105263134,
+    "convective_index": 0.6141007708135834,
+    "historical_skill": 0.6975205067192299,
+    "doy_sin": -0.8518276973262843,
+    "doy_cos": -0.5215598678504061
+  },
+  "feature_sd": {
+    "lead_time": 2.0,
+    "antecedent_1d": 1.1304485438027887,
+    "antecedent_3d": 0.743078690922871,
+    "antecedent_7d": 0.4407045612728493,
+    "antecedent_anomaly": 0.1997418236039997,
+    "origin_departure": 1.0226107170133463,
+    "wet_day_fraction": 0.3075700540718857,
+    "wet_spell_length": 0.32148827859062945,
+    "dry_spell_length": 0.27681327066538775,
+    "trend_3d": 0.589675772937031,
+    "large_excess_recency": 0.35776856964235276,
+    "state_wet_fraction": 0.18212869440565946,
+    "state_anomaly": 0.8372782122615726,
+    "rain_climatology": 0.13096550327838397,
+    "annual_variability": 0.06346002422364484,
+    "monsoon_share": 0.15508589162793948,
+    "climate_trend": 0.1649278046538005,
+    "convective_index": 0.16489490719382216,
+    "historical_skill": 0.09836303754664906,
+    "doy_sin": 0.025410724193151,
+    "doy_cos": 0.04146291610169325
+  },
+  "threshold": 0.5,
+  "event": {
+    "label": "Large Excess",
+    "definition": "IMD published daily departure category 'Large Excess' (observed rainfall at least 60% above the published daily normal) at the site on the valid day.",
+    "source": "IMD district-wise daily rainfall, Daily Category column."
+  },
+  "mode": "B",
+  "mode_note": "Historical weather risk proxy. Predicts an observed IMD Large Excess day from information available at the origin. This is NOT forecast-bust validation - no archived NWP forecast exists to bust.",
+  "training": {
+    "origins_total": 11,
+    "train_origins": [
+      "2026-08-23",
+      "2026-08-24",
+      "2026-08-25",
+      "2026-08-26",
+      "2026-08-27",
+      "2026-08-28",
+      "2026-08-29"
+    ],
+    "test_origins": [
+      "2026-08-30",
+      "2026-08-31",
+      "2026-09-01",
+      "2026-09-02"
+    ],
+    "train_rows": 1862,
+    "test_rows": 1064,
+    "train_base_rate": 0.1584,
+    "test_base_rate": 0.1654,
+    "split": "temporal",
+    "l2": 1.0,
+    "archive_start": "2026-08-19",
+    "archive_end": "2026-09-09",
+    "source": "IMD district-wise daily rainfall observations."
+  },
+  "metrics": {
+    "roc_auc_train": 0.8131,
+    "roc_auc_holdout": 0.682,
+    "brier_train": 0.1084,
+    "brier_holdout": 0.154,
+    "confusion_holdout": {
+      "threshold": 0.5,
+      "true_positive": 40,
+      "false_positive": 113,
+      "false_negative": 136,
+      "true_negative": 775,
+      "precision": 0.2614,
+      "recall": 0.2273,
+      "f1": 0.2432,
+      "accuracy": 0.766,
+      "base_rate": 0.1654
+    },
+    "reliability_holdout": [
+      {
+        "bin_lower": 0.0,
+        "bin_upper": 0.2,
+        "count": 649,
+        "mean_predicted": 0.0648,
+        "observed_rate": 0.1048
+      },
+      {
+        "bin_lower": 0.2,
+        "bin_upper": 0.4,
+        "count": 172,
+        "mean_predicted": 0.2982,
+        "observed_rate": 0.1686
+      },
+      {
+        "bin_lower": 0.4,
+        "bin_upper": 0.6,
+        "count": 142,
+        "mean_predicted": 0.4775,
+        "observed_rate": 0.3732
+      },
+      {
+        "bin_lower": 0.6,
+        "bin_upper": 0.8,
+        "count": 94,
+        "mean_predicted": 0.6813,
+        "observed_rate": 0.2553
+      },
+      {
+        "bin_lower": 0.8,
+        "bin_upper": 1.0,
+        "count": 7,
+        "mean_predicted": 0.8158,
+        "observed_rate": 0.2857
+      }
+    ],
+    "by_lead_holdout": [
+      {
+        "lead_time": 1,
+        "count": 152,
+        "events": 32,
+        "roc_auc": 0.831,
+        "brier": 0.1255
+      },
+      {
+        "lead_time": 2,
+        "count": 152,
+        "events": 28,
+        "roc_auc": 0.7618,
+        "brier": 0.1442
+      },
+      {
+        "lead_time": 3,
+        "count": 152,
+        "events": 27,
+        "roc_auc": 0.6948,
+        "brier": 0.1589
+      },
+      {
+        "lead_time": 4,
+        "count": 152,
+        "events": 24,
+        "roc_auc": 0.6585,
+        "brier": 0.1554
+      },
+      {
+        "lead_time": 5,
+        "count": 152,
+        "events": 24,
+        "roc_auc": 0.6286,
+        "brier": 0.1555
+      },
+      {
+        "lead_time": 6,
+        "count": 152,
+        "events": 24,
+        "roc_auc": 0.5677,
+        "brier": 0.1785
+      },
+      {
+        "lead_time": 7,
+        "count": 152,
+        "events": 17,
+        "roc_auc": 0.5813,
+        "brier": 0.1601
+      }
+    ]
+  },
+  "caveat": "Fitted on 7 origin dates and held out on 4. The daily observational archive spans 2026-08-19 to 2026-09-09 - 22 days. A held-out estimate from this few origins has wide error bars regardless of its value, and it should be read as a working figure, not a performance claim."
+}

@@ -1,0 +1,1021 @@
+{
+  "predictors": [
+    "current_anomaly",
+    "lag2_anomaly",
+    "lag3_anomaly",
+    "recent_mean_anomaly",
+    "lags_informative",
+    "same_month_last_year",
+    "same_month_3yr_mean",
+    "last_annual_anomaly",
+    "season_to_date_anomaly",
+    "recent_extreme_rate",
+    "target_month_cv",
+    "target_month_share",
+    "trend_per_decade",
+    "sign_run",
+    "month_sin",
+    "month_cos"
+  ],
+  "feature_mean": {
+    "current_anomaly": -0.010105481637737477,
+    "lag2_anomaly": -0.010968048096016854,
+    "lag3_anomaly": -0.01450463738485501,
+    "recent_mean_anomaly": -0.006599222142067262,
+    "lags_informative": 0.9118142912722322,
+    "same_month_last_year": -0.013367609875872679,
+    "same_month_3yr_mean": -0.004308301571872576,
+    "last_annual_anomaly": -0.03413000471478161,
+    "season_to_date_anomaly": 0.0063652463071394065,
+    "recent_extreme_rate": 0.24895315494455433,
+    "target_month_cv": 0.7182743542676673,
+    "target_month_share": 0.11043713317547774,
+    "trend_per_decade": 0.0057108799653161554,
+    "sign_run": -0.09948270147984833,
+    "month_sin": -0.07998986349797173,
+    "month_cos": -0.19513016882217465
+  },
+  "feature_sd": {
+    "current_anomaly": 1.0004771485018507,
+    "lag2_anomaly": 0.9490397980646287,
+    "lag3_anomaly": 0.906079400740697,
+    "recent_mean_anomaly": 0.6005499955880872,
+    "lags_informative": 0.18698034325614699,
+    "same_month_last_year": 0.9963787878734102,
+    "same_month_3yr_mean": 0.6179273258908324,
+    "last_annual_anomaly": 1.098129440818998,
+    "season_to_date_anomaly": 0.48345349295745005,
+    "recent_extreme_rate": 0.21398882822715926,
+    "target_month_cv": 0.43376605335366847,
+    "target_month_share": 0.09409495310051706,
+    "trend_per_decade": 0.09410580805900108,
+    "sign_run": 0.3854894470677674,
+    "month_sin": 0.7165345714317671,
+    "month_cos": 0.664909051597199
+  },
+  "targets": {
+    "extreme": {
+      "intercept": -1.1972720419974963,
+      "coefficients": {
+        "current_anomaly": 0.02565147343075634,
+        "lag2_anomaly": -0.05465565750845546,
+        "lag3_anomaly": -0.04801011521498635,
+        "recent_mean_anomaly": 0.08558900938143842,
+        "lags_informative": -0.03974944093226564,
+        "same_month_last_year": -0.05738062764131182,
+        "same_month_3yr_mean": 0.04316650687861721,
+        "last_annual_anomaly": -0.015608623969671215,
+        "season_to_date_anomaly": -0.020656888443619365,
+        "recent_extreme_rate": 0.068578587669435,
+        "target_month_cv": -0.6725561209879597,
+        "target_month_share": -0.0776702033984059,
+        "trend_per_decade": -0.006005410384440497,
+        "sign_run": -0.0207337008678626,
+        "month_sin": -0.0661768380955881,
+        "month_cos": 0.06565399160994
+      },
+      "operating_threshold": 0.3204,
+      "metrics": {
+        "roc_auc_train": 0.6398,
+        "roc_auc_holdout": 0.6443,
+        "brier_train": 0.1783,
+        "brier_holdout": 0.1738,
+        "confusion_holdout": {
+          "threshold": 0.3204463778454542,
+          "true_positive": 215,
+          "false_positive": 428,
+          "false_negative": 374,
+          "true_negative": 1437,
+          "precision": 0.3344,
+          "recall": 0.365,
+          "f1": 0.349,
+          "accuracy": 0.6732,
+          "base_rate": 0.24
+        },
+        "confusion_holdout_at_50": {
+          "threshold": 0.5,
+          "true_positive": 0,
+          "false_positive": 0,
+          "false_negative": 589,
+          "true_negative": 1865,
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0,
+          "accuracy": 0.76,
+          "base_rate": 0.24
+        },
+        "reliability_holdout": [
+          {
+            "bin_lower": 0.0,
+            "bin_upper": 0.2,
+            "count": 717,
+            "mean_predicted": 0.1297,
+            "observed_rate": 0.1046
+          },
+          {
+            "bin_lower": 0.2,
+            "bin_upper": 0.4,
+            "count": 1708,
+            "mean_predicted": 0.2978,
+            "observed_rate": 0.2974
+          },
+          {
+            "bin_lower": 0.4,
+            "bin_upper": 0.6,
+            "count": 29,
+            "mean_predicted": 0.4193,
+            "observed_rate": 0.2069
+          },
+          {
+            "bin_lower": 0.6,
+            "bin_upper": 0.8,
+            "count": 0,
+            "mean_predicted": null,
+            "observed_rate": null
+          },
+          {
+            "bin_lower": 0.8,
+            "bin_upper": 1.0,
+            "count": 0,
+            "mean_predicted": null,
+            "observed_rate": null
+          }
+        ],
+        "by_year_holdout": [
+          {
+            "year": 2010,
+            "count": 305,
+            "events": 72,
+            "roc_auc": 0.6233,
+            "brier": 0.1748
+          },
+          {
+            "year": 2011,
+            "count": 309,
+            "events": 64,
+            "roc_auc": 0.6418,
+            "brier": 0.1587
+          },
+          {
+            "year": 2012,
+            "count": 308,
+            "events": 78,
+            "roc_auc": 0.6426,
+            "brier": 0.1791
+          },
+          {
+            "year": 2013,
+            "count": 308,
+            "events": 80,
+            "roc_auc": 0.6475,
+            "brier": 0.1821
+          },
+          {
+            "year": 2014,
+            "count": 306,
+            "events": 68,
+            "roc_auc": 0.6742,
+            "brier": 0.1625
+          },
+          {
+            "year": 2015,
+            "count": 305,
+            "events": 83,
+            "roc_auc": 0.6086,
+            "brier": 0.1924
+          },
+          {
+            "year": 2016,
+            "count": 306,
+            "events": 80,
+            "roc_auc": 0.6445,
+            "brier": 0.1839
+          },
+          {
+            "year": 2017,
+            "count": 307,
+            "events": 64,
+            "roc_auc": 0.6755,
+            "brier": 0.1572
+          }
+        ],
+        "by_month_holdout": [
+          {
+            "month": 1,
+            "count": 84,
+            "events": 14,
+            "roc_auc": 0.698,
+            "brier": 0.1286
+          },
+          {
+            "month": 2,
+            "count": 176,
+            "events": 26,
+            "roc_auc": 0.7351,
+            "brier": 0.116
+          },
+          {
+            "month": 3,
+            "count": 173,
+            "events": 25,
+            "roc_auc": 0.5938,
+            "brier": 0.1218
+          },
+          {
+            "month": 4,
+            "count": 150,
+            "events": 52,
+            "roc_auc": 0.6743,
+            "brier": 0.2237
+          },
+          {
+            "month": 5,
+            "count": 184,
+            "events": 35,
+            "roc_auc": 0.6027,
+            "brier": 0.1542
+          },
+          {
+            "month": 6,
+            "count": 242,
+            "events": 82,
+            "roc_auc": 0.4175,
+            "brier": 0.2322
+          },
+          {
+            "month": 7,
+            "count": 287,
+            "events": 98,
+            "roc_auc": 0.5855,
+            "brier": 0.2226
+          },
+          {
+            "month": 8,
+            "count": 288,
+            "events": 91,
+            "roc_auc": 0.5219,
+            "brier": 0.2175
+          },
+          {
+            "month": 9,
+            "count": 288,
+            "events": 72,
+            "roc_auc": 0.533,
+            "brier": 0.1924
+          },
+          {
+            "month": 10,
+            "count": 280,
+            "events": 53,
+            "roc_auc": 0.697,
+            "brier": 0.1441
+          },
+          {
+            "month": 11,
+            "count": 207,
+            "events": 27,
+            "roc_auc": 0.7601,
+            "brier": 0.1042
+          },
+          {
+            "month": 12,
+            "count": 95,
+            "events": 14,
+            "roc_auc": 0.5115,
+            "brier": 0.1294
+          }
+        ],
+        "by_subdivision_holdout": [
+          {
+            "subdivision": "Andaman & Nicobar Islands",
+            "count": 96,
+            "events": 24,
+            "roc_auc": 0.5434,
+            "brier": 0.1932
+          },
+          {
+            "subdivision": "Arunachal Pradesh",
+            "count": 96,
+            "events": 16,
+            "roc_auc": 0.6141,
+            "brier": 0.1433
+          },
+          {
+            "subdivision": "Assam & Meghalaya",
+            "count": 80,
+            "events": 32,
+            "roc_auc": 0.5684,
+            "brier": 0.2382
+          },
+          {
+            "subdivision": "Bihar",
+            "count": 67,
+            "events": 19,
+            "roc_auc": 0.6075,
+            "brier": 0.1934
+          },
+          {
+            "subdivision": "Chhattisgarh",
+            "count": 80,
+            "events": 14,
+            "roc_auc": 0.7338,
+            "brier": 0.1335
+          },
+          {
+            "subdivision": "Coastal Andhra Pradesh",
+            "count": 80,
+            "events": 19,
+            "roc_auc": 0.5522,
+            "brier": 0.183
+          },
+          {
+            "subdivision": "Coastal Karnataka",
+            "count": 64,
+            "events": 17,
+            "roc_auc": 0.7034,
+            "brier": 0.1744
+          },
+          {
+            "subdivision": "East Madhya Pradesh",
+            "count": 56,
+            "events": 11,
+            "roc_auc": 0.6303,
+            "brier": 0.1514
+          },
+          {
+            "subdivision": "East Uttar Pradesh",
+            "count": 48,
+            "events": 13,
+            "roc_auc": 0.611,
+            "brier": 0.1895
+          },
+          {
+            "subdivision": "Gangetic West Bengal",
+            "count": 80,
+            "events": 19,
+            "roc_auc": 0.6937,
+            "brier": 0.1665
+          },
+          {
+            "subdivision": "Haryana Delhi & Chandigarh",
+            "count": 56,
+            "events": 11,
+            "roc_auc": 0.6242,
+            "brier": 0.1519
+          },
+          {
+            "subdivision": "Himachal Pradesh",
+            "count": 96,
+            "events": 15,
+            "roc_auc": 0.6881,
+            "brier": 0.1327
+          },
+          {
+            "subdivision": "Jammu & Kashmir",
+            "count": 92,
+            "events": 23,
+            "roc_auc": 0.6049,
+            "brier": 0.1811
+          },
+          {
+            "subdivision": "Jharkhand",
+            "count": 80,
+            "events": 22,
+            "roc_auc": 0.7053,
+            "brier": 0.1817
+          },
+          {
+            "subdivision": "Kerala",
+            "count": 96,
+            "events": 28,
+            "roc_auc": 0.6765,
+            "brier": 0.1918
+          },
+          {
+            "subdivision": "Konkan & Goa",
+            "count": 48,
+            "events": 13,
+            "roc_auc": 0.6286,
+            "brier": 0.1883
+          },
+          {
+            "subdivision": "Lakshadweep",
+            "count": 96,
+            "events": 19,
+            "roc_auc": 0.6582,
+            "brier": 0.1505
+          },
+          {
+            "subdivision": "Madhya Maharashtra",
+            "count": 48,
+            "events": 6,
+            "roc_auc": 0.5,
+            "brier": 0.1405
+          },
+          {
+            "subdivision": "Matathwada",
+            "count": 48,
+            "events": 13,
+            "roc_auc": 0.8132,
+            "brier": 0.1724
+          },
+          {
+            "subdivision": "Naga Mani Mizo Tripura",
+            "count": 96,
+            "events": 20,
+            "roc_auc": 0.6599,
+            "brier": 0.1579
+          },
+          {
+            "subdivision": "North Interior Karnataka",
+            "count": 56,
+            "events": 15,
+            "roc_auc": 0.5967,
+            "brier": 0.1919
+          },
+          {
+            "subdivision": "Orissa",
+            "count": 80,
+            "events": 17,
+            "roc_auc": 0.5425,
+            "brier": 0.1703
+          },
+          {
+            "subdivision": "Punjab",
+            "count": 80,
+            "events": 13,
+            "roc_auc": 0.6315,
+            "brier": 0.1327
+          },
+          {
+            "subdivision": "Rayalseema",
+            "count": 69,
+            "events": 15,
+            "roc_auc": 0.6728,
+            "brier": 0.1596
+          },
+          {
+            "subdivision": "South Interior Karnataka",
+            "count": 64,
+            "events": 21,
+            "roc_auc": 0.505,
+            "brier": 0.2215
+          },
+          {
+            "subdivision": "Sub Himalayan West Bengal & Sikkim",
+            "count": 80,
+            "events": 17,
+            "roc_auc": 0.5565,
+            "brier": 0.1695
+          },
+          {
+            "subdivision": "Tamil Nadu",
+            "count": 96,
+            "events": 21,
+            "roc_auc": 0.6133,
+            "brier": 0.1625
+          },
+          {
+            "subdivision": "Telangana",
+            "count": 64,
+            "events": 17,
+            "roc_auc": 0.6846,
+            "brier": 0.1837
+          },
+          {
+            "subdivision": "Uttarakhand",
+            "count": 80,
+            "events": 21,
+            "roc_auc": 0.5513,
+            "brier": 0.1907
+          },
+          {
+            "subdivision": "Vidarbha",
+            "count": 64,
+            "events": 15,
+            "roc_auc": 0.7483,
+            "brier": 0.1615
+          },
+          {
+            "subdivision": "West Madhya Pradesh",
+            "count": 40,
+            "events": 9,
+            "roc_auc": 0.7491,
+            "brier": 0.1512
+          },
+          {
+            "subdivision": "West Uttar Pradesh",
+            "count": 56,
+            "events": 18,
+            "roc_auc": 0.6813,
+            "brier": 0.207
+          }
+        ]
+      }
+    },
+    "wet": {
+      "intercept": -1.8187241487593493,
+      "coefficients": {
+        "current_anomaly": 0.09787915174956878,
+        "lag2_anomaly": 0.0282405504117794,
+        "lag3_anomaly": -0.022224723983868076,
+        "recent_mean_anomaly": 0.011817582409246933,
+        "lags_informative": -0.06990343682743504,
+        "same_month_last_year": -0.07001192866234901,
+        "same_month_3yr_mean": 0.08214271400074767,
+        "last_annual_anomaly": 0.04452715928404432,
+        "season_to_date_anomaly": 0.025173522979163587,
+        "recent_extreme_rate": 0.02539740491434279,
+        "target_month_cv": -0.2679211107432225,
+        "target_month_share": -0.1516968016718815,
+        "trend_per_decade": 0.09961714669525706,
+        "sign_run": 0.028834212194161084,
+        "month_sin": -0.06403839152933784,
+        "month_cos": -0.05644994712987035
+      },
+      "operating_threshold": 0.184,
+      "metrics": {
+        "roc_auc_train": 0.5896,
+        "roc_auc_holdout": 0.587,
+        "brier_train": 0.1217,
+        "brier_holdout": 0.1053,
+        "confusion_holdout": {
+          "threshold": 0.18402678396758812,
+          "true_positive": 42,
+          "false_positive": 188,
+          "false_negative": 254,
+          "true_negative": 1970,
+          "precision": 0.1826,
+          "recall": 0.1419,
+          "f1": 0.1597,
+          "accuracy": 0.8199,
+          "base_rate": 0.1206
+        },
+        "confusion_holdout_at_50": {
+          "threshold": 0.5,
+          "true_positive": 0,
+          "false_positive": 0,
+          "false_negative": 296,
+          "true_negative": 2158,
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0,
+          "accuracy": 0.8794,
+          "base_rate": 0.1206
+        },
+        "reliability_holdout": [
+          {
+            "bin_lower": 0.0,
+            "bin_upper": 0.2,
+            "count": 2348,
+            "mean_predicted": 0.1329,
+            "observed_rate": 0.1175
+          },
+          {
+            "bin_lower": 0.2,
+            "bin_upper": 0.4,
+            "count": 106,
+            "mean_predicted": 0.2163,
+            "observed_rate": 0.1887
+          },
+          {
+            "bin_lower": 0.4,
+            "bin_upper": 0.6,
+            "count": 0,
+            "mean_predicted": null,
+            "observed_rate": null
+          },
+          {
+            "bin_lower": 0.6,
+            "bin_upper": 0.8,
+            "count": 0,
+            "mean_predicted": null,
+            "observed_rate": null
+          },
+          {
+            "bin_lower": 0.8,
+            "bin_upper": 1.0,
+            "count": 0,
+            "mean_predicted": null,
+            "observed_rate": null
+          }
+        ],
+        "by_year_holdout": [
+          {
+            "year": 2010,
+            "count": 305,
+            "events": 49,
+            "roc_auc": 0.6328,
+            "brier": 0.1321
+          },
+          {
+            "year": 2011,
+            "count": 309,
+            "events": 35,
+            "roc_auc": 0.5984,
+            "brier": 0.1
+          },
+          {
+            "year": 2012,
+            "count": 308,
+            "events": 25,
+            "roc_auc": 0.5037,
+            "brier": 0.0785
+          },
+          {
+            "year": 2013,
+            "count": 308,
+            "events": 55,
+            "roc_auc": 0.5989,
+            "brier": 0.1455
+          },
+          {
+            "year": 2014,
+            "count": 306,
+            "events": 22,
+            "roc_auc": 0.63,
+            "brier": 0.07
+          },
+          {
+            "year": 2015,
+            "count": 305,
+            "events": 42,
+            "roc_auc": 0.5079,
+            "brier": 0.1196
+          },
+          {
+            "year": 2016,
+            "count": 306,
+            "events": 31,
+            "roc_auc": 0.5799,
+            "brier": 0.0919
+          },
+          {
+            "year": 2017,
+            "count": 307,
+            "events": 37,
+            "roc_auc": 0.5942,
+            "brier": 0.1052
+          }
+        ],
+        "by_month_holdout": [
+          {
+            "month": 1,
+            "count": 84,
+            "events": 6,
+            "roc_auc": 0.5085,
+            "brier": 0.0677
+          },
+          {
+            "month": 2,
+            "count": 176,
+            "events": 14,
+            "roc_auc": 0.593,
+            "brier": 0.0745
+          },
+          {
+            "month": 3,
+            "count": 173,
+            "events": 18,
+            "roc_auc": 0.4738,
+            "brier": 0.0939
+          },
+          {
+            "month": 4,
+            "count": 150,
+            "events": 29,
+            "roc_auc": 0.56,
+            "brier": 0.1585
+          },
+          {
+            "month": 5,
+            "count": 184,
+            "events": 21,
+            "roc_auc": 0.5627,
+            "brier": 0.1022
+          },
+          {
+            "month": 6,
+            "count": 242,
+            "events": 33,
+            "roc_auc": 0.5484,
+            "brier": 0.1182
+          },
+          {
+            "month": 7,
+            "count": 287,
+            "events": 37,
+            "roc_auc": 0.6498,
+            "brier": 0.1093
+          },
+          {
+            "month": 8,
+            "count": 288,
+            "events": 43,
+            "roc_auc": 0.61,
+            "brier": 0.1252
+          },
+          {
+            "month": 9,
+            "count": 288,
+            "events": 42,
+            "roc_auc": 0.5103,
+            "brier": 0.125
+          },
+          {
+            "month": 10,
+            "count": 280,
+            "events": 24,
+            "roc_auc": 0.5161,
+            "brier": 0.0814
+          },
+          {
+            "month": 11,
+            "count": 207,
+            "events": 19,
+            "roc_auc": 0.6904,
+            "brier": 0.082
+          },
+          {
+            "month": 12,
+            "count": 95,
+            "events": 10,
+            "roc_auc": 0.4541,
+            "brier": 0.0956
+          }
+        ]
+      }
+    },
+    "dry": {
+      "intercept": -2.6169170628775955,
+      "coefficients": {
+        "current_anomaly": -0.09742882572017363,
+        "lag2_anomaly": -0.15714365704807276,
+        "lag3_anomaly": -0.06028971694786521,
+        "recent_mean_anomaly": 0.14103733086879017,
+        "lags_informative": -0.03628396845516498,
+        "same_month_last_year": -0.014701619543633849,
+        "same_month_3yr_mean": -0.015288085053891825,
+        "last_annual_anomaly": -0.09229214496291048,
+        "season_to_date_anomaly": -0.039493098886740616,
+        "recent_extreme_rate": 0.07671636471849487,
+        "target_month_cv": -1.4896802673049023,
+        "target_month_share": -0.01486047347746314,
+        "trend_per_decade": -0.11461371959378838,
+        "sign_run": -0.06746847413516399,
+        "month_sin": -0.025032335139576787,
+        "month_cos": 0.33388633127396733
+      },
+      "operating_threshold": 0.2097,
+      "metrics": {
+        "roc_auc_train": 0.7231,
+        "roc_auc_holdout": 0.7212,
+        "brier_train": 0.0884,
+        "brier_holdout": 0.0992,
+        "confusion_holdout": {
+          "threshold": 0.20972248312667596,
+          "true_positive": 74,
+          "false_positive": 249,
+          "false_negative": 220,
+          "true_negative": 1911,
+          "precision": 0.2291,
+          "recall": 0.2517,
+          "f1": 0.2399,
+          "accuracy": 0.8089,
+          "base_rate": 0.1198
+        },
+        "confusion_holdout_at_50": {
+          "threshold": 0.5,
+          "true_positive": 0,
+          "false_positive": 0,
+          "false_negative": 294,
+          "true_negative": 2160,
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0,
+          "accuracy": 0.8802,
+          "base_rate": 0.1198
+        },
+        "reliability_holdout": [
+          {
+            "bin_lower": 0.0,
+            "bin_upper": 0.2,
+            "count": 2058,
+            "mean_predicted": 0.0876,
+            "observed_rate": 0.0991
+          },
+          {
+            "bin_lower": 0.2,
+            "bin_upper": 0.4,
+            "count": 396,
+            "mean_predicted": 0.2441,
+            "observed_rate": 0.2273
+          },
+          {
+            "bin_lower": 0.4,
+            "bin_upper": 0.6,
+            "count": 0,
+            "mean_predicted": null,
+            "observed_rate": null
+          },
+          {
+            "bin_lower": 0.6,
+            "bin_upper": 0.8,
+            "count": 0,
+            "mean_predicted": null,
+            "observed_rate": null
+          },
+          {
+            "bin_lower": 0.8,
+            "bin_upper": 1.0,
+            "count": 0,
+            "mean_predicted": null,
+            "observed_rate": null
+          }
+        ],
+        "by_year_holdout": [
+          {
+            "year": 2010,
+            "count": 305,
+            "events": 23,
+            "roc_auc": 0.7767,
+            "brier": 0.067
+          },
+          {
+            "year": 2011,
+            "count": 309,
+            "events": 29,
+            "roc_auc": 0.7277,
+            "brier": 0.0806
+          },
+          {
+            "year": 2012,
+            "count": 308,
+            "events": 53,
+            "roc_auc": 0.657,
+            "brier": 0.1407
+          },
+          {
+            "year": 2013,
+            "count": 308,
+            "events": 25,
+            "roc_auc": 0.8064,
+            "brier": 0.0679
+          },
+          {
+            "year": 2014,
+            "count": 306,
+            "events": 46,
+            "roc_auc": 0.7123,
+            "brier": 0.1205
+          },
+          {
+            "year": 2015,
+            "count": 305,
+            "events": 41,
+            "roc_auc": 0.7415,
+            "brier": 0.1084
+          },
+          {
+            "year": 2016,
+            "count": 306,
+            "events": 50,
+            "roc_auc": 0.6727,
+            "brier": 0.1339
+          },
+          {
+            "year": 2017,
+            "count": 307,
+            "events": 27,
+            "roc_auc": 0.7733,
+            "brier": 0.0744
+          }
+        ],
+        "by_month_holdout": [
+          {
+            "month": 1,
+            "count": 84,
+            "events": 8,
+            "roc_auc": 0.8289,
+            "brier": 0.0765
+          },
+          {
+            "month": 2,
+            "count": 176,
+            "events": 12,
+            "roc_auc": 0.8933,
+            "brier": 0.0542
+          },
+          {
+            "month": 3,
+            "count": 173,
+            "events": 7,
+            "roc_auc": 0.9441,
+            "brier": 0.0333
+          },
+          {
+            "month": 4,
+            "count": 150,
+            "events": 23,
+            "roc_auc": 0.6881,
+            "brier": 0.1248
+          },
+          {
+            "month": 5,
+            "count": 184,
+            "events": 14,
+            "roc_auc": 0.5714,
+            "brier": 0.0723
+          },
+          {
+            "month": 6,
+            "count": 242,
+            "events": 49,
+            "roc_auc": 0.5208,
+            "brier": 0.1661
+          },
+          {
+            "month": 7,
+            "count": 287,
+            "events": 61,
+            "roc_auc": 0.5672,
+            "brier": 0.1669
+          },
+          {
+            "month": 8,
+            "count": 288,
+            "events": 48,
+            "roc_auc": 0.6783,
+            "brier": 0.1323
+          },
+          {
+            "month": 9,
+            "count": 288,
+            "events": 31,
+            "roc_auc": 0.5911,
+            "brier": 0.0995
+          },
+          {
+            "month": 10,
+            "count": 280,
+            "events": 29,
+            "roc_auc": 0.7751,
+            "brier": 0.0858
+          },
+          {
+            "month": 11,
+            "count": 207,
+            "events": 8,
+            "roc_auc": 0.8882,
+            "brier": 0.0338
+          },
+          {
+            "month": 12,
+            "count": 95,
+            "events": 4,
+            "roc_auc": 0.8407,
+            "brier": 0.0385
+          }
+        ]
+      }
+    }
+  },
+  "nominal_threshold": 0.5,
+  "threshold_note": "Two thresholds are reported. 0.50 is the conventional one and at this base rate it never fires - shown rather than hidden. The operating threshold is the quantile matching the TRAINING base rate, picked on the training years alone and frozen before 2010-2017 was scored.",
+  "event": {
+    "label": "Extreme month",
+    "definition": "Sub-division monthly rainfall at least 1.0 standard deviations from its own climatology. 'Wet' is the positive side, 'dry' the negative.",
+    "source": "IMD sub-divisional monthly rainfall, 1901-2017.",
+    "climatology": "Expanding window: for a target in year Y, computed from years strictly before Y, so no test year informs its own baseline."
+  },
+  "resolution": "month",
+  "resolution_note": "The sub-division file holds one figure per month. This model predicts a whole calendar month and cannot resolve individual days. No daily value is derived from a monthly total.",
+  "training": {
+    "train_years": [
+      1935,
+      2009
+    ],
+    "test_years": [
+      2010,
+      2017
+    ],
+    "train_rows": 23133,
+    "test_rows": 2454,
+    "base_rates_train": {
+      "extreme": 0.2486,
+      "wet": 0.1439,
+      "dry": 0.1047
+    },
+    "base_rates_test": {
+      "extreme": 0.24,
+      "wet": 0.1206,
+      "dry": 0.1198
+    },
+    "split": "block, by target year",
+    "l2": 2.0,
+    "subdivisions": 36,
+    "min_climatology_mm": 10.0,
+    "min_history_years": 30
+  },
+  "caveat": "ROC-AUC around 0.64 is modest, and it is what a month-ahead rainfall prediction built only from a rainfall series honestly scores. The dominant driver of Indian monsoon anomalies is ENSO, and no ENSO index is present in this dataset. Adding one is the obvious next step; reporting a higher number without it would not be."
+}
