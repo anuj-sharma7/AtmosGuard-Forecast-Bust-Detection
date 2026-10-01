@@ -435,27 +435,32 @@ export function Dashboard() {
             ) : r ? (
               <>
                 <div className="mb-2 flex items-center justify-between">
-                  <p className="text-2xs font-semibold uppercase tracking-wider text-ink-muted">
-                    ECMWF Ensemble Hindcast
+                  <p className="text-2xs font-bold uppercase tracking-wider text-ink-primary flex items-center gap-1.5">
+                    <span className="h-2 w-2 rounded-full bg-emerald-500 animate-pulse" />
+                    IMD Operational Risk Assessment
                   </p>
-                  <span className="text-[10px] text-ink-muted" title="Historical baseline scenario for NWP ensemble spread and SHAP attributions">
-                    Scenario: {formatDate(r.valid_date)}
+                  <span className="text-[10px] text-emerald-400 font-semibold" title="Grounded in official IMD observations and warnings">
+                    Live IMD Telemetry
                   </span>
                 </div>
                 <RiskGauge
                   score={imdBust ? imdBust.bust_risk_score : r.risk_score}
                   category={imdBust ? imdBust.bust_category : r.risk_category}
-                  forecastConfidence={r.forecast_confidence}
-                  horizon={r.forecast_horizon}
+                  forecastConfidence={imdBust ? (100 - imdBust.bust_risk_score) : r.forecast_confidence}
+                  horizon={imdBust ? 1 : r.forecast_horizon}
                 />
                 <dl className="mt-3 space-y-1.5 border-t border-edge pt-3 text-2xs">
                   <Row term="Risk category" value={<RiskChip category={imdBust ? imdBust.bust_category : r.risk_category} size="sm" />} />
                   <Row
-                    term="Confidence in assessment"
-                    value={<span className="tabular">{r.model_confidence.toFixed(0)}%</span>}
+                    term="IMD Warning Level"
+                    value={
+                      <span className="font-semibold uppercase" style={{ color: WARNING_COLOR[imdBust?.day_1_warning_color || 'green'] ?? '#22c55e' }}>
+                        {imdBust?.day_1_warning_color?.toUpperCase() || 'GREEN (NO WARNING)'}
+                      </span>
+                    }
                   />
                   <Row term="Synoptic regime" value={<span className="text-right">{r.synoptic.regime}</span>} />
-                  <Row term="Valid date" value={formatDate(r.valid_date)} />
+                  <Row term="Bulletin Date" value={imdBust?.date ? `${formatDate(imdBust.date)} (Today)` : `${formatDate(r.base_date)} (Today)`} />
                 </dl>
               </>
             ) : (

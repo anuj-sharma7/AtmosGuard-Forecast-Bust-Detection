@@ -99,12 +99,12 @@ def meta() -> dict:
         "horizons": HORIZONS,
         "scenarios": [s.__dict__ for s in scenarios.SCENARIOS],
         "default_selection": {
-            "location_id": default.location_id,
-            "variable_id": default.variable_id,
-            "model_id": default.model_id,
-            "horizon": default.horizon,
-            "base_date": default.base_date,
-            "scenario_id": default.id,
+            "location_id": "jaipur",
+            "variable_id": "rainfall",
+            "model_id": "ecmwf",
+            "horizon": 3,
+            "base_date": imd_live._today_str(),
+            "scenario_id": None,
         },
         "disclaimer": service.DISCLAIMER,
     }

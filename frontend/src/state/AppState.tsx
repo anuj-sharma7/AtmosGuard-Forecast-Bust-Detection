@@ -60,7 +60,7 @@ export function AppStateProvider({ children }: { children: ReactNode }) {
     error: null,
   });
   const [selection, setSelection] = useState<Selection | null>(null);
-  const [demoMode, setDemoMode] = useState(true);
+  const [demoMode, setDemoMode] = useState(false);
   const [activeScenario, setActiveScenario] = useState<string | null>(null);
   const [nonce, setNonce] = useState(0);
 

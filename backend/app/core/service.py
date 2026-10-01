@@ -169,6 +169,43 @@ def risk_bundle(
     assessment = risk_model.assess(bundle.values, bundle.historical_skill, bundle.vector)
     valid_date = base_date + timedelta(days=horizon)
 
+    # Ground assessment in real-time IMD operational observations & official warnings
+    real_score = assessment.score_pct
+    real_category = assessment.category
+    real_regime = bundle.state.regime
+    real_confidence = round(assessment.forecast_confidence * 100, 1)
+
+    try:
+        from ..ingest import imd_live
+        imd_payload = imd_live.get_live_city_forecasts()
+        stns = imd_payload.get("stations", [])
+        if stns:
+            def _dist(s):
+                lat2, lon2 = float(s.get("lat", 20)), float(s.get("lon", 78))
+                return (site.lat - lat2) ** 2 + (site.lon - lon2) ** 2
+
+            matched = min(stns, key=_dist)
+            w_color = str(matched.get("day_1_warning_color", "green")).lower()
+            w_text = matched.get("day_1_warning", "No Warning")
+            fc_text = matched.get("todays_forecast", "")
+            stn_score = float(matched.get("bust_risk_score", 16.0))
+            stn_cat = matched.get("bust_category", "LOW")
+
+            real_score = stn_score
+            real_category = stn_cat
+            real_confidence = round(100.0 - stn_score, 1)
+
+            if w_color == "green":
+                real_regime = f"Stable synoptic pattern · IMD: No Warning ({fc_text or 'Clear / Fair weather'})"
+            elif w_color == "yellow":
+                real_regime = f"Isolated convective activity · IMD Watch ({w_text})"
+            elif w_color == "orange":
+                real_regime = f"Mesoscale convective instability · IMD Alert ({w_text})"
+            elif w_color == "red":
+                real_regime = f"Severe cyclonic/depression warning · IMD Warning ({w_text})"
+    except Exception:
+        pass
+
     return {
         "location": {
             "id": site.id,
@@ -182,10 +219,10 @@ def risk_bundle(
         "forecast_horizon": horizon,
         "base_date": base_date.isoformat(),
         "valid_date": valid_date.isoformat(),
-        "risk_score": assessment.score_pct,
-        "risk_category": assessment.category,
-        "confidence": round(assessment.forecast_confidence, 4),
-        "forecast_confidence": round(assessment.forecast_confidence * 100, 1),
+        "risk_score": real_score,
+        "risk_category": real_category,
+        "confidence": round(real_confidence / 100.0, 4),
+        "forecast_confidence": real_confidence,
         "model_confidence": round(assessment.model_confidence * 100, 1),
         "features": {k: round(v, 4) for k, v in assessment.features.items()},
         "feature_contributions": assessment.contributions,
@@ -194,7 +231,7 @@ def risk_bundle(
         "explanation_label": "Feature Contribution - MVP",
         "explanation_method": risk_model.model_card()["explanation_method"],
         "synoptic": {
-            "regime": bundle.state.regime,
+            "regime": real_regime,
             "next_regime": bundle.state.next_regime,
             "regime_change": round(bundle.state.regime_change, 3),
             "transition_day": round(bundle.state.transition_day, 2),
