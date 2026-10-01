@@ -160,3 +160,70 @@ class TestEcmwfRequest:
         for site in ALL_SITES:
             assert south <= site.lat <= north, site.id
             assert west <= site.lon <= east, site.id
+
+
+class TestLiveWeather:
+    def test_compare_ground_truth_aligned(self) -> None:
+        from app.ingest import live_weather
+
+        obs = {
+            "temperature": 32.0,
+            "relative_humidity": 60,
+            "precipitation_mm": 0.0,
+        }
+        res = live_weather.compare_ground_truth(
+            obs,
+            forecast_temp_max=34.0,
+            forecast_temp_min=24.0,
+            forecast_precip_expected=False,
+        )
+        assert res["agreement"] == "HIGH"
+        assert res["divergence_count"] == 0
+
+    def test_compare_ground_truth_temperature_divergence(self) -> None:
+        from app.ingest import live_weather
+
+        obs = {
+            "temperature": 41.5,
+            "relative_humidity": 30,
+            "precipitation_mm": 0.0,
+        }
+        res = live_weather.compare_ground_truth(
+            obs,
+            forecast_temp_max=35.0,
+            forecast_temp_min=25.0,
+        )
+        assert res["agreement"] == "LOW"
+        assert res["divergence_count"] >= 1
+        assert "exceeds forecast max" in res["notes"][0]
+
+    def test_compare_ground_truth_dry_air_divergence(self) -> None:
+        from app.ingest import live_weather
+
+        obs = {
+            "temperature": 28.0,
+            "relative_humidity": 35.0,
+            "precipitation_mm": 0.0,
+        }
+        res = live_weather.compare_ground_truth(
+            obs,
+            forecast_temp_max=32.0,
+            forecast_precip_expected=True,
+        )
+        assert res["agreement"] in {"MODERATE", "LOW"}
+        assert any("Dry air" in note for note in res["notes"])
+
+    def test_fetch_msn_weather_empty_location(self) -> None:
+        from app.ingest import live_weather
+
+        assert live_weather.fetch_msn_weather("") is None
+
+    def test_fetch_live_weather_returns_standard_structure(self) -> None:
+        from app.ingest import live_weather
+
+        data = live_weather.fetch_live_weather(26.9, 75.8, location_name="Jaipur")
+        assert "temperature" in data
+        assert "relative_humidity" in data
+        assert "source" in data
+        assert "msn_connector" in data
+
