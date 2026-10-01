@@ -1,0 +1,27 @@
+# --- AtmosGuard MVP runtime ---
+fastapi>=0.115.0
+uvicorn[standard]>=0.30.0
+pydantic>=2.10.0
+numpy>=2.2.0
+
+# --- Trained models ---
+# The dashboard's selected risk model is XGBoost (models/registry.json), and
+# the station replay uses scikit-learn.
+xgboost>=3.2.0
+scikit-learn>=1.5.0
+joblib>=1.4.0
+
+# --- Optional ---
+# shap==0.46.0   (not needed: XGBoost computes exact TreeSHAP itself)
+
+# --- Optional: real NWP/ensemble ingestion (replaces synthetic provider) ---
+# xarray==2024.11.0
+# netCDF4==1.7.2
+# cfgrib==0.9.14.1
+
+# --- Optional: PostgreSQL / TimescaleDB instead of local SQLite ---
+# psycopg[binary]==3.2.3
+
+# --- Dev ---
+# pytest==8.3.4
+# httpx==0.28.1
