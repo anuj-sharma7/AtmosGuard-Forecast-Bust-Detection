@@ -49,7 +49,10 @@ BAND_COLORS = {
 
 
 def _reference_date() -> date:
-    return date.fromisoformat(settings.demo_reference_date)
+    try:
+        return date.fromisoformat(imd_live._today_str())
+    except Exception:
+        return date.fromisoformat(settings.demo_reference_date)
 
 
 def _parse_date(value: str | None) -> date:
