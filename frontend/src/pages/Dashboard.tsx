@@ -444,13 +444,17 @@ export function Dashboard() {
                   </span>
                 </div>
                 <RiskGauge
-                  score={imdBust ? imdBust.bust_risk_score : r.risk_score}
-                  category={imdBust ? imdBust.bust_category : r.risk_category}
-                  forecastConfidence={imdBust ? (100 - imdBust.bust_risk_score) : r.forecast_confidence}
-                  horizon={imdBust ? 1 : r.forecast_horizon}
+                  score={r.risk_score}
+                  category={r.risk_category}
+                  forecastConfidence={r.forecast_confidence}
+                  horizon={r.forecast_horizon}
                 />
                 <dl className="mt-3 space-y-1.5 border-t border-edge pt-3 text-2xs">
-                  <Row term="Risk category" value={<RiskChip category={imdBust ? imdBust.bust_category : r.risk_category} size="sm" />} />
+                  <Row term="Risk category" value={<RiskChip category={r.risk_category} size="sm" />} />
+                  <Row
+                    term="Variable & Lead Time"
+                    value={<span className="font-semibold text-ink-primary">{r.variable.label} · Day {r.forecast_horizon} ({formatDate(r.valid_date)})</span>}
+                  />
                   <Row
                     term="IMD Warning Level"
                     value={
@@ -460,7 +464,7 @@ export function Dashboard() {
                     }
                   />
                   <Row term="Synoptic regime" value={<span className="text-right">{r.synoptic.regime}</span>} />
-                  <Row term="Bulletin Date" value={imdBust?.date ? `${formatDate(imdBust.date)} (Today)` : `${formatDate(r.base_date)} (Today)`} />
+                  <Row term="Assessment Date" value={`${formatDate(r.base_date)} (Today)`} />
                 </dl>
               </>
             ) : (

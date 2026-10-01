@@ -185,15 +185,67 @@ def risk_bundle(
                 return (site.lat - lat2) ** 2 + (site.lon - lon2) ** 2
 
             matched = min(stns, key=_dist)
-            w_color = str(matched.get("day_1_warning_color", "green")).lower()
-            w_text = matched.get("day_1_warning", "No Warning")
-            fc_text = matched.get("todays_forecast", "")
-            stn_score = float(matched.get("bust_risk_score", 16.0))
-            stn_cat = matched.get("bust_category", "LOW")
+            days_7 = matched.get("forecast_7days", [])
 
-            real_score = stn_score
-            real_category = stn_cat
-            real_confidence = round(100.0 - stn_score, 1)
+            # 1. Target horizon specific IMD outlook & warning (Day 1 to 7)
+            h_idx = max(0, min(6, horizon - 1))
+            target_day_data = days_7[h_idx] if len(days_7) > h_idx else {}
+
+            w_color = str(target_day_data.get("warning_color") or matched.get("day_1_warning_color", "green")).lower()
+            w_text = target_day_data.get("warning") or matched.get("day_1_warning", "No Warning")
+            fc_text = target_day_data.get("forecast") or matched.get("todays_forecast", "")
+            base_stn_score = float(matched.get("bust_risk_score", 16.0))
+
+            # 2. Horizon Lead-Time Growth: NWP divergence and convective spread rise with lead time
+            # Day 1: +0%, Day 2: +2%, Day 3: +4%, Day 4: +8%, Day 5: +13%, Day 6: +18%, Day 7: +24%
+            horizon_spread_penalty = {
+                1: 0.0,
+                2: 2.0,
+                3: 4.0,
+                4: 8.5,
+                5: 13.5,
+                6: 18.5,
+                7: 24.0,
+            }.get(horizon, (horizon - 1) * 3.5)
+
+            # Warning boost for target horizon day
+            warning_boost = 0.0
+            if w_color == "red":
+                warning_boost = 40.0
+            elif w_color == "orange":
+                warning_boost = 24.0
+            elif w_color == "yellow":
+                warning_boost = 12.0
+
+            stn_horizon_score = max(8.0, min(92.0, base_stn_score + horizon_spread_penalty + warning_boost))
+
+            # 3. Weather Variable Climatological & Predictability Scaling:
+            # - Rainfall: Convective non-linearity, highest spatial variance (1.0x)
+            # - Temperature: Synoptic scale, high model skill ~88-92% (0.64x)
+            # - Wind: Meso-scale friction and gust dynamics (0.80x)
+            # - Pressure: Deep barotropic/synoptic stability (0.48x)
+            var_scale = {
+                "rainfall": 1.0,
+                "temperature": 0.64,
+                "wind": 0.80,
+                "pressure": 0.48,
+            }.get(variable_id, 1.0)
+
+            # Blend with trained ML model assessment (historical skill & feature vector)
+            blended = (stn_horizon_score * 0.55 + assessment.score_pct * 0.45) * var_scale
+            real_score = max(6.0, min(95.0, round(blended, 1)))
+
+            # Categorize
+            if real_score >= 70.0:
+                real_category = "SEVERE"
+            elif real_score >= 50.0:
+                real_category = "HIGH"
+            elif real_score >= 30.0:
+                real_category = "MODERATE"
+            else:
+                real_category = "LOW"
+
+            real_confidence = round(max(10.0, min(94.0, 100.0 - real_score)), 1)
 
             if w_color == "green":
                 real_regime = f"Stable synoptic pattern · IMD: No Warning ({fc_text or 'Clear / Fair weather'})"
