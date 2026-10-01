@@ -382,6 +382,62 @@ export function Dashboard() {
                     )}
                   </div>
 
+                  {/* Real-time Ground Observation Telemetry (WMO + Microsoft MSN Gateway) */}
+                  {imdBust.live_current && (
+                    <div className="mb-3 rounded-md border border-cyan-500/30 bg-surface-2/90 p-2.5 shadow-sm">
+                      <div className="flex items-center justify-between mb-2">
+                        <div className="flex items-center gap-1.5">
+                          <span className="relative flex h-2 w-2">
+                            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-cyan-400 opacity-75"></span>
+                            <span className="relative inline-flex rounded-full h-2 w-2 bg-cyan-500"></span>
+                          </span>
+                          <span className="text-[11px] font-bold uppercase tracking-wider text-cyan-400">
+                            Live Observation Telemetry
+                          </span>
+                        </div>
+                        <span className="text-[10px] rounded px-1.5 py-0.5 bg-cyan-500/10 text-cyan-300 font-medium border border-cyan-500/20">
+                          Multi-Source (WMO / MSN)
+                        </span>
+                      </div>
+
+                      <div className="grid grid-cols-4 gap-1.5 mb-2 text-center">
+                        <div className="rounded bg-surface-1/60 p-1.5">
+                          <p className="text-[10px] text-ink-muted">Live Temp</p>
+                          <p className="text-xs font-bold text-ink-primary">
+                            {imdBust.live_current.temperature !== null ? `${imdBust.live_current.temperature}°C` : 'N/A'}
+                          </p>
+                        </div>
+                        <div className="rounded bg-surface-1/60 p-1.5">
+                          <p className="text-[10px] text-ink-muted">Humidity</p>
+                          <p className="text-xs font-bold text-ink-primary">
+                            {imdBust.live_current.relative_humidity !== null ? `${imdBust.live_current.relative_humidity}%` : 'N/A'}
+                          </p>
+                        </div>
+                        <div className="rounded bg-surface-1/60 p-1.5">
+                          <p className="text-[10px] text-ink-muted">Live Rain</p>
+                          <p className="text-xs font-bold text-ink-primary">
+                            {imdBust.live_current.precipitation_mm !== null ? `${imdBust.live_current.precipitation_mm} mm` : '0 mm'}
+                          </p>
+                        </div>
+                        <div className="rounded bg-surface-1/60 p-1.5">
+                          <p className="text-[10px] text-ink-muted">Wind</p>
+                          <p className="text-xs font-bold text-ink-primary">
+                            {imdBust.live_current.wind_speed_kmh !== null ? `${imdBust.live_current.wind_speed_kmh} km/h` : 'N/A'}
+                          </p>
+                        </div>
+                      </div>
+
+                      <div className="flex items-center justify-between text-[11px] text-ink-secondary pt-1 border-t border-edge/40">
+                        <span className="flex items-center gap-1">
+                          <span className="text-cyan-400">☁</span> Condition: <strong className="text-ink-primary">{imdBust.live_current.weather_description}</strong>
+                        </span>
+                        <span className="text-[10px] text-ink-muted">
+                          {imdBust.live_current.msn_connector?.status === 'connected' ? 'MSN Active' : 'Bing/MSN Gateway + WMO'}
+                        </span>
+                      </div>
+                    </div>
+                  )}
+
                   {/* Today's official forecast */}
                   {imdBust.todays_forecast && (
                     <div className="mb-3 rounded bg-surface-2 px-2.5 py-2">

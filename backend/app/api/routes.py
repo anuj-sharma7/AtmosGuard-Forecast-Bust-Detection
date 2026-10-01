@@ -821,7 +821,11 @@ def imd_bust_for_location(location_id: str) -> dict:
         "sunrise_time": best.get("sunrise_time"),
         "sunset_time": best.get("sunset_time"),
         "subdivision": best.get("subdivision") or best.get("state"),
-        "live_current": live_weather.fetch_live_weather(best.get("lat", 20.0), best.get("lon", 78.0)),
+        "live_current": live_weather.fetch_live_weather(
+            best.get("lat", 20.0),
+            best.get("lon", 78.0),
+            location_name=best.get("station_name", ref_name),
+        ),
         "source": payload.get("source"),
         "updated_at": payload.get("updated_at"),
     }
@@ -853,7 +857,9 @@ def imd_realtime_alerts(
 def get_live_weather(
     lat: float = Query(..., description="Latitude in decimal degrees"),
     lon: float = Query(..., description="Longitude in decimal degrees"),
+    location: str = Query("", description="City or station name"),
 ) -> dict:
-    """Fetch current real-time atmospheric observations (temperature, rainfall, humidity, wind) for any coordinate."""
-    return live_weather.fetch_live_weather(lat, lon)
+    """Fetch current real-time atmospheric observations (temperature, rainfall, humidity, wind) with MSN connector & WMO telemetry."""
+    return live_weather.fetch_live_weather(lat, lon, location_name=location)
+
 

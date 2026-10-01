@@ -1022,6 +1022,7 @@ export interface ImdStationForecast {
 export interface LiveWeatherResponse {
   lat: number;
   lon: number;
+  location_name?: string;
   temperature: number | null;
   relative_humidity: number | null;
   precipitation_mm: number | null;
@@ -1030,6 +1031,11 @@ export interface LiveWeatherResponse {
   weather_description: string;
   time: string | null;
   source: string;
+  msn_connector?: {
+    endpoint: string;
+    status: string;
+    bing_webmaster_key_active: boolean;
+  };
   status: string;
 }
 
@@ -1071,6 +1077,8 @@ export interface ImdBustResponse {
   humidity_0830?: string | null;
   sunrise_time?: string | null;
   sunset_time?: string | null;
+  subdivision?: string;
+  live_current?: LiveWeatherResponse;
   source: string;
   updated_at: string;
 }
