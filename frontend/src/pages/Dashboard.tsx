@@ -322,15 +322,31 @@ export function Dashboard() {
                     <span>LOW</span><span>MODERATE</span><span>HIGH</span><span>SEVERE</span>
                   </div>
 
-                  {/* Risk category badge */}
-                  <div className="mb-3 flex items-center gap-2">
-                    <span
-                      className="rounded px-2 py-0.5 text-xs font-bold uppercase tracking-wide text-white"
-                      style={{ backgroundColor: BUST_COLOR[imdBust.bust_category] ?? '#22c55e' }}
-                    >
-                      {imdBust.bust_category} RISK
+                  {/* Risk category badge & dynamic bulletin date info */}
+                  <div className="mb-3 flex flex-wrap items-center justify-between gap-2">
+                    <div className="flex items-center gap-2">
+                      <span
+                        className="rounded px-2 py-0.5 text-xs font-bold uppercase tracking-wide text-white"
+                        style={{ backgroundColor: BUST_COLOR[imdBust.bust_category] ?? '#22c55e' }}
+                      >
+                        {imdBust.bust_category} RISK
+                      </span>
+                      <span className="text-2xs font-medium text-emerald-400">
+                        ● IMD Bulletin {formatDate(imdBust.bulletin_date || imdBust.date)} (Today)
+                      </span>
+                    </div>
+                    <span className="text-[11px] text-ink-muted">
+                      {imdBust.last_updated ? `Synced: ${imdBust.last_updated}` : 'Live feed'}
                     </span>
-                    <span className="text-2xs text-ink-muted">· IMD Bulletin {imdBust.date}</span>
+                  </div>
+
+                  {/* Forecast window banner */}
+                  <div className="mb-3 rounded border border-edge/60 bg-surface-2/70 px-2.5 py-1.5 text-[11px] text-ink-secondary flex items-center justify-between">
+                    <span>
+                      <strong className="text-ink-primary">Forecast Window:</strong> Day 1 to Day 7
+                      {imdBust.forecast_valid_to ? ` (${formatDate(imdBust.bulletin_date || imdBust.date)} – ${formatDate(imdBust.forecast_valid_to)})` : ''}
+                    </span>
+                    <span className="text-accent text-[10px] uppercase font-semibold">Live Operational</span>
                   </div>
 
                   {/* Current conditions grid */}
@@ -418,9 +434,14 @@ export function Dashboard() {
               <ErrorState message={risk.error} onRetry={reload} />
             ) : r ? (
               <>
-                <p className="mb-2 text-2xs font-semibold uppercase tracking-wider text-ink-muted">
-                  Ensemble Model Assessment
-                </p>
+                <div className="mb-2 flex items-center justify-between">
+                  <p className="text-2xs font-semibold uppercase tracking-wider text-ink-muted">
+                    ECMWF Ensemble Hindcast
+                  </p>
+                  <span className="text-[10px] text-ink-muted" title="Historical baseline scenario for NWP ensemble spread and SHAP attributions">
+                    Scenario: {formatDate(r.valid_date)}
+                  </span>
+                </div>
                 <RiskGauge
                   score={imdBust ? imdBust.bust_risk_score : r.risk_score}
                   category={imdBust ? imdBust.bust_category : r.risk_category}

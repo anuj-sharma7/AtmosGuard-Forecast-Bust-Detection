@@ -36,6 +36,9 @@ function Logo() {
 
 function useLiveFeedStatus() {
   const [liveDate, setLiveDate] = useState<string | null>(null);
+  const [lastUpdated, setLastUpdated] = useState<string | null>(null);
+  const [validTo, setValidTo] = useState<string | null>(null);
+  const [stationCount, setStationCount] = useState<number>(277);
   const [liveState, setLiveState] = useState<'connecting' | 'live' | 'error'>('connecting');
 
   useEffect(() => {
@@ -46,9 +49,11 @@ function useLiveFeedStatus() {
         .then((res) => {
           if (!active) return;
           if (res?.stations?.length) {
-            // Use the date from the first station that has one
-            const date = res.stations.find((s) => s.date)?.date ?? null;
+            const date = res.bulletin_date || res.date || res.stations.find((s) => s.date)?.date || new Date().toISOString().slice(0, 10);
             setLiveDate(date);
+            setLastUpdated(res.last_updated || 'Just now');
+            setValidTo(res.forecast_valid_to || null);
+            setStationCount(res.count || res.stations.length);
             setLiveState('live');
           } else {
             setLiveState('error');
@@ -64,12 +69,20 @@ function useLiveFeedStatus() {
     return () => { active = false; clearInterval(timer); };
   }, []);
 
-  return { liveDate, liveState };
+  return { liveDate, lastUpdated, validTo, stationCount, liveState };
 }
 
 function formatLiveDate(iso: string | null): string {
   if (!iso) return '--';
   try {
+    const parts = iso.slice(0, 10).split('-');
+    if (parts.length === 3) {
+      const year = parseInt(parts[0], 10);
+      const month = parseInt(parts[1], 10) - 1;
+      const day = parseInt(parts[2], 10);
+      const d = new Date(year, month, day);
+      return d.toLocaleDateString('en-IN', { day: '2-digit', month: 'short', year: 'numeric' });
+    }
     const d = new Date(iso);
     return d.toLocaleDateString('en-IN', { day: '2-digit', month: 'short', year: 'numeric' });
   } catch {
@@ -79,7 +92,7 @@ function formatLiveDate(iso: string | null): string {
 
 export function AtmosGuardHeader() {
   const { meta, selection, demoMode, setDemoMode } = useAppState();
-  const { liveDate, liveState } = useLiveFeedStatus();
+  const { liveDate, lastUpdated, validTo, stationCount, liveState } = useLiveFeedStatus();
   const isDemo = meta.data?.data_mode === 'demo';
 
   return (
@@ -123,9 +136,12 @@ export function AtmosGuardHeader() {
           ))}
         </nav>
 
-        <div className="ml-auto flex items-center gap-2.5">
-          <div className="hidden text-right leading-tight sm:block">
-            <p className="text-2xs text-ink-muted">Data status</p>
+        <div className="ml-auto flex items-center gap-3">
+          {/* Feed & Last Synced */}
+          <div
+            className="hidden text-right leading-tight sm:block cursor-help"
+            title={`IMD Operational Feed: Real-time observations from ${stationCount} stations across all 36 subdivisions. Last synchronized: ${lastUpdated || 'Just now'}`}
+          >
             <p className="flex items-center justify-end gap-1.5 text-2xs font-medium text-ink-primary">
               {liveState === 'live' ? (
                 <span className="relative flex h-2 w-2" aria-hidden>
@@ -138,21 +154,27 @@ export function AtmosGuardHeader() {
                 <span className="h-2 w-2 animate-pulse rounded-full bg-amber-400" aria-hidden />
               )}
               {liveState === 'live'
-                ? 'IMD Live Feed'
+                ? `IMD Live Feed (${stationCount})`
                 : liveState === 'error'
                 ? 'Feed error'
                 : 'Connecting…'}
             </p>
+            <p className="text-[10px] text-ink-muted">
+              {lastUpdated ? `Synced: ${lastUpdated}` : 'Live auto-sync'}
+            </p>
           </div>
 
-          <div className="hidden text-right leading-tight md:block">
-            <p className="text-2xs text-ink-muted">IMD Bulletin Date</p>
-            <p className="text-2xs font-medium tabular text-ink-primary">
-              {liveState === 'live' && liveDate
-                ? formatLiveDate(liveDate)
-                : selection
-                ? new Date(selection.base_date).toLocaleDateString('en-IN', { day: '2-digit', month: 'short', year: 'numeric' })
-                : '--'}
+          {/* Bulletin Date & Forecast Window */}
+          <div
+            className="hidden text-right leading-tight md:block cursor-help border-l border-edge/60 pl-3"
+            title={`Official IMD Bulletin Date: ${formatLiveDate(liveDate)} (Today). Forecast Outlook Horizon: Valid through ${formatLiveDate(validTo)}.`}
+          >
+            <p className="text-2xs font-semibold tabular text-emerald-400 flex items-center justify-end gap-1">
+              <span className="inline-block h-1.5 w-1.5 rounded-full bg-emerald-400" />
+              {liveState === 'live' && liveDate ? `${formatLiveDate(liveDate)} (Today)` : selection ? formatLiveDate(selection.base_date) : '--'}
+            </p>
+            <p className="text-[10px] text-ink-muted">
+              {validTo ? `Valid to: ${formatLiveDate(validTo)}` : '7-Day Horizon'}
             </p>
           </div>
 

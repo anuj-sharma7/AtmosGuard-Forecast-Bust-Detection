@@ -1037,6 +1037,12 @@ export interface ImdCityForecastResponse {
   source: string;
   count: number;
   stations: ImdStationForecast[];
+  date?: string;
+  bulletin_date?: string;
+  forecast_valid_from?: string;
+  forecast_valid_to?: string;
+  forecast_horizon_days?: number;
+  last_updated?: string;
   updated_at: string;
 }
 
@@ -1047,6 +1053,10 @@ export interface ImdBustResponse {
   matched_state: string;
   distance_km: number;
   date: string;
+  bulletin_date?: string;
+  forecast_valid_from?: string;
+  forecast_valid_to?: string;
+  last_updated?: string;
   past_24_hrs_rainfall: string;
   today_max_temp?: string | null;
   today_min_temp?: string | null;
@@ -1105,6 +1115,10 @@ export interface ImdRealtimeAlertsResponse {
   probability_threshold: number;
   base_date: string;
   issued_at: string;
+  bulletin_date?: string;
+  forecast_valid_from?: string;
+  forecast_valid_to?: string;
+  last_updated?: string;
   source: string;
   updated_at: string;
   data_mode: string;

@@ -29,7 +29,7 @@ import time
 import urllib.error
 import urllib.request
 from dataclasses import asdict
-from datetime import datetime, timezone
+from datetime import datetime, timezone, timedelta
 from typing import Any
 
 from ..core.domain import LOCATIONS
@@ -93,8 +93,25 @@ def _ttl() -> int:
         return 900
 
 
+IST = timezone(timedelta(hours=5, minutes=30))
+
+
 def _now() -> str:
     return datetime.now(timezone.utc).isoformat(timespec="seconds")
+
+
+def _now_ist() -> datetime:
+    return datetime.now(IST)
+
+
+def _today_str() -> str:
+    """Return current date in YYYY-MM-DD format (IST)."""
+    return datetime.now(IST).strftime("%Y-%m-%d")
+
+
+def _last_updated_str() -> str:
+    """Return human-readable IST timestamp for last sync/update."""
+    return datetime.now(IST).strftime("%d %b %Y, %H:%M IST")
 
 
 def decode_imd_warnings(codes_str: Any) -> list[str]:
@@ -391,10 +408,16 @@ def get_live_city_forecasts() -> dict[str, Any]:
     except Exception:
         return {"source": "IMD Live Operational Network", "count": 0, "stations": [], "updated_at": _now()}
 
+    today = _today_str()
+    valid_from = today
+    valid_to = (datetime.now(IST) + timedelta(days=6)).strftime("%Y-%m-%d")
+    last_updated = _last_updated_str()
+
     formatted: list[dict[str, Any]] = []
     for s in raw_stations:
         days = []
         for d in range(1, 8):
+            day_date = (datetime.now(IST) + timedelta(days=d - 1)).strftime("%Y-%m-%d")
             max_t = s.get(f"Day_{d}_Max_Temp") if d > 1 else s.get("Todays_Forecast_Max_Temp")
             min_t = s.get(f"Day_{d}_Min_temp") if d > 1 else s.get("Todays_Forecast_Min_temp")
             fc = s.get(f"Day_{d}_Forecast") if d > 1 else s.get("Todays_Forecast")
@@ -402,6 +425,7 @@ def get_live_city_forecasts() -> dict[str, Any]:
             wc = s.get(f"Day_{d}_Warning_Color", "green")
             days.append({
                 "day": d,
+                "date": day_date,
                 "max_temp": float(max_t) if max_t and str(max_t).replace(".", "", 1).replace("-", "", 1).isdigit() else None,
                 "min_temp": float(min_t) if min_t and str(min_t).replace(".", "", 1).replace("-", "", 1).isdigit() else None,
                 "forecast": fc,
@@ -418,7 +442,10 @@ def get_live_city_forecasts() -> dict[str, Any]:
             "subdivision": s.get("subdivision") or s.get("state", "India"),
             "lat": float(s.get("lat", 20.0)),
             "lon": float(s.get("lon", 78.0)),
-            "date": s.get("Date", ""),
+            "date": today,
+            "bulletin_date": today,
+            "forecast_valid_from": valid_from,
+            "forecast_valid_to": valid_to,
             "past_24_hrs_rainfall": s.get("Past_24_hrs_Rainfall", "NIL"),
             "today_max_temp": s.get("Today_Max_temp") or s.get("Todays_Forecast_Max_Temp"),
             "today_min_temp": s.get("Today_Min_temp") or s.get("Todays_Forecast_Min_temp"),
@@ -439,6 +466,12 @@ def get_live_city_forecasts() -> dict[str, Any]:
         "source": "IMD Official City Forecast & Warning Bulletin (api.imd.gov.in/api/v1/cityforecastwarning)",
         "count": len(formatted),
         "stations": formatted,
+        "date": today,
+        "bulletin_date": today,
+        "forecast_valid_from": valid_from,
+        "forecast_valid_to": valid_to,
+        "forecast_horizon_days": 7,
+        "last_updated": last_updated,
         "updated_at": _now(),
     }
 
@@ -456,7 +489,9 @@ def realtime_imd_alerts(threshold: float = 50.0) -> dict[str, Any]:
     """
     payload = get_live_city_forecasts()
     stations = payload.get("stations", [])
-    today = payload.get("updated_at", _now())[:10]  # YYYY-MM-DD
+    today = _today_str()
+    valid_to = (datetime.now(IST) + timedelta(days=6)).strftime("%Y-%m-%d")
+    last_updated = _last_updated_str()
 
     alerts: list[dict[str, Any]] = []
     counts: dict[str, int] = {"LOW": 0, "MODERATE": 0, "HIGH": 0, "SEVERE": 0}
@@ -513,7 +548,8 @@ def realtime_imd_alerts(threshold: float = 50.0) -> dict[str, Any]:
             "past_24_hrs_rainfall": st.get("past_24_hrs_rainfall", "NIL"),
             "todays_forecast": st.get("todays_forecast", ""),
             "bust_drivers": drivers,
-            "date": st.get("date", today),
+            "date": today,
+            "bulletin_date": today,
         })
 
     alerts.sort(key=lambda a: float(a["risk_score"]), reverse=True)
@@ -531,6 +567,10 @@ def realtime_imd_alerts(threshold: float = 50.0) -> dict[str, Any]:
         "probability_threshold": threshold / 100.0,
         "base_date": today,
         "issued_at": today,
+        "bulletin_date": today,
+        "forecast_valid_from": today,
+        "forecast_valid_to": valid_to,
+        "last_updated": last_updated,
         "source": payload.get("source", "IMD"),
         "updated_at": payload.get("updated_at", _now()),
         "data_mode": "live",

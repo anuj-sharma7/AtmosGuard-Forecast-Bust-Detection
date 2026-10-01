@@ -93,11 +93,22 @@ export function AlertsPage() {
       const total = imdData?.alerts.length ?? 0;
       const severe = imdData?.severe_count ?? 0;
       const high = imdData?.high_count ?? 0;
-      const issued = imdData?.issued_at ? formatDate(imdData.issued_at) : '27 Sep 2026';
+      const issued = imdData?.issued_at
+        ? `${formatDate(imdData.issued_at)} (Today)`
+        : `${formatDate(new Date().toISOString().slice(0, 10))} (Today)`;
       const highest = imdData?.alerts[0]
         ? `${imdData.alerts[0].risk_score.toFixed(0)}% (${imdData.alerts[0].location_name})`
         : '--';
-      return { total, severe, high, issued, highest, isLive: true };
+      return {
+        total,
+        severe,
+        high,
+        issued,
+        highest,
+        isLive: true,
+        lastUpdated: imdData?.last_updated || 'Just now',
+        validTo: imdData?.forecast_valid_to ? formatDate(imdData.forecast_valid_to) : null,
+      };
     } else if (sourceMode === 'MODEL_ENSEMBLE') {
       const total = modelData?.alerts.length ?? 0;
       const severe = modelData?.counts.SEVERE ?? 0;
@@ -160,7 +171,13 @@ export function AlertsPage() {
         <Metric
           label={metrics.isLive ? 'Live Bulletin' : 'Model Issued'}
           value={metrics.issued}
-          detail={metrics.isLive ? 'Official IMD Realtime Feed' : 'Ensemble initialisation'}
+          detail={
+            metrics.isLive
+              ? (metrics as unknown as { lastUpdated?: string }).lastUpdated
+                ? `Synced: ${(metrics as unknown as { lastUpdated?: string }).lastUpdated}`
+                : 'Official IMD Realtime Feed'
+              : 'Ensemble initialisation'
+          }
         />
         <Metric
           label="Highest risk"

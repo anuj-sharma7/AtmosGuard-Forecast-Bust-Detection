@@ -1212,7 +1212,12 @@ export function ImdWeatherMap({
           <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
           <span>IMD Live GeoServer · Day {horizon} Bust Early-Warning · Scroll to zoom · All 36 states</span>
         </div>
-        <span>Updated {baseDate ? formatDate(baseDate) : 'Today'}</span>
+        <div className="flex items-center gap-2">
+          <span className="text-emerald-400 font-medium">
+            Bulletin: {baseDate ? `${formatDate(baseDate)} (Today)` : 'Today'}
+          </span>
+          <span>· Valid 7-Day Window</span>
+        </div>
       </div>
     </div>
   );
