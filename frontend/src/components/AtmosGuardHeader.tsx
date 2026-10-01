@@ -35,9 +35,25 @@ function Logo() {
 }
 
 function useLiveFeedStatus() {
-  const [liveDate, setLiveDate] = useState<string | null>(null);
-  const [lastUpdated, setLastUpdated] = useState<string | null>(null);
-  const [validTo, setValidTo] = useState<string | null>(null);
+  const getTodayIso = () => {
+    const now = new Date();
+    // Use local/IST date string YYYY-MM-DD
+    const year = now.getFullYear();
+    const month = String(now.getMonth() + 1).padStart(2, '0');
+    const day = String(now.getDate()).padStart(2, '0');
+    return `${year}-${month}-${day}`;
+  };
+
+  const [liveDate, setLiveDate] = useState<string>(getTodayIso);
+  const [lastUpdated, setLastUpdated] = useState<string | null>('Just now');
+  const [validTo, setValidTo] = useState<string | null>(() => {
+    const d = new Date();
+    d.setDate(d.getDate() + 6);
+    const year = d.getFullYear();
+    const month = String(d.getMonth() + 1).padStart(2, '0');
+    const day = String(d.getDate()).padStart(2, '0');
+    return `${year}-${month}-${day}`;
+  });
   const [stationCount, setStationCount] = useState<number>(277);
   const [liveState, setLiveState] = useState<'connecting' | 'live' | 'error'>('connecting');
 
@@ -49,7 +65,7 @@ function useLiveFeedStatus() {
         .then((res) => {
           if (!active) return;
           if (res?.stations?.length) {
-            const date = res.bulletin_date || res.date || res.stations.find((s) => s.date)?.date || new Date().toISOString().slice(0, 10);
+            const date = res.bulletin_date || res.date || getTodayIso();
             setLiveDate(date);
             setLastUpdated(res.last_updated || 'Just now');
             setValidTo(res.forecast_valid_to || null);
@@ -91,7 +107,7 @@ function formatLiveDate(iso: string | null): string {
 }
 
 export function AtmosGuardHeader() {
-  const { meta, selection, demoMode, setDemoMode } = useAppState();
+  const { meta, demoMode, setDemoMode } = useAppState();
   const { liveDate, lastUpdated, validTo, stationCount, liveState } = useLiveFeedStatus();
   const isDemo = meta.data?.data_mode === 'demo';
 
@@ -142,6 +158,7 @@ export function AtmosGuardHeader() {
             className="hidden text-right leading-tight sm:block cursor-help"
             title={`IMD Operational Feed: Real-time observations from ${stationCount} stations across all 36 subdivisions. Last synchronized: ${lastUpdated || 'Just now'}`}
           >
+            <p className="text-2xs text-ink-muted">Data status</p>
             <p className="flex items-center justify-end gap-1.5 text-2xs font-medium text-ink-primary">
               {liveState === 'live' ? (
                 <span className="relative flex h-2 w-2" aria-hidden>
@@ -169,9 +186,10 @@ export function AtmosGuardHeader() {
             className="hidden text-right leading-tight md:block cursor-help border-l border-edge/60 pl-3"
             title={`Official IMD Bulletin Date: ${formatLiveDate(liveDate)} (Today). Forecast Outlook Horizon: Valid through ${formatLiveDate(validTo)}.`}
           >
-            <p className="text-2xs font-semibold tabular text-emerald-400 flex items-center justify-end gap-1">
+            <p className="text-2xs text-ink-muted">IMD Bulletin Date</p>
+            <p className="text-2xs font-bold tabular text-emerald-400 flex items-center justify-end gap-1">
               <span className="inline-block h-1.5 w-1.5 rounded-full bg-emerald-400" />
-              {liveState === 'live' && liveDate ? `${formatLiveDate(liveDate)} (Today)` : selection ? formatLiveDate(selection.base_date) : '--'}
+              {formatLiveDate(liveDate)} <span className="text-[10px] text-emerald-500 font-semibold">(Today)</span>
             </p>
             <p className="text-[10px] text-ink-muted">
               {validTo ? `Valid to: ${formatLiveDate(validTo)}` : '7-Day Horizon'}

@@ -1,6 +1,6 @@
 [
   {
-    "Date": "2026-09-27",
+    "Date": "2026-10-01",
     "Station_Code": "53",
     "Station_Name": "Kanpur Airforce",
     "Today_Max_temp": null,
@@ -58,7 +58,7 @@
     "subdivision": "Uttar Pradesh"
   },
   {
-    "Date": "2026-09-27",
+    "Date": "2026-10-01",
     "Station_Code": "8205",
     "Station_Name": "Chamba",
     "Today_Max_temp": null,
@@ -116,7 +116,7 @@
     "subdivision": "Himachal Pradesh"
   },
   {
-    "Date": "2026-09-27",
+    "Date": "2026-10-01",
     "Station_Code": "10001",
     "Station_Name": "Faridabad",
     "Today_Max_temp": null,
@@ -174,7 +174,7 @@
     "subdivision": "Haryana"
   },
   {
-    "Date": "2026-09-27",
+    "Date": "2026-10-01",
     "Station_Code": "10002",
     "Station_Name": "Bhadrak (Ranital)",
     "Today_Max_temp": null,
@@ -232,7 +232,7 @@
     "subdivision": "Odisha"
   },
   {
-    "Date": "2026-09-27",
+    "Date": "2026-10-01",
     "Station_Code": "11001",
     "Station_Name": "Hamirpur",
     "Today_Max_temp": null,
@@ -290,7 +290,7 @@
     "subdivision": "Himachal Pradesh"
   },
   {
-    "Date": "2026-09-27",
+    "Date": "2026-10-01",
     "Station_Code": "13001",
     "Station_Name": "Bokaro",
     "Today_Max_temp": null,
@@ -348,7 +348,7 @@
     "subdivision": "Jharkhand"
   },
   {
-    "Date": "2026-09-27",
+    "Date": "2026-10-01",
     "Station_Code": "13002",
     "Station_Name": "Deogarh",
     "Today_Max_temp": null,
@@ -406,7 +406,7 @@
     "subdivision": "Odisha"
   },
   {
-    "Date": "2026-09-27",
+    "Date": "2026-10-01",
     "Station_Code": "13003",
     "Station_Name": "Giridih",
     "Today_Max_temp": null,
@@ -464,7 +464,7 @@
     "subdivision": "Jharkhand"
   },
   {
-    "Date": "2026-09-27",
+    "Date": "2026-10-01",
     "Station_Code": "18001",
     "Station_Name": "Thane",
     "Today_Max_temp": null,
@@ -522,7 +522,7 @@
     "subdivision": "Maharashtra"
   },
   {
-    "Date": "2026-09-27",
+    "Date": "2026-10-01",
     "Station_Code": "19001",
     "Station_Name": "Champhai",
     "Today_Max_temp": null,
@@ -580,7 +580,7 @@
     "subdivision": "Mizoram"
   },
   {
-    "Date": "2026-09-27",
+    "Date": "2026-10-01",
     "Station_Code": "21001",
     "Station_Name": "Kohima-Dimapur",
     "Today_Max_temp": null,
@@ -638,7 +638,7 @@
     "subdivision": "Nagaland"
   },
   {
-    "Date": "2026-09-27",
+    "Date": "2026-10-01",
     "Station_Code": "23001",
     "Station_Name": "Bhabanipatna",
     "Today_Max_temp": null,
@@ -696,7 +696,7 @@
     "subdivision": "Odisha"
   },
   {
-    "Date": "2026-09-27",
+    "Date": "2026-10-01",
     "Station_Code": "26001",
     "Station_Name": "Mangan",
     "Today_Max_temp": null,
@@ -754,7 +754,7 @@
     "subdivision": "Sikkim"
   },
   {
-    "Date": "2026-09-27",
+    "Date": "2026-10-01",
     "Station_Code": "26002",
     "Station_Name": "Gyalsingh",
     "Today_Max_temp": null,
@@ -812,7 +812,7 @@
     "subdivision": "Sikkim"
   },
   {
-    "Date": "2026-09-27",
+    "Date": "2026-10-01",
     "Station_Code": "26003",
     "Station_Name": "Namchi",
     "Today_Max_temp": null,
@@ -870,7 +870,7 @@
     "subdivision": "Sikkim"
   },
   {
-    "Date": "2026-09-27",
+    "Date": "2026-10-01",
     "Station_Code": "26004",
     "Station_Name": "Pakyong",
     "Today_Max_temp": null,
@@ -928,7 +928,7 @@
     "subdivision": "Sikkim"
   },
   {
-    "Date": "2026-09-27",
+    "Date": "2026-10-01",
     "Station_Code": "26005",
     "Station_Name": "Soreng",
     "Today_Max_temp": null,
@@ -986,7 +986,7 @@
     "subdivision": "Sikkim"
   },
   {
-    "Date": "2026-09-27",
+    "Date": "2026-10-01",
     "Station_Code": "30002",
     "Station_Name": "Anni",
     "Today_Max_temp": null,
@@ -1044,7 +1044,7 @@
     "subdivision": "Himachal Pradesh"
   },
   {
-    "Date": "2026-09-27",
+    "Date": "2026-10-01",
     "Station_Code": "30003",
     "Station_Name": "Diskit Nubra",
     "Today_Max_temp": "25.3",
@@ -1102,7 +1102,7 @@
     "subdivision": "Ladakh"
   },
   {
-    "Date": "2026-09-27",
+    "Date": "2026-10-01",
     "Station_Code": "30005",
     "Station_Name": "Mathura Vrindavan",
     "Today_Max_temp": null,
@@ -1160,7 +1160,7 @@
     "subdivision": "Uttar Pradesh"
   },
   {
-    "Date": "2026-09-27",
+    "Date": "2026-10-01",
     "Station_Code": "30006",
     "Station_Name": "Ooty",
     "Today_Max_temp": null,
@@ -1218,7 +1218,7 @@
     "subdivision": "Tamil Nadu"
   },
   {
-    "Date": "2026-09-27",
+    "Date": "2026-10-01",
     "Station_Code": "30007",
     "Station_Name": "Bekal",
     "Today_Max_temp": null,
@@ -1276,7 +1276,7 @@
     "subdivision": "Kerala"
   },
   {
-    "Date": "2026-09-27",
+    "Date": "2026-10-01",
     "Station_Code": "30008",
     "Station_Name": "Kollam",
     "Today_Max_temp": null,
@@ -1334,7 +1334,7 @@
     "subdivision": "Kerala"
   },
   {
-    "Date": "2026-09-27",
+    "Date": "2026-10-01",
     "Station_Code": "30011",
     "Station_Name": "Wayanad",
     "Today_Max_temp": null,
@@ -1392,7 +1392,7 @@
     "subdivision": "Kerala"
   },
   {
-    "Date": "2026-09-27",
+    "Date": "2026-10-01",
     "Station_Code": "30012",
     "Station_Name": "Chitrakoot",
     "Today_Max_temp": null,
@@ -1450,7 +1450,7 @@
     "subdivision": "Madhya Pradesh"
   },
   {
-    "Date": "2026-09-27",
+    "Date": "2026-10-01",
     "Station_Code": "30013",
     "Station_Name": "Orchha",
     "Today_Max_temp": null,
@@ -1508,7 +1508,7 @@
     "subdivision": "Madhya Pradesh"
   },
   {
-    "Date": "2026-09-27",
+    "Date": "2026-10-01",
     "Station_Code": "30014",
     "Station_Name": "Sanchi",
     "Today_Max_temp": null,
@@ -1566,7 +1566,7 @@
     "subdivision": "Madhya Pradesh"
   },
   {
-    "Date": "2026-09-27",
+    "Date": "2026-10-01",
     "Station_Code": "30016",
     "Station_Name": "Mamallapuram",
     "Today_Max_temp": null,
@@ -1624,7 +1624,7 @@
     "subdivision": "Tamil Nadu"
   },
   {
-    "Date": "2026-09-27",
+    "Date": "2026-10-01",
     "Station_Code": "30017",
     "Station_Name": "Rameshwaram",
     "Today_Max_temp": null,
@@ -1682,7 +1682,7 @@
     "subdivision": "Tamil Nadu"
   },
   {
-    "Date": "2026-09-27",
+    "Date": "2026-10-01",
     "Station_Code": "30021",
     "Station_Name": "Kumbalgarh",
     "Today_Max_temp": null,
@@ -1740,7 +1740,7 @@
     "subdivision": "Rajasthan"
   },
   {
-    "Date": "2026-09-27",
+    "Date": "2026-10-01",
     "Station_Code": "30023",
     "Station_Name": "Lachung",
     "Today_Max_temp": null,
@@ -1798,7 +1798,7 @@
     "subdivision": "Sikkim"
   },
   {
-    "Date": "2026-09-27",
+    "Date": "2026-10-01",
     "Station_Code": "30024",
     "Station_Name": "Pelling",
     "Today_Max_temp": null,
@@ -1856,7 +1856,7 @@
     "subdivision": "Sikkim"
   },
   {
-    "Date": "2026-09-27",
+    "Date": "2026-10-01",
     "Station_Code": "30025",
     "Station_Name": "Panipat",
     "Today_Max_temp": null,
@@ -1914,7 +1914,7 @@
     "subdivision": "Haryana"
   },
   {
-    "Date": "2026-09-27",
+    "Date": "2026-10-01",
     "Station_Code": "30026",
     "Station_Name": "Baidyanathdham",
     "Today_Max_temp": null,
@@ -1972,7 +1972,7 @@
     "subdivision": "Jharkhand"
   },
   {
-    "Date": "2026-09-27",
+    "Date": "2026-10-01",
     "Station_Code": "30027",
     "Station_Name": "Bodhgaya",
     "Today_Max_temp": "31.6",
@@ -2030,7 +2030,7 @@
     "subdivision": "Bihar"
   },
   {
-    "Date": "2026-09-27",
+    "Date": "2026-10-01",
     "Station_Code": "30029",
     "Station_Name": "Palakkad",
     "Today_Max_temp": null,
@@ -2088,7 +2088,7 @@
     "subdivision": "Kerala"
   },
   {
-    "Date": "2026-09-27",
+    "Date": "2026-10-01",
     "Station_Code": "31001",
     "Station_Name": "Champawat",
     "Today_Max_temp": null,
@@ -2146,7 +2146,7 @@
     "subdivision": "Uttarakhand"
   },
   {
-    "Date": "2026-09-27",
+    "Date": "2026-10-01",
     "Station_Code": "31002",
     "Station_Name": "Chinchwad",
     "Today_Max_temp": "30.9",
@@ -2204,7 +2204,7 @@
     "subdivision": "Maharashtra"
   },
   {
-    "Date": "2026-09-27",
+    "Date": "2026-10-01",
     "Station_Code": "31003",
     "Station_Name": "Magarpatta",
     "Today_Max_temp": "32.1",
@@ -2262,7 +2262,7 @@
     "subdivision": "Maharashtra"
   },
   {
-    "Date": "2026-09-27",
+    "Date": "2026-10-01",
     "Station_Code": "31004",
     "Station_Name": "Lavale",
     "Today_Max_temp": "31.7",
@@ -2320,7 +2320,7 @@
     "subdivision": "Maharashtra"
   },
   {
-    "Date": "2026-09-27",
+    "Date": "2026-10-01",
     "Station_Code": "40001",
     "Station_Name": "Barpeta",
     "Today_Max_temp": null,
@@ -2378,7 +2378,7 @@
     "subdivision": "Assam"
   },
   {
-    "Date": "2026-09-27",
+    "Date": "2026-10-01",
     "Station_Code": "40062",
     "Station_Name": "Tapovan",
     "Today_Max_temp": null,
@@ -2436,7 +2436,7 @@
     "subdivision": "Uttarakhand"
   },
   {
-    "Date": "2026-09-27",
+    "Date": "2026-10-01",
     "Station_Code": "42026",
     "Station_Name": "Gulmarg",
     "Today_Max_temp": "20.8",
@@ -2494,7 +2494,7 @@
     "subdivision": "Jammu & Kashmir"
   },
   {
-    "Date": "2026-09-27",
+    "Date": "2026-10-01",
     "Station_Code": "42027",
     "Station_Name": "Srinagar-City",
     "Today_Max_temp": "29.8",
@@ -2552,7 +2552,7 @@
     "subdivision": "Jammu & Kashmir"
   },
   {
-    "Date": "2026-09-27",
+    "Date": "2026-10-01",
     "Station_Code": "42028",
     "Station_Name": "Pahalgam",
     "Today_Max_temp": "24.8",
@@ -2610,7 +2610,7 @@
     "subdivision": "Jammu & Kashmir"
   },
   {
-    "Date": "2026-09-27",
+    "Date": "2026-10-01",
     "Station_Code": "42031",
     "Station_Name": "Kupwara",
     "Today_Max_temp": "30.7",
@@ -2668,7 +2668,7 @@
     "subdivision": "Jammu & Kashmir"
   },
   {
-    "Date": "2026-09-27",
+    "Date": "2026-10-01",
     "Station_Code": "42034",
     "Station_Name": "Leh",
     "Today_Max_temp": "20.8",
@@ -2726,7 +2726,7 @@
     "subdivision": "Ladakh"
   },
   {
-    "Date": "2026-09-27",
+    "Date": "2026-10-01",
     "Station_Code": "42043",
     "Station_Name": "Batote",
     "Today_Max_temp": "27.0",
@@ -2784,7 +2784,7 @@
     "subdivision": "Jammu & Kashmir"
   },
   {
-    "Date": "2026-09-27",
+    "Date": "2026-10-01",
     "Station_Code": "42044",
     "Station_Name": "Qazigund",
     "Today_Max_temp": "29.5",
@@ -2842,7 +2842,7 @@
     "subdivision": "Jammu & Kashmir"
   },
   {
-    "Date": "2026-09-27",
+    "Date": "2026-10-01",
     "Station_Code": "42045",
     "Station_Name": "Banihal",
     "Today_Max_temp": "26.5",
@@ -2900,7 +2900,7 @@
     "subdivision": "Jammu & Kashmir"
   },
   {
-    "Date": "2026-09-27",
+    "Date": "2026-10-01",
     "Station_Code": "42046",
     "Station_Name": "Kukernag",
     "Today_Max_temp": "28.0",
@@ -2958,7 +2958,7 @@
     "subdivision": "Jammu & Kashmir"
   },
   {
-    "Date": "2026-09-27",
+    "Date": "2026-10-01",
     "Station_Code": "42048",
     "Station_Name": "Bhaderwah",
     "Today_Max_temp": "27.2",
@@ -3016,7 +3016,7 @@
     "subdivision": "Jammu & Kashmir"
   },
   {
-    "Date": "2026-09-27",
+    "Date": "2026-10-01",
     "Station_Code": "42054",
     "Station_Name": "Katra",
     "Today_Max_temp": "29.0",
@@ -3074,7 +3074,7 @@
     "subdivision": "Jammu & Kashmir"
   },
   {
-    "Date": "2026-09-27",
+    "Date": "2026-10-01",
     "Station_Code": "42056",
     "Station_Name": "Jammu-City",
     "Today_Max_temp": "31.4",
@@ -3132,7 +3132,7 @@
     "subdivision": "Jammu & Kashmir"
   },
   {
-    "Date": "2026-09-27",
+    "Date": "2026-10-01",
     "Station_Code": "42057",
     "Station_Name": "Pathankot",
     "Today_Max_temp": null,
@@ -3190,7 +3190,7 @@
     "subdivision": "Punjab"
   },
   {
-    "Date": "2026-09-27",
+    "Date": "2026-10-01",
     "Station_Code": "42059",
     "Station_Name": "Dalhousie",
     "Today_Max_temp": null,
@@ -3248,7 +3248,7 @@
     "subdivision": "Himachal Pradesh"
   },
   {
-    "Date": "2026-09-27",
+    "Date": "2026-10-01",
     "Station_Code": "42062",
     "Station_Name": "Dharamshala",
     "Today_Max_temp": "26.0",
@@ -3306,7 +3306,7 @@
     "subdivision": "Himachal Pradesh"
   },
   {
-    "Date": "2026-09-27",
+    "Date": "2026-10-01",
     "Station_Code": "42063",
     "Station_Name": "Keylong",
     "Today_Max_temp": null,
@@ -3364,7 +3364,7 @@
     "subdivision": "Himachal Pradesh"
   },
   {
-    "Date": "2026-09-27",
+    "Date": "2026-10-01",
     "Station_Code": "42065",
     "Station_Name": "Manali",
     "Today_Max_temp": "24.5",
@@ -3422,7 +3422,7 @@
     "subdivision": "Himachal Pradesh"
   },
   {
-    "Date": "2026-09-27",
+    "Date": "2026-10-01",
     "Station_Code": "42066",
     "Station_Name": "Kalpa",
     "Today_Max_temp": "8.2",
@@ -3480,7 +3480,7 @@
     "subdivision": "Himachal Pradesh"
   },
   {
-    "Date": "2026-09-27",
+    "Date": "2026-10-01",
     "Station_Code": "42071",
     "Station_Name": "Amritsar",
     "Today_Max_temp": "32.1",
@@ -3538,7 +3538,7 @@
     "subdivision": "Punjab"
   },
   {
-    "Date": "2026-09-27",
+    "Date": "2026-10-01",
     "Station_Code": "42074",
     "Station_Name": "Kapurthala",
     "Today_Max_temp": null,
@@ -3596,7 +3596,7 @@
     "subdivision": "Punjab"
   },
   {
-    "Date": "2026-09-27",
+    "Date": "2026-10-01",
     "Station_Code": "42075",
     "Station_Name": "Jalandhar",
     "Today_Max_temp": null,
@@ -3654,7 +3654,7 @@
     "subdivision": "Punjab"
   },
   {
-    "Date": "2026-09-27",
+    "Date": "2026-10-01",
     "Station_Code": "42076",
     "Station_Name": "Kangra",
     "Today_Max_temp": "28.9",
@@ -3712,7 +3712,7 @@
     "subdivision": "Himachal Pradesh"
   },
   {
-    "Date": "2026-09-27",
+    "Date": "2026-10-01",
     "Station_Code": "42077",
     "Station_Name": "Una",
     "Today_Max_temp": "33.4",
@@ -3770,7 +3770,7 @@
     "subdivision": "Himachal Pradesh"
   },
   {
-    "Date": "2026-09-27",
+    "Date": "2026-10-01",
     "Station_Code": "42079",
     "Station_Name": "Sundernagar",
     "Today_Max_temp": "28.5",
@@ -3828,7 +3828,7 @@
     "subdivision": "Himachal Pradesh"
   },
   {
-    "Date": "2026-09-27",
+    "Date": "2026-10-01",
     "Station_Code": "42080",
     "Station_Name": "Bilaspur",
     "Today_Max_temp": null,
@@ -3886,7 +3886,7 @@
     "subdivision": "Himachal Pradesh"
   },
   {
-    "Date": "2026-09-27",
+    "Date": "2026-10-01",
     "Station_Code": "42081",
     "Station_Name": "Kullu",
     "Today_Max_temp": "31.0",
@@ -3944,7 +3944,7 @@
     "subdivision": "Himachal Pradesh"
   },
   {
-    "Date": "2026-09-27",
+    "Date": "2026-10-01",
     "Station_Code": "42083",
     "Station_Name": "Shimla-City",
     "Today_Max_temp": "20.1",
@@ -4002,7 +4002,7 @@
     "subdivision": "Himachal Pradesh"
   },
   {
-    "Date": "2026-09-27",
+    "Date": "2026-10-01",
     "Station_Code": "42084",
     "Station_Name": "Shimla-Airport",
     "Today_Max_temp": "24.2",
@@ -4060,7 +4060,7 @@
     "subdivision": "Himachal Pradesh"
   },
   {
-    "Date": "2026-09-27",
+    "Date": "2026-10-01",
     "Station_Code": "42096",
     "Station_Name": "Ferozepore",
     "Today_Max_temp": null,
@@ -4118,7 +4118,7 @@
     "subdivision": "Punjab"
   },
   {
-    "Date": "2026-09-27",
+    "Date": "2026-10-01",
     "Station_Code": "42097",
     "Station_Name": "Bhatinda",
     "Today_Max_temp": null,
@@ -4176,7 +4176,7 @@
     "subdivision": "Punjab"
   },
   {
-    "Date": "2026-09-27",
+    "Date": "2026-10-01",
     "Station_Code": "42099",
     "Station_Name": "Ludhiana",
     "Today_Max_temp": "29.4",
@@ -4234,7 +4234,7 @@
     "subdivision": "Punjab"
   },
   {
-    "Date": "2026-09-27",
+    "Date": "2026-10-01",
     "Station_Code": "42101",
     "Station_Name": "Patiala",
     "Today_Max_temp": "29.5",
@@ -4292,7 +4292,7 @@
     "subdivision": "Punjab"
   },
   {
-    "Date": "2026-09-27",
+    "Date": "2026-10-01",
     "Station_Code": "42103",
     "Station_Name": "Ambala",
     "Today_Max_temp": "29.8",
@@ -4350,7 +4350,7 @@
     "subdivision": "Haryana"
   },
   {
-    "Date": "2026-09-27",
+    "Date": "2026-10-01",
     "Station_Code": "42104",
     "Station_Name": "Nahan",
     "Today_Max_temp": "21.8",
@@ -4408,7 +4408,7 @@
     "subdivision": "Himachal Pradesh"
   },
   {
-    "Date": "2026-09-27",
+    "Date": "2026-10-01",
     "Station_Code": "42105",
     "Station_Name": "Chandigarh-City",
     "Today_Max_temp": "30.5",
@@ -4466,7 +4466,7 @@
     "subdivision": "Chandigarh"
   },
   {
-    "Date": "2026-09-27",
+    "Date": "2026-10-01",
     "Station_Code": "42106",
     "Station_Name": "Solan",
     "Today_Max_temp": "25.8",
@@ -4524,7 +4524,7 @@
     "subdivision": "Himachal Pradesh"
   },
   {
-    "Date": "2026-09-27",
+    "Date": "2026-10-01",
     "Station_Code": "42108",
     "Station_Name": "Uttarkashi",
     "Today_Max_temp": null,
@@ -4582,7 +4582,7 @@
     "subdivision": "Uttarakhand"
   },
   {
-    "Date": "2026-09-27",
+    "Date": "2026-10-01",
     "Station_Code": "42111",
     "Station_Name": "Dehradun-Mokhampur",
     "Today_Max_temp": "21.1",
@@ -4640,7 +4640,7 @@
     "subdivision": "Uttarakhand"
   },
   {
-    "Date": "2026-09-27",
+    "Date": "2026-10-01",
     "Station_Code": "42112",
     "Station_Name": "Mussorie",
     "Today_Max_temp": null,
@@ -4698,7 +4698,7 @@
     "subdivision": "Uttarakhand"
   },
   {
-    "Date": "2026-09-27",
+    "Date": "2026-10-01",
     "Station_Code": "42114",
     "Station_Name": "Tehri",
     "Today_Max_temp": "14.0",
@@ -4756,7 +4756,7 @@
     "subdivision": "Uttarakhand"
   },
   {
-    "Date": "2026-09-27",
+    "Date": "2026-10-01",
     "Station_Code": "42116",
     "Station_Name": "Joshimath",
     "Today_Max_temp": null,
@@ -4814,7 +4814,7 @@
     "subdivision": "Uttarakhand"
   },
   {
-    "Date": "2026-09-27",
+    "Date": "2026-10-01",
     "Station_Code": "42117",
     "Station_Name": "Chamoli",
     "Today_Max_temp": null,
@@ -4872,7 +4872,7 @@
     "subdivision": "Uttarakhand"
   },
   {
-    "Date": "2026-09-27",
+    "Date": "2026-10-01",
     "Station_Code": "42123",
     "Station_Name": "Sriganganagar",
     "Today_Max_temp": "38.0",
@@ -4930,7 +4930,7 @@
     "subdivision": "Rajasthan"
   },
   {
-    "Date": "2026-09-27",
+    "Date": "2026-10-01",
     "Station_Code": "42131",
     "Station_Name": "Hissar",
     "Today_Max_temp": "33.5",
@@ -4988,7 +4988,7 @@
     "subdivision": "Haryana"
   },
   {
-    "Date": "2026-09-27",
+    "Date": "2026-10-01",
     "Station_Code": "42137",
     "Station_Name": "Karnal",
     "Today_Max_temp": null,
@@ -5046,7 +5046,7 @@
     "subdivision": "Haryana"
   },
   {
-    "Date": "2026-09-27",
+    "Date": "2026-10-01",
     "Station_Code": "42138",
     "Station_Name": "Muzaffarnagar",
     "Today_Max_temp": "22.8",
@@ -5104,7 +5104,7 @@
     "subdivision": "Uttar Pradesh"
   },
   {
-    "Date": "2026-09-27",
+    "Date": "2026-10-01",
     "Station_Code": "42139",
     "Station_Name": "Meerut",
     "Today_Max_temp": "25.2",
@@ -5162,7 +5162,7 @@
     "subdivision": "Uttar Pradesh"
   },
   {
-    "Date": "2026-09-27",
+    "Date": "2026-10-01",
     "Station_Code": "42143",
     "Station_Name": "Bijnor-Najibabad",
     "Today_Max_temp": "23.5",
@@ -5220,7 +5220,7 @@
     "subdivision": "Uttar Pradesh"
   },
   {
-    "Date": "2026-09-27",
+    "Date": "2026-10-01",
     "Station_Code": "42146",
     "Station_Name": "Nainital",
     "Today_Max_temp": null,
@@ -5278,7 +5278,7 @@
     "subdivision": "Uttarakhand"
   },
   {
-    "Date": "2026-09-27",
+    "Date": "2026-10-01",
     "Station_Code": "42147",
     "Station_Name": "Mukteshwar",
     "Today_Max_temp": "13.3",
@@ -5336,7 +5336,7 @@
     "subdivision": "Uttarakhand"
   },
   {
-    "Date": "2026-09-27",
+    "Date": "2026-10-01",
     "Station_Code": "42148",
     "Station_Name": "Pantnagar",
     "Today_Max_temp": "24.5",
@@ -5394,7 +5394,7 @@
     "subdivision": "Uttarakhand"
   },
   {
-    "Date": "2026-09-27",
+    "Date": "2026-10-01",
     "Station_Code": "42165",
     "Station_Name": "Bikaner",
     "Today_Max_temp": "37.1",
@@ -5452,7 +5452,7 @@
     "subdivision": "Rajasthan"
   },
   {
-    "Date": "2026-09-27",
+    "Date": "2026-10-01",
     "Station_Code": "42170",
     "Station_Name": "Churu",
     "Today_Max_temp": "38.3",
@@ -5510,7 +5510,7 @@
     "subdivision": "Rajasthan"
   },
   {
-    "Date": "2026-09-27",
+    "Date": "2026-10-01",
     "Station_Code": "42174",
     "Station_Name": "Pilani",
     "Today_Max_temp": null,
@@ -5568,7 +5568,7 @@
     "subdivision": "Rajasthan"
   },
   {
-    "Date": "2026-09-27",
+    "Date": "2026-10-01",
     "Station_Code": "42176",
     "Station_Name": "Rohtak",
     "Today_Max_temp": "29.6",
@@ -5626,7 +5626,7 @@
     "subdivision": "Haryana"
   },
   {
-    "Date": "2026-09-27",
+    "Date": "2026-10-01",
     "Station_Code": "42177",
     "Station_Name": "Narnaul",
     "Today_Max_temp": null,
@@ -5684,7 +5684,7 @@
     "subdivision": "Haryana"
   },
   {
-    "Date": "2026-09-27",
+    "Date": "2026-10-01",
     "Station_Code": "42178",
     "Station_Name": "Gurgaon",
     "Today_Max_temp": null,
@@ -5742,7 +5742,7 @@
     "subdivision": "Haryana"
   },
   {
-    "Date": "2026-09-27",
+    "Date": "2026-10-01",
     "Station_Code": "42180",
     "Station_Name": "New Delhi-Ayanagar",
     "Today_Max_temp": "30.2",
@@ -5800,7 +5800,7 @@
     "subdivision": "Delhi"
   },
   {
-    "Date": "2026-09-27",
+    "Date": "2026-10-01",
     "Station_Code": "42181",
     "Station_Name": "New Delhi-Palam",
     "Today_Max_temp": "29.2",
@@ -5858,7 +5858,7 @@
     "subdivision": "Delhi"
   },
   {
-    "Date": "2026-09-27",
+    "Date": "2026-10-01",
     "Station_Code": "42182",
     "Station_Name": "New Delhi-Safdarjung",
     "Today_Max_temp": "30.6",
@@ -5916,7 +5916,7 @@
     "subdivision": "Delhi"
   },
   {
-    "Date": "2026-09-27",
+    "Date": "2026-10-01",
     "Station_Code": "42184",
     "Station_Name": "New Delhi-Ridge",
     "Today_Max_temp": "30.0",
@@ -5974,7 +5974,7 @@
     "subdivision": "Delhi"
   },
   {
-    "Date": "2026-09-27",
+    "Date": "2026-10-01",
     "Station_Code": "42187",
     "Station_Name": "Moradabad",
     "Today_Max_temp": "22.8",
@@ -6032,7 +6032,7 @@
     "subdivision": "Uttar Pradesh"
   },
   {
-    "Date": "2026-09-27",
+    "Date": "2026-10-01",
     "Station_Code": "42189",
     "Station_Name": "Bareilly",
     "Today_Max_temp": "22.8",
@@ -6090,7 +6090,7 @@
     "subdivision": "Uttar Pradesh"
   },
   {
-    "Date": "2026-09-27",
+    "Date": "2026-10-01",
     "Station_Code": "42217",
     "Station_Name": "Tadong",
     "Today_Max_temp": "29.3",
@@ -6148,7 +6148,7 @@
     "subdivision": "Sikkim"
   },
   {
-    "Date": "2026-09-27",
+    "Date": "2026-10-01",
     "Station_Code": "42220",
     "Station_Name": "Pasighat",
     "Today_Max_temp": "33.1",
@@ -6206,7 +6206,7 @@
     "subdivision": "Arunachal Pradesh"
   },
   {
-    "Date": "2026-09-27",
+    "Date": "2026-10-01",
     "Station_Code": "42237",
     "Station_Name": "PHALODI",
     "Today_Max_temp": null,
@@ -6264,7 +6264,7 @@
     "subdivision": "Rajasthan"
   },
   {
-    "Date": "2026-09-27",
+    "Date": "2026-10-01",
     "Station_Code": "42242",
     "Station_Name": "Nagaur",
     "Today_Max_temp": "33.5",
@@ -6322,7 +6322,7 @@
     "subdivision": "Rajasthan"
   },
   {
-    "Date": "2026-09-27",
+    "Date": "2026-10-01",
     "Station_Code": "42249",
     "Station_Name": "Siker",
     "Today_Max_temp": null,
@@ -6380,7 +6380,7 @@
     "subdivision": "Rajasthan"
   },
   {
-    "Date": "2026-09-27",
+    "Date": "2026-10-01",
     "Station_Code": "42255",
     "Station_Name": "Alwar",
     "Today_Max_temp": null,
@@ -6438,7 +6438,7 @@
     "subdivision": "Rajasthan"
   },
   {
-    "Date": "2026-09-27",
+    "Date": "2026-10-01",
     "Station_Code": "42258",
     "Station_Name": "Bharatpur",
     "Today_Max_temp": null,
@@ -6496,7 +6496,7 @@
     "subdivision": "Rajasthan"
   },
   {
-    "Date": "2026-09-27",
+    "Date": "2026-10-01",
     "Station_Code": "42259",
     "Station_Name": "Agra",
     "Today_Max_temp": "30.3",
@@ -6554,7 +6554,7 @@
     "subdivision": "Uttar Pradesh"
   },
   {
-    "Date": "2026-09-28",
+    "Date": "2026-10-01",
     "Station_Code": "43371",
     "Station_Name": "Port Blair",
     "Today_Max_temp": "30.2",
@@ -6612,7 +6612,7 @@
     "Day_7_Warning": "Forecast Day 7: Generally cloudy sky with Light to moderate rain or thundershowers"
   },
   {
-    "Date": "2026-09-28",
+    "Date": "2026-10-01",
     "Station_Code": "43372",
     "Station_Name": "Car Nicobar",
     "Today_Max_temp": "30.5",
@@ -6670,7 +6670,7 @@
     "Day_7_Warning": "Forecast Day 7: Partly cloudy sky with one or two spells of rain or thundershowers"
   },
   {
-    "Date": "2026-09-28",
+    "Date": "2026-10-01",
     "Station_Code": "43373",
     "Station_Name": "Hut Bay",
     "Today_Max_temp": "29.8",
@@ -6728,7 +6728,7 @@
     "Day_7_Warning": "Forecast Day 7: Generally cloudy sky with rain or thundershowers"
   },
   {
-    "Date": "2026-09-28",
+    "Date": "2026-10-01",
     "Station_Code": "43361",
     "Station_Name": "Kavaratti",
     "Today_Max_temp": "31.2",
@@ -6786,7 +6786,7 @@
     "Day_7_Warning": "Forecast Day 7: Partly cloudy sky with light rain"
   },
   {
-    "Date": "2026-09-28",
+    "Date": "2026-10-01",
     "Station_Code": "43362",
     "Station_Name": "Agatti",
     "Today_Max_temp": "31.6",
@@ -6844,7 +6844,7 @@
     "Day_7_Warning": "Forecast Day 7: Mainly clear sky"
   },
   {
-    "Date": "2026-09-28",
+    "Date": "2026-10-01",
     "Station_Code": "43363",
     "Station_Name": "Minicoy",
     "Today_Max_temp": "30.8",
@@ -6902,7 +6902,7 @@
     "Day_7_Warning": "Forecast Day 7: Partly cloudy sky with light showers"
   },
   {
-    "Date": "2026-09-28",
+    "Date": "2026-10-01",
     "Station_Code": "43351",
     "Station_Name": "Kozhikode",
     "Today_Max_temp": "31.4",
@@ -6960,7 +6960,7 @@
     "Day_7_Warning": "Forecast Day 7: Generally cloudy sky with one or two spells of rain or thundershowers"
   },
   {
-    "Date": "2026-09-28",
+    "Date": "2026-10-01",
     "Station_Code": "43352",
     "Station_Name": "Kochi",
     "Today_Max_temp": "30.8",
@@ -7018,7 +7018,7 @@
     "Day_7_Warning": "Forecast Day 7: Generally cloudy sky with a few spells of rain or thundershowers"
   },
   {
-    "Date": "2026-09-28",
+    "Date": "2026-10-01",
     "Station_Code": "43353",
     "Station_Name": "Thiruvananthapuram",
     "Today_Max_temp": "31.0",
@@ -7076,7 +7076,7 @@
     "Day_7_Warning": "Forecast Day 7: Partly cloudy sky with light rain"
   },
   {
-    "Date": "2026-09-28",
+    "Date": "2026-10-01",
     "Station_Code": "43354",
     "Station_Name": "Thrissur",
     "Today_Max_temp": "31.2",
@@ -7134,7 +7134,7 @@
     "Day_7_Warning": "Forecast Day 7: Generally cloudy sky with a few spells of rain or thundershowers"
   },
   {
-    "Date": "2026-09-28",
+    "Date": "2026-10-01",
     "Station_Code": "43355",
     "Station_Name": "Kannur",
     "Today_Max_temp": "31.5",
@@ -7192,7 +7192,7 @@
     "Day_7_Warning": "Forecast Day 7: Generally cloudy sky with one or two spells of rain"
   },
   {
-    "Date": "2026-09-28",
+    "Date": "2026-10-01",
     "Station_Code": "43357",
     "Station_Name": "Alappuzha",
     "Today_Max_temp": "30.4",
@@ -7250,7 +7250,7 @@
     "Day_7_Warning": "Forecast Day 7: Generally cloudy sky with a few spells of rain or thundershowers"
   },
   {
-    "Date": "2026-09-28",
+    "Date": "2026-10-01",
     "Station_Code": "43281",
     "Station_Name": "Mangaluru",
     "Today_Max_temp": "30.2",
@@ -7308,7 +7308,7 @@
     "Day_7_Warning": "Forecast Day 7: Generally cloudy sky with moderate to heavy rain"
   },
   {
-    "Date": "2026-09-28",
+    "Date": "2026-10-01",
     "Station_Code": "43282",
     "Station_Name": "Udupi",
     "Today_Max_temp": "29.8",
@@ -7366,7 +7366,7 @@
     "Day_7_Warning": "Forecast Day 7: Generally cloudy sky with heavy rain in some areas"
   },
   {
-    "Date": "2026-09-28",
+    "Date": "2026-10-01",
     "Station_Code": "43283",
     "Station_Name": "Karwar",
     "Today_Max_temp": "30.0",
@@ -7424,7 +7424,7 @@
     "Day_7_Warning": "Forecast Day 7: Generally cloudy sky with heavy rain"
   },
   {
-    "Date": "2026-09-28",
+    "Date": "2026-10-01",
     "Station_Code": "43271",
     "Station_Name": "Hubballi-Dharwad",
     "Today_Max_temp": "31.2",
@@ -7482,7 +7482,7 @@
     "Day_7_Warning": "Forecast Day 7: Partly cloudy sky with light rain"
   },
   {
-    "Date": "2026-09-28",
+    "Date": "2026-10-01",
     "Station_Code": "43272",
     "Station_Name": "Belagavi",
     "Today_Max_temp": "29.5",
@@ -7540,7 +7540,7 @@
     "Day_7_Warning": "Forecast Day 7: Generally cloudy sky with one or two spells of rain"
   },
   {
-    "Date": "2026-09-28",
+    "Date": "2026-10-01",
     "Station_Code": "43273",
     "Station_Name": "Kalaburagi",
     "Today_Max_temp": "33.4",
@@ -7598,7 +7598,7 @@
     "Day_7_Warning": "Forecast Day 7: Partly cloudy sky"
   },
   {
-    "Date": "2026-09-28",
+    "Date": "2026-10-01",
     "Station_Code": "43274",
     "Station_Name": "Vijayapura",
     "Today_Max_temp": "33.0",
@@ -7656,7 +7656,7 @@
     "Day_7_Warning": "Forecast Day 7: Mainly clear sky"
   },
   {
-    "Date": "2026-09-28",
+    "Date": "2026-10-01",
     "Station_Code": "43275",
     "Station_Name": "Ballari",
     "Today_Max_temp": "34.0",
@@ -7714,7 +7714,7 @@
     "Day_7_Warning": "Forecast Day 7: Partly cloudy sky"
   },
   {
-    "Date": "2026-09-28",
+    "Date": "2026-10-01",
     "Station_Code": "43261",
     "Station_Name": "Bengaluru City",
     "Today_Max_temp": "29.4",
@@ -7772,7 +7772,7 @@
     "Day_7_Warning": "Forecast Day 7: Generally cloudy sky with light rain / drizzle"
   },
   {
-    "Date": "2026-09-28",
+    "Date": "2026-10-01",
     "Station_Code": "43262",
     "Station_Name": "Mysuru",
     "Today_Max_temp": "29.8",
@@ -7830,7 +7830,7 @@
     "Day_7_Warning": "Forecast Day 7: Partly cloudy sky with light to moderate rain"
   },
   {
-    "Date": "2026-09-28",
+    "Date": "2026-10-01",
     "Station_Code": "43263",
     "Station_Name": "Shivamogga",
     "Today_Max_temp": "29.2",
@@ -7888,7 +7888,7 @@
     "Day_7_Warning": "Forecast Day 7: Generally cloudy sky with rain or thundershowers"
   },
   {
-    "Date": "2026-09-28",
+    "Date": "2026-10-01",
     "Station_Code": "43264",
     "Station_Name": "Chikkamagaluru",
     "Today_Max_temp": "27.5",
@@ -7946,7 +7946,7 @@
     "Day_7_Warning": "Forecast Day 7: Generally cloudy sky with moderate rain"
   },
   {
-    "Date": "2026-09-28",
+    "Date": "2026-10-01",
     "Station_Code": "43241",
     "Station_Name": "Chennai-Meenambakkam",
     "Today_Max_temp": "34.6",
@@ -8004,7 +8004,7 @@
     "Day_7_Warning": "Forecast Day 7: Partly cloudy sky with possibility of light rain"
   },
   {
-    "Date": "2026-09-28",
+    "Date": "2026-10-01",
     "Station_Code": "43242",
     "Station_Name": "Coimbatore",
     "Today_Max_temp": "31.8",
@@ -8062,7 +8062,7 @@
     "Day_7_Warning": "Forecast Day 7: Generally cloudy sky with light rain"
   },
   {
-    "Date": "2026-09-28",
+    "Date": "2026-10-01",
     "Station_Code": "43243",
     "Station_Name": "Madurai",
     "Today_Max_temp": "36.2",
@@ -8120,7 +8120,7 @@
     "Day_7_Warning": "Forecast Day 7: Mainly clear sky"
   },
   {
-    "Date": "2026-09-28",
+    "Date": "2026-10-01",
     "Station_Code": "43244",
     "Station_Name": "Tiruchirappalli",
     "Today_Max_temp": "35.4",
@@ -8178,7 +8178,7 @@
     "Day_7_Warning": "Forecast Day 7: Partly cloudy sky with light showers"
   },
   {
-    "Date": "2026-09-28",
+    "Date": "2026-10-01",
     "Station_Code": "43245",
     "Station_Name": "Salem",
     "Today_Max_temp": "33.8",
@@ -8236,7 +8236,7 @@
     "Day_7_Warning": "Forecast Day 7: Partly cloudy sky with one or two spells of rain"
   },
   {
-    "Date": "2026-09-28",
+    "Date": "2026-10-01",
     "Station_Code": "43246",
     "Station_Name": "Kanyakumari",
     "Today_Max_temp": "32.0",
@@ -8294,7 +8294,7 @@
     "Day_7_Warning": "Forecast Day 7: Partly cloudy sky with light rain"
   },
   {
-    "Date": "2026-09-28",
+    "Date": "2026-10-01",
     "Station_Code": "43247",
     "Station_Name": "Puducherry",
     "Today_Max_temp": "34.0",
@@ -8352,7 +8352,7 @@
     "Day_7_Warning": "Forecast Day 7: Partly cloudy sky with light rain"
   },
   {
-    "Date": "2026-09-28",
+    "Date": "2026-10-01",
     "Station_Code": "43231",
     "Station_Name": "Tirupati",
     "Today_Max_temp": "34.8",
@@ -8410,7 +8410,7 @@
     "Day_7_Warning": "Forecast Day 7: Partly cloudy sky"
   },
   {
-    "Date": "2026-09-28",
+    "Date": "2026-10-01",
     "Station_Code": "43232",
     "Station_Name": "Kurnool",
     "Today_Max_temp": "34.2",
@@ -8468,7 +8468,7 @@
     "Day_7_Warning": "Forecast Day 7: Mainly clear sky"
   },
   {
-    "Date": "2026-09-28",
+    "Date": "2026-10-01",
     "Station_Code": "43233",
     "Station_Name": "Anantapur",
     "Today_Max_temp": "33.6",
@@ -8526,7 +8526,7 @@
     "Day_7_Warning": "Forecast Day 7: Partly cloudy sky"
   },
   {
-    "Date": "2026-09-28",
+    "Date": "2026-10-01",
     "Station_Code": "43234",
     "Station_Name": "Kadapa",
     "Today_Max_temp": "35.0",
@@ -8584,7 +8584,7 @@
     "Day_7_Warning": "Forecast Day 7: Partly cloudy sky"
   },
   {
-    "Date": "2026-09-28",
+    "Date": "2026-10-01",
     "Station_Code": "43221",
     "Station_Name": "Visakhapatnam",
     "Today_Max_temp": "33.0",
@@ -8642,7 +8642,7 @@
     "Day_7_Warning": "Forecast Day 7: Generally cloudy sky with a few spells of rain or thundershowers"
   },
   {
-    "Date": "2026-09-28",
+    "Date": "2026-10-01",
     "Station_Code": "43222",
     "Station_Name": "Vijayawada",
     "Today_Max_temp": "33.8",
@@ -8700,7 +8700,7 @@
     "Day_7_Warning": "Forecast Day 7: Generally cloudy sky with light to moderate rain"
   },
   {
-    "Date": "2026-09-28",
+    "Date": "2026-10-01",
     "Station_Code": "43223",
     "Station_Name": "Kakinada",
     "Today_Max_temp": "33.2",
@@ -8758,7 +8758,7 @@
     "Day_7_Warning": "Forecast Day 7: Generally cloudy sky with rain or thundershowers"
   },
   {
-    "Date": "2026-09-28",
+    "Date": "2026-10-01",
     "Station_Code": "43224",
     "Station_Name": "Nellore",
     "Today_Max_temp": "35.2",
@@ -8816,7 +8816,7 @@
     "Day_7_Warning": "Forecast Day 7: Partly cloudy sky with light rain"
   },
   {
-    "Date": "2026-09-28",
+    "Date": "2026-10-01",
     "Station_Code": "43225",
     "Station_Name": "Guntur",
     "Today_Max_temp": "34.0",
@@ -8874,7 +8874,7 @@
     "Day_7_Warning": "Forecast Day 7: Generally cloudy sky with one or two spells of rain"
   },
   {
-    "Date": "2026-09-28",
+    "Date": "2026-10-01",
     "Station_Code": "43211",
     "Station_Name": "Hyderabad Begumpet",
     "Today_Max_temp": "32.6",
@@ -8932,7 +8932,7 @@
     "Day_7_Warning": "Forecast Day 7: Generally cloudy sky with light to moderate rain or thunderstorm"
   },
   {
-    "Date": "2026-09-28",
+    "Date": "2026-10-01",
     "Station_Code": "43212",
     "Station_Name": "Warangal",
     "Today_Max_temp": "32.2",
@@ -8990,7 +8990,7 @@
     "Day_7_Warning": "Forecast Day 7: Generally cloudy sky with one or two spells of rain"
   },
   {
-    "Date": "2026-09-28",
+    "Date": "2026-10-01",
     "Station_Code": "43213",
     "Station_Name": "Nizamabad",
     "Today_Max_temp": "32.0",
@@ -9048,7 +9048,7 @@
     "Day_7_Warning": "Forecast Day 7: Generally cloudy sky with light rain"
   },
   {
-    "Date": "2026-09-28",
+    "Date": "2026-10-01",
     "Station_Code": "43214",
     "Station_Name": "Karimnagar",
     "Today_Max_temp": "32.4",
@@ -9106,7 +9106,7 @@
     "Day_7_Warning": "Forecast Day 7: Partly cloudy sky with possibility of rain or thunderstorm"
   },
   {
-    "Date": "2026-09-28",
+    "Date": "2026-10-01",
     "Station_Code": "43215",
     "Station_Name": "Khammam",
     "Today_Max_temp": "33.0",
@@ -9164,7 +9164,7 @@
     "Day_7_Warning": "Forecast Day 7: Generally cloudy sky with a few spells of rain"
   },
   {
-    "Date": "2026-09-28",
+    "Date": "2026-10-01",
     "Station_Code": "43201",
     "Station_Name": "Mumbai-Colaba",
     "Today_Max_temp": "31.0",
@@ -9222,7 +9222,7 @@
     "Day_7_Warning": "Forecast Day 7: Generally cloudy sky with heavy rain in city and suburbs"
   },
   {
-    "Date": "2026-09-28",
+    "Date": "2026-10-01",
     "Station_Code": "43203",
     "Station_Name": "Ratnagiri",
     "Today_Max_temp": "29.8",
@@ -9280,7 +9280,7 @@
     "Day_7_Warning": "Forecast Day 7: Generally cloudy sky with very heavy rain in isolated places"
   },
   {
-    "Date": "2026-09-28",
+    "Date": "2026-10-01",
     "Station_Code": "43204",
     "Station_Name": "Panaji-Goa",
     "Today_Max_temp": "30.0",
@@ -9338,7 +9338,7 @@
     "Day_7_Warning": "Forecast Day 7: Generally cloudy sky with moderate to heavy rain or thundershowers"
   },
   {
-    "Date": "2026-09-28",
+    "Date": "2026-10-01",
     "Station_Code": "43205",
     "Station_Name": "Sindhudurg",
     "Today_Max_temp": "29.4",
@@ -9396,7 +9396,7 @@
     "Day_7_Warning": "Forecast Day 7: Generally cloudy sky with heavy rain"
   },
   {
-    "Date": "2026-09-28",
+    "Date": "2026-10-01",
     "Station_Code": "43191",
     "Station_Name": "Pune-Shivajinagar",
     "Today_Max_temp": "29.6",
@@ -9454,7 +9454,7 @@
     "Day_7_Warning": "Forecast Day 7: Generally cloudy sky with light to moderate rain"
   },
   {
-    "Date": "2026-09-28",
+    "Date": "2026-10-01",
     "Station_Code": "43192",
     "Station_Name": "Nashik",
     "Today_Max_temp": "29.0",
@@ -9512,7 +9512,7 @@
     "Day_7_Warning": "Forecast Day 7: Generally cloudy sky with intermittent showers"
   },
   {
-    "Date": "2026-09-28",
+    "Date": "2026-10-01",
     "Station_Code": "43193",
     "Station_Name": "Kolhapur",
     "Today_Max_temp": "28.5",
@@ -9570,7 +9570,7 @@
     "Day_7_Warning": "Forecast Day 7: Generally cloudy sky with moderate to heavy rain"
   },
   {
-    "Date": "2026-09-28",
+    "Date": "2026-10-01",
     "Station_Code": "43194",
     "Station_Name": "Solapur",
     "Today_Max_temp": "32.4",
@@ -9628,7 +9628,7 @@
     "Day_7_Warning": "Forecast Day 7: Partly cloudy sky with light rain"
   },
   {
-    "Date": "2026-09-28",
+    "Date": "2026-10-01",
     "Station_Code": "43195",
     "Station_Name": "Satara",
     "Today_Max_temp": "28.2",
@@ -9686,7 +9686,7 @@
     "Day_7_Warning": "Forecast Day 7: Generally cloudy sky with a few spells of rain"
   },
   {
-    "Date": "2026-09-28",
+    "Date": "2026-10-01",
     "Station_Code": "43196",
     "Station_Name": "Jalgaon",
     "Today_Max_temp": "32.0",
@@ -9744,7 +9744,7 @@
     "Day_7_Warning": "Forecast Day 7: Partly cloudy sky with rain or thunderstorm"
   },
   {
-    "Date": "2026-09-28",
+    "Date": "2026-10-01",
     "Station_Code": "43181",
     "Station_Name": "Chhatrapati Sambhajinagar (Aurangabad)",
     "Today_Max_temp": "31.5",
@@ -9802,7 +9802,7 @@
     "Day_7_Warning": "Forecast Day 7: Partly cloudy sky with rain or thundershowers"
   },
   {
-    "Date": "2026-09-28",
+    "Date": "2026-10-01",
     "Station_Code": "43182",
     "Station_Name": "Nanded",
     "Today_Max_temp": "32.0",
@@ -9860,7 +9860,7 @@
     "Day_7_Warning": "Forecast Day 7: Generally cloudy sky with a few spells of rain"
   },
   {
-    "Date": "2026-09-28",
+    "Date": "2026-10-01",
     "Station_Code": "43183",
     "Station_Name": "Latur",
     "Today_Max_temp": "31.8",
@@ -9918,7 +9918,7 @@
     "Day_7_Warning": "Forecast Day 7: Partly cloudy sky with light to moderate rain"
   },
   {
-    "Date": "2026-09-28",
+    "Date": "2026-10-01",
     "Station_Code": "43184",
     "Station_Name": "Parbhani",
     "Today_Max_temp": "32.2",
@@ -9976,7 +9976,7 @@
     "Day_7_Warning": "Forecast Day 7: Generally cloudy sky with light rain"
   },
   {
-    "Date": "2026-09-28",
+    "Date": "2026-10-01",
     "Station_Code": "43171",
     "Station_Name": "Nagpur Sonegaon",
     "Today_Max_temp": "32.4",
@@ -10034,7 +10034,7 @@
     "Day_7_Warning": "Forecast Day 7: Generally cloudy sky with one or two spells of rain or thundershowers"
   },
   {
-    "Date": "2026-09-28",
+    "Date": "2026-10-01",
     "Station_Code": "43172",
     "Station_Name": "Amravati",
     "Today_Max_temp": "32.0",
@@ -10092,7 +10092,7 @@
     "Day_7_Warning": "Forecast Day 7: Partly cloudy sky with light to moderate rain"
   },
   {
-    "Date": "2026-09-28",
+    "Date": "2026-10-01",
     "Station_Code": "43173",
     "Station_Name": "Chandrapur",
     "Today_Max_temp": "33.0",
@@ -10150,7 +10150,7 @@
     "Day_7_Warning": "Forecast Day 7: Generally cloudy sky with a few spells of rain"
   },
   {
-    "Date": "2026-09-28",
+    "Date": "2026-10-01",
     "Station_Code": "43174",
     "Station_Name": "Akola",
     "Today_Max_temp": "33.2",
@@ -10208,7 +10208,7 @@
     "Day_7_Warning": "Forecast Day 7: Partly cloudy sky with rain or thunderstorm"
   },
   {
-    "Date": "2026-09-28",
+    "Date": "2026-10-01",
     "Station_Code": "43175",
     "Station_Name": "Gondia",
     "Today_Max_temp": "31.8",
@@ -10266,7 +10266,7 @@
     "Day_7_Warning": "Forecast Day 7: Generally cloudy sky with moderate to heavy rain"
   },
   {
-    "Date": "2026-09-28",
+    "Date": "2026-10-01",
     "Station_Code": "43161",
     "Station_Name": "Ahmedabad",
     "Today_Max_temp": "34.2",
@@ -10324,7 +10324,7 @@
     "Day_7_Warning": "Forecast Day 7: Partly cloudy sky with possibility of light rain"
   },
   {
-    "Date": "2026-09-28",
+    "Date": "2026-10-01",
     "Station_Code": "43162",
     "Station_Name": "Surat",
     "Today_Max_temp": "32.4",
@@ -10382,7 +10382,7 @@
     "Day_7_Warning": "Forecast Day 7: Generally cloudy sky with a few spells of rain"
   },
   {
-    "Date": "2026-09-28",
+    "Date": "2026-10-01",
     "Station_Code": "43163",
     "Station_Name": "Vadodara",
     "Today_Max_temp": "33.5",
@@ -10440,7 +10440,7 @@
     "Day_7_Warning": "Forecast Day 7: Partly cloudy sky with light rain"
   },
   {
-    "Date": "2026-09-28",
+    "Date": "2026-10-01",
     "Station_Code": "43164",
     "Station_Name": "Gandhinagar",
     "Today_Max_temp": "34.0",
@@ -10498,7 +10498,7 @@
     "Day_7_Warning": "Forecast Day 7: Partly cloudy sky"
   },
   {
-    "Date": "2026-09-28",
+    "Date": "2026-10-01",
     "Station_Code": "43165",
     "Station_Name": "Valsad",
     "Today_Max_temp": "31.2",
@@ -10556,7 +10556,7 @@
     "Day_7_Warning": "Forecast Day 7: Generally cloudy sky with heavy rain in isolated places"
   },
   {
-    "Date": "2026-09-28",
+    "Date": "2026-10-01",
     "Station_Code": "43151",
     "Station_Name": "Rajkot",
     "Today_Max_temp": "34.5",
@@ -10614,7 +10614,7 @@
     "Day_7_Warning": "Forecast Day 7: Partly cloudy sky"
   },
   {
-    "Date": "2026-09-28",
+    "Date": "2026-10-01",
     "Station_Code": "43152",
     "Station_Name": "Bhavnagar",
     "Today_Max_temp": "33.8",
@@ -10672,7 +10672,7 @@
     "Day_7_Warning": "Forecast Day 7: Partly cloudy sky with light rain"
   },
   {
-    "Date": "2026-09-28",
+    "Date": "2026-10-01",
     "Station_Code": "43153",
     "Station_Name": "Jamnagar",
     "Today_Max_temp": "33.2",
@@ -10730,7 +10730,7 @@
     "Day_7_Warning": "Forecast Day 7: Mainly clear sky"
   },
   {
-    "Date": "2026-09-28",
+    "Date": "2026-10-01",
     "Station_Code": "43154",
     "Station_Name": "Bhuj (Kutch)",
     "Today_Max_temp": "35.6",
@@ -10788,7 +10788,7 @@
     "Day_7_Warning": "Forecast Day 7: Mainly clear sky"
   },
   {
-    "Date": "2026-09-28",
+    "Date": "2026-10-01",
     "Station_Code": "43155",
     "Station_Name": "Porbandar",
     "Today_Max_temp": "32.0",
@@ -10846,7 +10846,7 @@
     "Day_7_Warning": "Forecast Day 7: Partly cloudy sky with light rain"
   },
   {
-    "Date": "2026-09-28",
+    "Date": "2026-10-01",
     "Station_Code": "43156",
     "Station_Name": "Diu",
     "Today_Max_temp": "31.8",
@@ -10904,7 +10904,7 @@
     "Day_7_Warning": "Forecast Day 7: Partly cloudy sky with one or two spells of rain"
   },
   {
-    "Date": "2026-09-28",
+    "Date": "2026-10-01",
     "Station_Code": "43141",
     "Station_Name": "Jodhpur",
     "Today_Max_temp": "36.8",
@@ -10962,7 +10962,7 @@
     "Day_7_Warning": "Forecast Day 7: Mainly clear sky"
   },
   {
-    "Date": "2026-09-28",
+    "Date": "2026-10-01",
     "Station_Code": "43143",
     "Station_Name": "Jaisalmer",
     "Today_Max_temp": "38.2",
@@ -11020,7 +11020,7 @@
     "Day_7_Warning": "Forecast Day 7: Clear sky"
   },
   {
-    "Date": "2026-09-28",
+    "Date": "2026-10-01",
     "Station_Code": "43144",
     "Station_Name": "Barmer",
     "Today_Max_temp": "37.8",
@@ -11078,7 +11078,7 @@
     "Day_7_Warning": "Forecast Day 7: Mainly clear sky"
   },
   {
-    "Date": "2026-09-28",
+    "Date": "2026-10-01",
     "Station_Code": "43145",
     "Station_Name": "Sri Ganganagar",
     "Today_Max_temp": "36.4",
@@ -11136,7 +11136,7 @@
     "Day_7_Warning": "Forecast Day 7: Mainly clear sky"
   },
   {
-    "Date": "2026-09-28",
+    "Date": "2026-10-01",
     "Station_Code": "43131",
     "Station_Name": "Jaipur Sanganer",
     "Today_Max_temp": "34.0",
@@ -11194,7 +11194,7 @@
     "Day_7_Warning": "Forecast Day 7: Partly cloudy sky"
   },
   {
-    "Date": "2026-09-28",
+    "Date": "2026-10-01",
     "Station_Code": "43132",
     "Station_Name": "Ajmer",
     "Today_Max_temp": "34.2",
@@ -11252,7 +11252,7 @@
     "Day_7_Warning": "Forecast Day 7: Mainly clear sky"
   },
   {
-    "Date": "2026-09-28",
+    "Date": "2026-10-01",
     "Station_Code": "43133",
     "Station_Name": "Kota",
     "Today_Max_temp": "33.8",
@@ -11310,7 +11310,7 @@
     "Day_7_Warning": "Forecast Day 7: Partly cloudy sky with light rain"
   },
   {
-    "Date": "2026-09-28",
+    "Date": "2026-10-01",
     "Station_Code": "43134",
     "Station_Name": "Udaipur Dabok",
     "Today_Max_temp": "32.0",
@@ -11368,7 +11368,7 @@
     "Day_7_Warning": "Forecast Day 7: Partly cloudy sky with one or two spells of rain"
   },
   {
-    "Date": "2026-09-28",
+    "Date": "2026-10-01",
     "Station_Code": "43121",
     "Station_Name": "Bhopal Bairagarh",
     "Today_Max_temp": "32.0",
@@ -11426,7 +11426,7 @@
     "Day_7_Warning": "Forecast Day 7: Generally cloudy sky with light to moderate rain"
   },
   {
-    "Date": "2026-09-28",
+    "Date": "2026-10-01",
     "Station_Code": "43122",
     "Station_Name": "Indore",
     "Today_Max_temp": "31.2",
@@ -11484,7 +11484,7 @@
     "Day_7_Warning": "Forecast Day 7: Generally cloudy sky with a few spells of rain"
   },
   {
-    "Date": "2026-09-28",
+    "Date": "2026-10-01",
     "Station_Code": "43123",
     "Station_Name": "Gwalior",
     "Today_Max_temp": "34.0",
@@ -11542,7 +11542,7 @@
     "Day_7_Warning": "Forecast Day 7: Partly cloudy sky with possibility of rain"
   },
   {
-    "Date": "2026-09-28",
+    "Date": "2026-10-01",
     "Station_Code": "43124",
     "Station_Name": "Ujjain",
     "Today_Max_temp": "31.8",
@@ -11600,7 +11600,7 @@
     "Day_7_Warning": "Forecast Day 7: Partly cloudy sky with light rain"
   },
   {
-    "Date": "2026-09-28",
+    "Date": "2026-10-01",
     "Station_Code": "43125",
     "Station_Name": "Hoshangabad (Narmadapuram)",
     "Today_Max_temp": "31.0",
@@ -11658,7 +11658,7 @@
     "Day_7_Warning": "Forecast Day 7: Generally cloudy sky with rain or thundershowers"
   },
   {
-    "Date": "2026-09-28",
+    "Date": "2026-10-01",
     "Station_Code": "43111",
     "Station_Name": "Jabalpur",
     "Today_Max_temp": "31.5",
@@ -11716,7 +11716,7 @@
     "Day_7_Warning": "Forecast Day 7: Generally cloudy sky with a few spells of rain or thundershowers"
   },
   {
-    "Date": "2026-09-28",
+    "Date": "2026-10-01",
     "Station_Code": "43112",
     "Station_Name": "Rewa",
     "Today_Max_temp": "31.0",
@@ -11774,7 +11774,7 @@
     "Day_7_Warning": "Forecast Day 7: Generally cloudy sky with moderate to heavy rain"
   },
   {
-    "Date": "2026-09-28",
+    "Date": "2026-10-01",
     "Station_Code": "43113",
     "Station_Name": "Sagar",
     "Today_Max_temp": "31.8",
@@ -11832,7 +11832,7 @@
     "Day_7_Warning": "Forecast Day 7: Generally cloudy sky with light to moderate rain"
   },
   {
-    "Date": "2026-09-28",
+    "Date": "2026-10-01",
     "Station_Code": "43114",
     "Station_Name": "Satna",
     "Today_Max_temp": "31.2",
@@ -11890,7 +11890,7 @@
     "Day_7_Warning": "Forecast Day 7: Generally cloudy sky with a few spells of rain"
   },
   {
-    "Date": "2026-09-28",
+    "Date": "2026-10-01",
     "Station_Code": "43101",
     "Station_Name": "Raipur Mana",
     "Today_Max_temp": "32.0",
@@ -11948,7 +11948,7 @@
     "Day_7_Warning": "Forecast Day 7: Generally cloudy sky with a few spells of rain or thundershowers"
   },
   {
-    "Date": "2026-09-28",
+    "Date": "2026-10-01",
     "Station_Code": "43103",
     "Station_Name": "Jagdalpur",
     "Today_Max_temp": "30.5",
@@ -12006,7 +12006,7 @@
     "Day_7_Warning": "Forecast Day 7: Generally cloudy sky with rain or thundershowers"
   },
   {
-    "Date": "2026-09-28",
+    "Date": "2026-10-01",
     "Station_Code": "43104",
     "Station_Name": "Ambikapur",
     "Today_Max_temp": "29.8",
@@ -12064,7 +12064,7 @@
     "Day_7_Warning": "Forecast Day 7: Generally cloudy sky with heavy rain in some areas"
   },
   {
-    "Date": "2026-09-28",
+    "Date": "2026-10-01",
     "Station_Code": "43105",
     "Station_Name": "Durg-Bhilai",
     "Today_Max_temp": "31.8",
@@ -12122,7 +12122,7 @@
     "Day_7_Warning": "Forecast Day 7: Generally cloudy sky with rain"
   },
   {
-    "Date": "2026-09-28",
+    "Date": "2026-10-01",
     "Station_Code": "43091",
     "Station_Name": "Bhubaneswar Airport",
     "Today_Max_temp": "32.4",
@@ -12180,7 +12180,7 @@
     "Day_7_Warning": "Forecast Day 7: Generally cloudy sky with moderate to heavy rain or thundershowers"
   },
   {
-    "Date": "2026-09-28",
+    "Date": "2026-10-01",
     "Station_Code": "43092",
     "Station_Name": "Cuttack",
     "Today_Max_temp": "32.2",
@@ -12238,7 +12238,7 @@
     "Day_7_Warning": "Forecast Day 7: Generally cloudy sky with a few spells of rain"
   },
   {
-    "Date": "2026-09-28",
+    "Date": "2026-10-01",
     "Station_Code": "43093",
     "Station_Name": "Puri",
     "Today_Max_temp": "31.6",
@@ -12296,7 +12296,7 @@
     "Day_7_Warning": "Forecast Day 7: Generally cloudy sky with heavy rain and gusty winds"
   },
   {
-    "Date": "2026-09-28",
+    "Date": "2026-10-01",
     "Station_Code": "43094",
     "Station_Name": "Rourkela",
     "Today_Max_temp": "31.0",
@@ -12354,7 +12354,7 @@
     "Day_7_Warning": "Forecast Day 7: Generally cloudy sky with rain or thundershowers"
   },
   {
-    "Date": "2026-09-28",
+    "Date": "2026-10-01",
     "Station_Code": "43095",
     "Station_Name": "Balasore",
     "Today_Max_temp": "31.2",
@@ -12412,7 +12412,7 @@
     "Day_7_Warning": "Forecast Day 7: Generally cloudy sky with heavy to very heavy rain"
   },
   {
-    "Date": "2026-09-28",
+    "Date": "2026-10-01",
     "Station_Code": "43096",
     "Station_Name": "Sambalpur",
     "Today_Max_temp": "31.8",
@@ -12470,7 +12470,7 @@
     "Day_7_Warning": "Forecast Day 7: Generally cloudy sky with a few spells of rain"
   },
   {
-    "Date": "2026-09-28",
+    "Date": "2026-10-01",
     "Station_Code": "43081",
     "Station_Name": "Ranchi Airport",
     "Today_Max_temp": "29.2",
@@ -12528,7 +12528,7 @@
     "Day_7_Warning": "Forecast Day 7: Generally cloudy sky with a few spells of rain or thundershowers"
   },
   {
-    "Date": "2026-09-28",
+    "Date": "2026-10-01",
     "Station_Code": "43082",
     "Station_Name": "Jamshedpur",
     "Today_Max_temp": "31.0",
@@ -12586,7 +12586,7 @@
     "Day_7_Warning": "Forecast Day 7: Generally cloudy sky with moderate to heavy rain"
   },
   {
-    "Date": "2026-09-28",
+    "Date": "2026-10-01",
     "Station_Code": "43083",
     "Station_Name": "Dhanbad",
     "Today_Max_temp": "30.8",
@@ -12644,7 +12644,7 @@
     "Day_7_Warning": "Forecast Day 7: Generally cloudy sky with rain or thundershowers"
   },
   {
-    "Date": "2026-09-28",
+    "Date": "2026-10-01",
     "Station_Code": "43084",
     "Station_Name": "Deoghar",
     "Today_Max_temp": "30.4",
@@ -12702,7 +12702,7 @@
     "Day_7_Warning": "Forecast Day 7: Generally cloudy sky with light to moderate rain"
   },
   {
-    "Date": "2026-09-28",
+    "Date": "2026-10-01",
     "Station_Code": "43085",
     "Station_Name": "Hazaribagh",
     "Today_Max_temp": "28.8",
@@ -12760,7 +12760,7 @@
     "Day_7_Warning": "Forecast Day 7: Generally cloudy sky with a few spells of rain"
   },
   {
-    "Date": "2026-09-28",
+    "Date": "2026-10-01",
     "Station_Code": "43071",
     "Station_Name": "Patna Airport",
     "Today_Max_temp": "32.0",
@@ -12818,7 +12818,7 @@
     "Day_7_Warning": "Forecast Day 7: Generally cloudy sky with one or two spells of rain or thundershowers"
   },
   {
-    "Date": "2026-09-28",
+    "Date": "2026-10-01",
     "Station_Code": "43072",
     "Station_Name": "Gaya",
     "Today_Max_temp": "32.4",
@@ -12876,7 +12876,7 @@
     "Day_7_Warning": "Forecast Day 7: Partly cloudy sky with light to moderate rain"
   },
   {
-    "Date": "2026-09-28",
+    "Date": "2026-10-01",
     "Station_Code": "43073",
     "Station_Name": "Bhagalpur",
     "Today_Max_temp": "31.5",
@@ -12934,7 +12934,7 @@
     "Day_7_Warning": "Forecast Day 7: Generally cloudy sky with a few spells of rain"
   },
   {
-    "Date": "2026-09-28",
+    "Date": "2026-10-01",
     "Station_Code": "43074",
     "Station_Name": "Muzaffarpur",
     "Today_Max_temp": "31.0",
@@ -12992,7 +12992,7 @@
     "Day_7_Warning": "Forecast Day 7: Generally cloudy sky with moderate to heavy rain"
   },
   {
-    "Date": "2026-09-28",
+    "Date": "2026-10-01",
     "Station_Code": "43075",
     "Station_Name": "Darbhanga",
     "Today_Max_temp": "30.8",
@@ -13050,7 +13050,7 @@
     "Day_7_Warning": "Forecast Day 7: Generally cloudy sky with heavy rain in some areas"
   },
   {
-    "Date": "2026-09-28",
+    "Date": "2026-10-01",
     "Station_Code": "43076",
     "Station_Name": "Purnia",
     "Today_Max_temp": "30.2",
@@ -13108,7 +13108,7 @@
     "Day_7_Warning": "Forecast Day 7: Generally cloudy sky with heavy to very heavy rain"
   },
   {
-    "Date": "2026-09-28",
+    "Date": "2026-10-01",
     "Station_Code": "43061",
     "Station_Name": "Kolkata Alipore",
     "Today_Max_temp": "32.0",
@@ -13166,7 +13166,7 @@
     "Day_7_Warning": "Forecast Day 7: Generally cloudy sky with moderate to heavy rain or thundershowers"
   },
   {
-    "Date": "2026-09-28",
+    "Date": "2026-10-01",
     "Station_Code": "43062",
     "Station_Name": "Howrah",
     "Today_Max_temp": "32.2",
@@ -13224,7 +13224,7 @@
     "Day_7_Warning": "Forecast Day 7: Generally cloudy sky with a few spells of rain"
   },
   {
-    "Date": "2026-09-28",
+    "Date": "2026-10-01",
     "Station_Code": "43063",
     "Station_Name": "Asansol",
     "Today_Max_temp": "31.4",
@@ -13282,7 +13282,7 @@
     "Day_7_Warning": "Forecast Day 7: Generally cloudy sky with light to moderate rain"
   },
   {
-    "Date": "2026-09-28",
+    "Date": "2026-10-01",
     "Station_Code": "43064",
     "Station_Name": "Durgapur",
     "Today_Max_temp": "31.6",
@@ -13340,7 +13340,7 @@
     "Day_7_Warning": "Forecast Day 7: Generally cloudy sky with rain or thundershowers"
   },
   {
-    "Date": "2026-09-28",
+    "Date": "2026-10-01",
     "Station_Code": "43065",
     "Station_Name": "Digha",
     "Today_Max_temp": "30.8",
@@ -13398,7 +13398,7 @@
     "Day_7_Warning": "Forecast Day 7: Generally cloudy sky with heavy to very heavy rain and squall"
   },
   {
-    "Date": "2026-09-28",
+    "Date": "2026-10-01",
     "Station_Code": "43051",
     "Station_Name": "Siliguri",
     "Today_Max_temp": "29.2",
@@ -13456,7 +13456,7 @@
     "Day_7_Warning": "Forecast Day 7: Generally cloudy sky with very heavy to extremely heavy rainfall"
   },
   {
-    "Date": "2026-09-28",
+    "Date": "2026-10-01",
     "Station_Code": "43052",
     "Station_Name": "Darjeeling",
     "Today_Max_temp": "18.4",
@@ -13514,7 +13514,7 @@
     "Day_7_Warning": "Forecast Day 7: Generally cloudy sky with continuous rain and fog"
   },
   {
-    "Date": "2026-09-28",
+    "Date": "2026-10-01",
     "Station_Code": "43053",
     "Station_Name": "Gangtok",
     "Today_Max_temp": "20.2",
@@ -13572,7 +13572,7 @@
     "Day_7_Warning": "Forecast Day 7: Generally cloudy sky with heavy to very heavy rain"
   },
   {
-    "Date": "2026-09-28",
+    "Date": "2026-10-01",
     "Station_Code": "43054",
     "Station_Name": "Jalpaiguri",
     "Today_Max_temp": "29.6",
@@ -13630,7 +13630,7 @@
     "Day_7_Warning": "Forecast Day 7: Generally cloudy sky with very heavy rain"
   },
   {
-    "Date": "2026-09-28",
+    "Date": "2026-10-01",
     "Station_Code": "43055",
     "Station_Name": "Cooch Behar",
     "Today_Max_temp": "30.0",
@@ -13688,7 +13688,7 @@
     "Day_7_Warning": "Forecast Day 7: Generally cloudy sky with heavy to very heavy rain"
   },
   {
-    "Date": "2026-09-28",
+    "Date": "2026-10-01",
     "Station_Code": "43041",
     "Station_Name": "Guwahati Borjhar",
     "Today_Max_temp": "31.2",
@@ -13746,7 +13746,7 @@
     "Day_7_Warning": "Forecast Day 7: Generally cloudy sky with moderate to heavy rain or thunderstorm"
   },
   {
-    "Date": "2026-09-28",
+    "Date": "2026-10-01",
     "Station_Code": "43042",
     "Station_Name": "Shillong",
     "Today_Max_temp": "22.4",
@@ -13804,7 +13804,7 @@
     "Day_7_Warning": "Forecast Day 7: Generally cloudy sky with heavy to very heavy rain"
   },
   {
-    "Date": "2026-09-28",
+    "Date": "2026-10-01",
     "Station_Code": "43043",
     "Station_Name": "Cherrapunji (Sohra)",
     "Today_Max_temp": "21.0",
@@ -13862,7 +13862,7 @@
     "Day_7_Warning": "Forecast Day 7: Generally cloudy sky with continuous extremely heavy rain"
   },
   {
-    "Date": "2026-09-28",
+    "Date": "2026-10-01",
     "Station_Code": "43044",
     "Station_Name": "Dibrugarh",
     "Today_Max_temp": "30.5",
@@ -13920,7 +13920,7 @@
     "Day_7_Warning": "Forecast Day 7: Generally cloudy sky with rain or thundershowers"
   },
   {
-    "Date": "2026-09-28",
+    "Date": "2026-10-01",
     "Station_Code": "43045",
     "Station_Name": "Silchar",
     "Today_Max_temp": "31.0",
@@ -13978,7 +13978,7 @@
     "Day_7_Warning": "Forecast Day 7: Generally cloudy sky with heavy rain"
   },
   {
-    "Date": "2026-09-28",
+    "Date": "2026-10-01",
     "Station_Code": "43046",
     "Station_Name": "Jorhat",
     "Today_Max_temp": "30.8",
@@ -14036,7 +14036,7 @@
     "Day_7_Warning": "Forecast Day 7: Generally cloudy sky with a few spells of rain"
   },
   {
-    "Date": "2026-09-28",
+    "Date": "2026-10-01",
     "Station_Code": "43047",
     "Station_Name": "Tezpur",
     "Today_Max_temp": "31.4",
@@ -14094,7 +14094,7 @@
     "Day_7_Warning": "Forecast Day 7: Generally cloudy sky with rain"
   },
   {
-    "Date": "2026-09-28",
+    "Date": "2026-10-01",
     "Station_Code": "43031",
     "Station_Name": "Itanagar",
     "Today_Max_temp": "28.5",
@@ -14152,7 +14152,7 @@
     "Day_7_Warning": "Forecast Day 7: Generally cloudy sky with heavy to very heavy rain"
   },
   {
-    "Date": "2026-09-28",
+    "Date": "2026-10-01",
     "Station_Code": "43033",
     "Station_Name": "Tawang",
     "Today_Max_temp": "16.8",
@@ -14210,7 +14210,7 @@
     "Day_7_Warning": "Forecast Day 7: Generally cloudy sky with rain or snow at higher reaches"
   },
   {
-    "Date": "2026-09-28",
+    "Date": "2026-10-01",
     "Station_Code": "43021",
     "Station_Name": "Agartala",
     "Today_Max_temp": "31.8",
@@ -14268,7 +14268,7 @@
     "Day_7_Warning": "Forecast Day 7: Generally cloudy sky with a few spells of rain or thundershowers"
   },
   {
-    "Date": "2026-09-28",
+    "Date": "2026-10-01",
     "Station_Code": "43022",
     "Station_Name": "Imphal",
     "Today_Max_temp": "28.6",
@@ -14326,7 +14326,7 @@
     "Day_7_Warning": "Forecast Day 7: Generally cloudy sky with light to moderate rain"
   },
   {
-    "Date": "2026-09-28",
+    "Date": "2026-10-01",
     "Station_Code": "43023",
     "Station_Name": "Aizawl",
     "Today_Max_temp": "26.4",
@@ -14384,7 +14384,7 @@
     "Day_7_Warning": "Forecast Day 7: Generally cloudy sky with heavy rain in some areas"
   },
   {
-    "Date": "2026-09-28",
+    "Date": "2026-10-01",
     "Station_Code": "43024",
     "Station_Name": "Kohima",
     "Today_Max_temp": "25.0",
@@ -14442,7 +14442,7 @@
     "Day_7_Warning": "Forecast Day 7: Generally cloudy sky with a few spells of rain"
   },
   {
-    "Date": "2026-09-28",
+    "Date": "2026-10-01",
     "Station_Code": "43025",
     "Station_Name": "Dimapur",
     "Today_Max_temp": "31.0",
@@ -14500,7 +14500,7 @@
     "Day_7_Warning": "Forecast Day 7: Generally cloudy sky with rain or thunderstorm"
   },
   {
-    "Date": "2026-09-28",
+    "Date": "2026-10-01",
     "Station_Code": "43011",
     "Station_Name": "Lucknow Amausi",
     "Today_Max_temp": "33.2",
@@ -14558,7 +14558,7 @@
     "Day_7_Warning": "Forecast Day 7: Generally cloudy sky with one or two spells of rain or thundershowers"
   },
   {
-    "Date": "2026-09-28",
+    "Date": "2026-10-01",
     "Station_Code": "43012",
     "Station_Name": "Varanasi Babatpur",
     "Today_Max_temp": "32.6",
@@ -14616,7 +14616,7 @@
     "Day_7_Warning": "Forecast Day 7: Generally cloudy sky with a few spells of rain"
   },
   {
-    "Date": "2026-09-28",
+    "Date": "2026-10-01",
     "Station_Code": "43013",
     "Station_Name": "Prayagraj (Allahabad)",
     "Today_Max_temp": "33.0",
@@ -14674,7 +14674,7 @@
     "Day_7_Warning": "Forecast Day 7: Partly cloudy sky with light rain"
   },
   {
-    "Date": "2026-09-28",
+    "Date": "2026-10-01",
     "Station_Code": "43014",
     "Station_Name": "Gorakhpur",
     "Today_Max_temp": "31.4",
@@ -14732,7 +14732,7 @@
     "Day_7_Warning": "Forecast Day 7: Generally cloudy sky with moderate to heavy rain"
   },
   {
-    "Date": "2026-09-28",
+    "Date": "2026-10-01",
     "Station_Code": "43015",
     "Station_Name": "Ayodhya",
     "Today_Max_temp": "32.2",
@@ -14790,7 +14790,7 @@
     "Day_7_Warning": "Forecast Day 7: Generally cloudy sky with light to moderate rain"
   },
   {
-    "Date": "2026-09-28",
+    "Date": "2026-10-01",
     "Station_Code": "43016",
     "Station_Name": "Jhansi",
     "Today_Max_temp": "34.0",
@@ -14848,7 +14848,7 @@
     "Day_7_Warning": "Forecast Day 7: Partly cloudy sky with light rain"
   },
   {
-    "Date": "2026-09-28",
+    "Date": "2026-10-01",
     "Station_Code": "43001",
     "Station_Name": "Noida",
     "Today_Max_temp": "33.5",
@@ -14906,7 +14906,7 @@
     "Day_7_Warning": "Forecast Day 7: Partly cloudy sky with possibility of light rain"
   },
   {
-    "Date": "2026-09-28",
+    "Date": "2026-10-01",
     "Station_Code": "43002",
     "Station_Name": "Agra Taj",
     "Today_Max_temp": "34.8",
@@ -14964,7 +14964,7 @@
     "Day_7_Warning": "Forecast Day 7: Partly cloudy sky"
   },
   {
-    "Date": "2026-09-28",
+    "Date": "2026-10-01",
     "Station_Code": "43004",
     "Station_Name": "Aligarh",
     "Today_Max_temp": "34.0",
@@ -15022,7 +15022,7 @@
     "Day_7_Warning": "Forecast Day 7: Partly cloudy sky"
   },
   {
-    "Date": "2026-09-28",
+    "Date": "2026-10-01",
     "Station_Code": "43005",
     "Station_Name": "Mathura",
     "Today_Max_temp": "34.6",
@@ -15080,7 +15080,7 @@
     "Day_7_Warning": "Forecast Day 7: Partly cloudy sky"
   },
   {
-    "Date": "2026-09-28",
+    "Date": "2026-10-01",
     "Station_Code": "42991",
     "Station_Name": "Dehradun",
     "Today_Max_temp": "28.4",
@@ -15138,7 +15138,7 @@
     "Day_7_Warning": "Forecast Day 7: Generally cloudy sky with heavy to very heavy rain"
   },
   {
-    "Date": "2026-09-28",
+    "Date": "2026-10-01",
     "Station_Code": "42992",
     "Station_Name": "Haridwar",
     "Today_Max_temp": "30.0",
@@ -15196,7 +15196,7 @@
     "Day_7_Warning": "Forecast Day 7: Generally cloudy sky with moderate to heavy rain"
   },
   {
-    "Date": "2026-09-28",
+    "Date": "2026-10-01",
     "Station_Code": "42993",
     "Station_Name": "Mussoorie",
     "Today_Max_temp": "19.2",
@@ -15254,7 +15254,7 @@
     "Day_7_Warning": "Forecast Day 7: Generally cloudy sky with continuous heavy rain and mist"
   },
   {
-    "Date": "2026-09-28",
+    "Date": "2026-10-01",
     "Station_Code": "42994",
     "Station_Name": "Rishikesh",
     "Today_Max_temp": "29.4",
@@ -15312,7 +15312,7 @@
     "Day_7_Warning": "Forecast Day 7: Generally cloudy sky with heavy rain"
   },
   {
-    "Date": "2026-09-28",
+    "Date": "2026-10-01",
     "Station_Code": "42995",
     "Station_Name": "Pithoragarh",
     "Today_Max_temp": "22.0",
@@ -15370,7 +15370,7 @@
     "Day_7_Warning": "Forecast Day 7: Generally cloudy sky with very heavy to extremely heavy rainfall"
   },
   {
-    "Date": "2026-09-28",
+    "Date": "2026-10-01",
     "Station_Code": "42981",
     "Station_Name": "Shimla",
     "Today_Max_temp": "21.0",
@@ -15428,7 +15428,7 @@
     "Day_7_Warning": "Forecast Day 7: Generally cloudy sky with moderate to heavy rain or thunderstorm"
   },
   {
-    "Date": "2026-09-28",
+    "Date": "2026-10-01",
     "Station_Code": "42985",
     "Station_Name": "Mandi",
     "Today_Max_temp": "27.5",
@@ -15486,7 +15486,7 @@
     "Day_7_Warning": "Forecast Day 7: Generally cloudy sky with heavy rain in some areas"
   },
   {
-    "Date": "2026-09-28",
+    "Date": "2026-10-01",
     "Station_Code": "42971",
     "Station_Name": "Srinagar",
     "Today_Max_temp": "24.8",
@@ -15544,7 +15544,7 @@
     "Day_7_Warning": "Forecast Day 7: Partly cloudy sky with possibility of light rain"
   },
   {
-    "Date": "2026-09-28",
+    "Date": "2026-10-01",
     "Station_Code": "42972",
     "Station_Name": "Jammu",
     "Today_Max_temp": "32.0",
@@ -15602,7 +15602,7 @@
     "Day_7_Warning": "Forecast Day 7: Generally cloudy sky with one or two spells of rain or thundershowers"
   },
   {
-    "Date": "2026-09-28",
+    "Date": "2026-10-01",
     "Station_Code": "42973",
     "Station_Name": "Leh (Ladakh)",
     "Today_Max_temp": "18.0",
@@ -15660,7 +15660,7 @@
     "Day_7_Warning": "Forecast Day 7: Mainly clear sky"
   },
   {
-    "Date": "2026-09-28",
+    "Date": "2026-10-01",
     "Station_Code": "42974",
     "Station_Name": "Kargil (Ladakh)",
     "Today_Max_temp": "19.5",
@@ -15718,7 +15718,7 @@
     "Day_7_Warning": "Forecast Day 7: Clear sky"
   },
   {
-    "Date": "2026-09-28",
+    "Date": "2026-10-01",
     "Station_Code": "42977",
     "Station_Name": "Katra (Vaishno Devi)",
     "Today_Max_temp": "29.0",
@@ -15776,7 +15776,7 @@
     "Day_7_Warning": "Forecast Day 7: Generally cloudy sky with rain or thundershowers"
   },
   {
-    "Date": "2026-09-28",
+    "Date": "2026-10-01",
     "Station_Code": "42961",
     "Station_Name": "Amritsar Rajasansi",
     "Today_Max_temp": "34.2",
@@ -15834,7 +15834,7 @@
     "Day_7_Warning": "Forecast Day 7: Partly cloudy sky with possibility of light rain"
   },
   {
-    "Date": "2026-09-28",
+    "Date": "2026-10-01",
     "Station_Code": "42965",
     "Station_Name": "Bathinda",
     "Today_Max_temp": "35.6",
@@ -15892,7 +15892,7 @@
     "Day_7_Warning": "Forecast Day 7: Mainly clear sky"
   },
   {
-    "Date": "2026-09-28",
+    "Date": "2026-10-01",
     "Station_Code": "42951",
     "Station_Name": "Chandigarh",
     "Today_Max_temp": "32.6",
@@ -15950,7 +15950,7 @@
     "Day_7_Warning": "Forecast Day 7: Generally cloudy sky with one or two spells of rain"
   },
   {
-    "Date": "2026-09-28",
+    "Date": "2026-10-01",
     "Station_Code": "42952",
     "Station_Name": "Gurugram",
     "Today_Max_temp": "34.0",
@@ -16008,7 +16008,7 @@
     "Day_7_Warning": "Forecast Day 7: Partly cloudy sky with light drizzle"
   },
   {
-    "Date": "2026-09-28",
+    "Date": "2026-10-01",
     "Station_Code": "42955",
     "Station_Name": "Hisar",
     "Today_Max_temp": "35.4",
