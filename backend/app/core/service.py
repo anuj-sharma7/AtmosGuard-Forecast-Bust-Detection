@@ -177,9 +177,10 @@ def risk_bundle(
 
     try:
         from ..ingest import imd_live
+        is_live_date = (base_date.isoformat() == imd_live._today_str())
         imd_payload = imd_live.get_live_city_forecasts()
         stns = imd_payload.get("stations", [])
-        if stns:
+        if is_live_date and stns:
             def _dist(s):
                 lat2, lon2 = float(s.get("lat", 20)), float(s.get("lon", 78))
                 return (site.lat - lat2) ** 2 + (site.lon - lon2) ** 2

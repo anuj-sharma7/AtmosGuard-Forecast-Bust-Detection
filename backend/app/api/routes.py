@@ -49,10 +49,7 @@ BAND_COLORS = {
 
 
 def _reference_date() -> date:
-    try:
-        return date.fromisoformat(imd_live._today_str())
-    except Exception:
-        return date.fromisoformat(settings.demo_reference_date)
+    return date.fromisoformat(settings.demo_reference_date)
 
 
 def _parse_date(value: str | None) -> date:
@@ -105,7 +102,7 @@ def meta() -> dict:
             "location_id": "jaipur",
             "variable_id": "rainfall",
             "model_id": "ecmwf",
-            "horizon": 3,
+            "horizon": 5,
             "base_date": imd_live._today_str(),
             "scenario_id": None,
         },
