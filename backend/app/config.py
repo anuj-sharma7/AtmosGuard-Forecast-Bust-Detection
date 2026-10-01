@@ -14,6 +14,14 @@ from pathlib import Path
 BASE_DIR = Path(__file__).resolve().parent.parent
 REPO_DIR = BASE_DIR.parent
 
+try:
+    from dotenv import load_dotenv
+
+    load_dotenv(REPO_DIR / ".env")
+    load_dotenv(BASE_DIR / ".env")
+except ImportError:
+    pass
+
 
 def _env_bool(name: str, default: bool) -> bool:
     raw = os.getenv(name)
@@ -67,6 +75,11 @@ class Settings:
     cors_origins: tuple[str, ...] = ("http://localhost:5173", "http://127.0.0.1:5173")
 
     serve_frontend: bool = field(default_factory=lambda: _env_bool("ATMOSGUARD_SERVE_FRONTEND", True))
+
+    # Real-time weather provider: OpenWeatherMap (configured via OPENWEATHERMAP_API_KEY in .env)
+    openweathermap_api_key: str = field(
+        default_factory=lambda: os.getenv("OPENWEATHERMAP_API_KEY", "")
+    )
 
     @property
     def frontend_dist(self) -> Path:

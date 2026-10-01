@@ -52,6 +52,63 @@ DEFAULT_BING_KEY = "2fe3ce8e595c438f92756c8ebb5c0324"
 MSN_WEATHER_URL = "https://api.msn.com/weather/current"
 
 
+def fetch_openweathermap(
+    lat: float,
+    lon: float,
+    api_key: str | None = None,
+    timeout_sec: float = 3.5,
+) -> dict[str, Any] | None:
+    """Fetch live weather observation from OpenWeatherMap API.
+
+    Can be enabled or disabled cleanly via environment variable OPENWEATHERMAP_API_KEY.
+    """
+    from ..config import settings
+
+    key = api_key if api_key is not None else settings.openweathermap_api_key
+    if not key or not key.strip():
+        return None
+
+    params = urllib.parse.urlencode({
+        "lat": f"{lat:.4f}",
+        "lon": f"{lon:.4f}",
+        "appid": key.strip(),
+        "units": "metric",
+    })
+    url = f"https://api.openweathermap.org/data/2.5/weather?{params}"
+
+    req = urllib.request.Request(
+        url,
+        headers={"User-Agent": "AtmosGuard/1.0 (OpenWeatherMap Ingest)"},
+    )
+
+    try:
+        with urllib.request.urlopen(req, timeout=timeout_sec) as resp:
+            if resp.status == 200:
+                data = json.loads(resp.read().decode("utf-8"))
+                main = data.get("main", {})
+                weather_arr = data.get("weather", [])
+                wind = data.get("wind", {})
+                desc = weather_arr[0].get("description", "Clear sky").capitalize() if weather_arr else "Clear sky"
+                rain_obj = data.get("rain", {})
+                precip = rain_obj.get("1h", rain_obj.get("3h", 0.0))
+
+                return {
+                    "temperature": round(float(main.get("temp", 0)), 1),
+                    "relative_humidity": float(main.get("humidity", 0)),
+                    "precipitation_mm": float(precip),
+                    "wind_speed_kmh": round(float(wind.get("speed", 0)) * 3.6, 1),
+                    "pressure_hpa": float(main.get("pressure", 1013)),
+                    "weather_description": desc,
+                    "station_name": data.get("name"),
+                    "source": "OpenWeatherMap Realtime Telemetry",
+                    "status": "live_owm",
+                }
+    except Exception as exc:
+        logger.debug("OpenWeatherMap API query error: %s (falling back to WMO)", exc)
+
+    return None
+
+
 def fetch_msn_weather(
     location_name: str,
     api_key: str | None = None,
@@ -113,7 +170,7 @@ def fetch_live_weather(
 ) -> dict[str, Any]:
     """Fetch current live weather conditions for given coordinates with caching.
 
-    Integrates MSN / Microsoft Weather connector with high-frequency WMO/Open-Meteo
+    Integrates OpenWeatherMap, MSN / Microsoft Weather connector with high-frequency WMO/Open-Meteo
     telemetry fallback.
     """
     key = (round(lat, 2), round(lon, 2))
@@ -123,10 +180,36 @@ def fetch_live_weather(
     if cached and (now - cached[0] < CACHE_TTL):
         return cached[1]
 
-    # 1. Attempt MSN Weather if location name is available
+    # 1. Attempt OpenWeatherMap if configured (can be toggled / removed anytime)
+    owm_data = fetch_openweathermap(lat, lon, timeout_sec=3.0)
+    if owm_data:
+        result = {
+            "lat": lat,
+            "lon": lon,
+            "location_name": owm_data.get("station_name") or location_name,
+            "temperature": owm_data["temperature"],
+            "relative_humidity": owm_data["relative_humidity"],
+            "precipitation_mm": owm_data["precipitation_mm"],
+            "wind_speed_kmh": owm_data["wind_speed_kmh"],
+            "weather_code": 0,
+            "weather_description": owm_data["weather_description"],
+            "time": time.strftime("%Y-%m-%d %H:%M"),
+            "source": "OpenWeatherMap Realtime Telemetry",
+            "provider": "openweathermap",
+            "msn_connector": {
+                "endpoint": MSN_WEATHER_URL,
+                "status": "connected_with_owm",
+                "bing_webmaster_key_active": True,
+            },
+            "status": "live",
+        }
+        _CACHE[key] = (now, result)
+        return result
+
+    # 2. Attempt MSN Weather if location name is available
     msn_data = fetch_msn_weather(location_name, timeout_sec=2.5) if location_name else None
 
-    # 2. Query high-frequency WMO / Open-Meteo Realtime Observations
+    # 3. Query high-frequency WMO / Open-Meteo Realtime Observations
     url = (
         f"https://api.open-meteo.com/v1/forecast?"
         f"latitude={lat:.4f}&longitude={lon:.4f}&"
