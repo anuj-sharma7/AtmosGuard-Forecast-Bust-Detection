@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en" class="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="dark" />
+    <meta name="description" content="AtmosGuard - AI-based forecast bust risk and early-warning system. Decision support for meteorologists and disaster-management teams." />
+    <title>AtmosGuard - Forecast Bust Risk &amp; Early Warning</title>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%230d1524'/%3E%3Cpath d='M6 21h20M6 21a6 6 0 0 1 5-9 7 7 0 0 1 13 2 4.5 4.5 0 0 1 2 7' fill='none' stroke='%2338bdf8' stroke-width='2' stroke-linecap='round'/%3E%3Cpath d='M16 12v7M16 22.5v1.5' stroke='%23d03b3b' stroke-width='2.4' stroke-linecap='round'/%3E%3C/svg%3E" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <!--
+      Loaded non-render-blocking. A stylesheet link stalls first paint until it
+      resolves, so an unreachable font CDN - an offline or air-gapped operations
+      room, the same case the map basemap has to survive - would leave the
+      dashboard blank rather than merely unstyled. The `media` swap lets the
+      browser fetch it out of the critical path; the system font stack in
+      tailwind.config.js carries the design until (or unless) it arrives.
+    -->
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap"
+      media="print"
+      onload="this.media='all'"
+    />
+    <noscript>
+      <link
+        rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap"
+      />
+    </noscript>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
