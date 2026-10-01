@@ -175,8 +175,11 @@ def risk_bundle(
     real_regime = bundle.state.regime
     real_confidence = round(assessment.forecast_confidence * 100, 1)
 
+    real_explanation = risk_model.narrative(assessment, site.name, horizon, var.label)
+    contributions = list(assessment.contributions)
+
     try:
-        from ..ingest import imd_live
+        from ..ingest import imd_live, live_weather
         is_live_date = (base_date.isoformat() == imd_live._today_str())
         imd_payload = imd_live.get_live_city_forecasts()
         stns = imd_payload.get("stations", [])
@@ -188,6 +191,15 @@ def risk_bundle(
             matched = min(stns, key=_dist)
             days_7 = matched.get("forecast_7days", [])
 
+            # Fetch multi-source ground observation telemetry (OpenWeatherMap + WMO)
+            live_obs = live_weather.fetch_live_weather(site.lat, site.lon, location_name=site.name)
+            curr_temp = live_obs.get("temperature")
+            curr_rh = live_obs.get("relative_humidity")
+            curr_rain = live_obs.get("precipitation_mm") or 0.0
+            curr_wind = live_obs.get("wind_speed_kmh")
+            curr_cond = live_obs.get("weather_description", "Clear sky")
+            obs_feed = live_obs.get("source", "Realtime Telemetry")
+
             # 1. Target horizon specific IMD outlook & warning (Day 1 to 7)
             h_idx = max(0, min(6, horizon - 1))
             target_day_data = days_7[h_idx] if len(days_7) > h_idx else {}
@@ -198,7 +210,6 @@ def risk_bundle(
             base_stn_score = float(matched.get("bust_risk_score", 16.0))
 
             # 2. Horizon Lead-Time Growth: NWP divergence and convective spread rise with lead time
-            # Day 1: +0%, Day 2: +2%, Day 3: +4%, Day 4: +8%, Day 5: +13%, Day 6: +18%, Day 7: +24%
             horizon_spread_penalty = {
                 1: 0.0,
                 2: 2.0,
@@ -218,13 +229,42 @@ def risk_bundle(
             elif w_color == "yellow":
                 warning_boost = 12.0
 
-            stn_horizon_score = max(8.0, min(92.0, base_stn_score + horizon_spread_penalty + warning_boost))
+            # 3. Ground Observation Anomaly & Real-Time Divergence Analysis
+            ground_anomaly_penalty = 0.0
+            ground_notes = []
 
-            # 3. Weather Variable Climatological & Predictability Scaling:
-            # - Rainfall: Convective non-linearity, highest spatial variance (1.0x)
-            # - Temperature: Synoptic scale, high model skill ~88-92% (0.64x)
-            # - Wind: Meso-scale friction and gust dynamics (0.80x)
-            # - Pressure: Deep barotropic/synoptic stability (0.48x)
+            # (a) Temperature Divergence: Compare live temp against IMD max/min or model
+            stn_max_t = matched.get("today_max_temp")
+            if curr_temp is not None and stn_max_t is not None:
+                try:
+                    max_f = float(stn_max_t)
+                    if curr_temp > max_f + 3.0:
+                        ground_anomaly_penalty += 8.0
+                        ground_notes.append(f"Ground temp ({curr_temp}°C) exceeds IMD max ({max_f}°C)")
+                except (ValueError, TypeError):
+                    pass
+
+            # (b) Moisture / Rainfall Divergence:
+            if variable_id == "rainfall":
+                fc_val = float(bundle.forecast.deterministic[horizon - 1])
+                if fc_val > 5.0 and curr_rh is not None and curr_rh < 45.0 and curr_rain == 0.0:
+                    ground_anomaly_penalty += 10.0
+                    ground_notes.append(f"Dry ground air ({curr_rh}% RH, 0mm rain) diverges from wet NWP model ({fc_val:.1f}mm)")
+                elif fc_val < 1.0 and curr_rain > 5.0:
+                    ground_anomaly_penalty += 14.0
+                    ground_notes.append(f"Unpredicted ground precipitation ({curr_rain}mm) detected at observation station")
+                elif curr_rh is not None and curr_rh > 85.0 and w_color in {"orange", "red"}:
+                    ground_anomaly_penalty += 6.0
+                    ground_notes.append(f"Near-saturation humidity ({curr_rh}% RH) confirms high convective volatility")
+
+            # (c) Wind Gust Divergence:
+            if variable_id == "wind" and curr_wind is not None and curr_wind > 25.0:
+                ground_anomaly_penalty += 8.0
+                ground_notes.append(f"Surface gusts ({curr_wind} km/h) elevating boundary-layer divergence")
+
+            stn_horizon_score = max(8.0, min(95.0, base_stn_score + horizon_spread_penalty + warning_boost + ground_anomaly_penalty))
+
+            # 4. Weather Variable Climatological & Predictability Scaling
             var_scale = {
                 "rainfall": 1.0,
                 "temperature": 0.64,
@@ -256,6 +296,28 @@ def risk_bundle(
                 real_regime = f"Mesoscale convective instability · IMD Alert ({w_text})"
             elif w_color == "red":
                 real_regime = f"Severe cyclonic/depression warning · IMD Warning ({w_text})"
+
+            # Synthesize all APIs into comprehensive narrative
+            telemetry_detail = f"{curr_temp}°C, {curr_rh}% RH, {curr_cond} via {obs_feed}"
+            divergence_str = f" · Note: {'; '.join(ground_notes)}" if ground_notes else " · Ground telemetry aligns with forecast."
+            real_explanation = (
+                f"Multi-Source AI Assessment for {site.name} (Day {horizon} {var.label}): "
+                f"IMD Warning: {w_color.upper()} ('{w_text}'). "
+                f"Live ground truth: {telemetry_detail}{divergence_str}. "
+                f"Bust risk assessed at {real_score}% ({real_category} risk, confidence {real_confidence}%)."
+            )
+
+            # Inject Ground Telemetry into explainable AI feature contributions
+            if ground_notes:
+                from ..schemas import FeatureContribution
+                contributions.insert(0, FeatureContribution(
+                    feature="ground_observation_divergence",
+                    label="Real-Time Ground Telemetry Divergence",
+                    description="; ".join(ground_notes),
+                    value=round(ground_anomaly_penalty, 1),
+                    contribution=round(ground_anomaly_penalty / 100.0, 3),
+                    direction="increases" if ground_anomaly_penalty > 0 else "decreases",
+                ))
     except Exception:
         pass
 
@@ -278,9 +340,9 @@ def risk_bundle(
         "forecast_confidence": real_confidence,
         "model_confidence": round(assessment.model_confidence * 100, 1),
         "features": {k: round(v, 4) for k, v in assessment.features.items()},
-        "feature_contributions": assessment.contributions,
+        "feature_contributions": contributions,
         "base_value": round(assessment.base_value * 100, 1),
-        "explanation": risk_model.narrative(assessment, site.name, horizon, var.label),
+        "explanation": real_explanation,
         "explanation_label": "Feature Contribution - MVP",
         "explanation_method": risk_model.model_card()["explanation_method"],
         "synoptic": {
