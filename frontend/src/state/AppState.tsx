@@ -89,8 +89,9 @@ export function AppStateProvider({ children }: { children: ReactNode }) {
     if (!selection) return;
     let cancelled = false;
     setRisk((prev) => ({ data: prev.data, loading: true, error: null }));
+    const effectiveHorizon = Math.max(3, Math.min(7, selection.horizon));
     api
-      .risk(selection)
+      .risk({ ...selection, horizon: effectiveHorizon })
       .then((data) => {
         if (!cancelled) setRisk({ data, loading: false, error: null });
       })
@@ -106,8 +107,9 @@ export function AppStateProvider({ children }: { children: ReactNode }) {
     if (!selection) return;
     let cancelled = false;
     setNetwork((prev) => ({ data: prev.data, loading: true, error: null }));
+    const effectiveHorizon = Math.max(3, Math.min(7, selection.horizon));
     api
-      .network(selection)
+      .network({ ...selection, horizon: effectiveHorizon })
       .then((data) => {
         if (!cancelled) setNetwork({ data, loading: false, error: null });
       })

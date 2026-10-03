@@ -117,8 +117,9 @@ export function Dashboard() {
     if (!selection) return;
     let cancelled = false;
     setWarningsLoading(true);
+    const effectiveHorizon = Math.max(3, Math.min(7, selection.horizon));
     api
-      .warnings(selection)
+      .warnings({ ...selection, horizon: effectiveHorizon })
       .then((data) => {
         if (!cancelled) setWarnings(data);
       })
@@ -385,7 +386,11 @@ export function Dashboard() {
                           {imdBust?.bust_category ?? r.risk_category} BUST RISK
                         </span>
                         <span className="rounded border border-edge bg-surface-2 px-2 py-0.5 text-2xs font-semibold text-ink-secondary">
-                          Day {selection?.horizon ?? r.forecast_horizon} · Valid {formatDate(r.valid_date)}
+                          {selection?.horizon === 1
+                            ? 'Day 1 · Live Nowcast (Today)'
+                            : selection?.horizon === 2
+                            ? 'Day 2 · Short-Range Outlook (Tomorrow)'
+                            : `Day ${selection?.horizon ?? r.forecast_horizon} · Valid ${formatDate(r.valid_date)}`}
                         </span>
                       </div>
                     </div>
