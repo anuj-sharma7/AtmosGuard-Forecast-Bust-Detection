@@ -6,7 +6,7 @@
  * ensemble is doing. On first load this is the Jaipur Day 5 rainfall case.
  */
 
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { api } from '../api/client';
@@ -58,6 +58,19 @@ export function Dashboard() {
   const [imdBustLoading, setImdBustLoading] = useState(false);
   const [countdown, setCountdown] = useState(60);
   const [isSyncing, setIsSyncing] = useState(false);
+  const [siteFilter, setSiteFilter] = useState<'ALL' | 'ALERT' | 'NORMAL'>('ALL');
+
+  const sortedSites = useMemo(() => {
+    if (!network.data?.sites) return [];
+    const list = [...network.data.sites].sort((a, b) => b.risk_score - a.risk_score);
+    if (siteFilter === 'ALERT') {
+      return list.filter((s) => s.risk_category === 'HIGH' || s.risk_category === 'SEVERE');
+    }
+    if (siteFilter === 'NORMAL') {
+      return list.filter((s) => s.risk_category === 'LOW' || s.risk_category === 'MODERATE');
+    }
+    return list;
+  }, [network.data?.sites, siteFilter]);
 
   // Manual or timer-triggered live telemetry sync
   const handleSync = useCallback(
@@ -160,34 +173,69 @@ export function Dashboard() {
 
   return (
     <div className="space-y-4">
-      {/* Positioning statement - the product explained in two lines. */}
-      <section className="panel px-4 py-3.5">
-        <div className="flex flex-wrap items-end justify-between gap-4">
-          <div className="max-w-2xl">
-            <h2 className="text-lg font-bold tracking-tight text-ink-primary">
-              Reads the forecast before it fails.
-            </h2>
-            <p className="mt-1 text-xs leading-relaxed text-ink-secondary">
-              AtmosGuard detects medium-range forecast bust risk before the weather event occurs -
-              helping forecasters identify uncertainty, understand its causes, and act earlier.
-            </p>
+      {/* Top Cockpit Header & Telemetry Status Bar */}
+      <section className="panel px-4 py-3 border border-edge/80 bg-gradient-to-r from-surface-1 via-surface-1 to-surface-2/60">
+        <div className="flex flex-wrap items-center justify-between gap-4">
+          <div className="flex items-center gap-3">
+            <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg border border-accent/40 bg-accent/15 text-accent shadow-sm">
+              <svg className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 00-9.78 2.096A4.001 4.001 0 003 15z" />
+              </svg>
+            </div>
+            <div>
+              <div className="flex items-center gap-2">
+                <h1 className="text-base font-bold tracking-tight text-ink-primary">
+                  AtmosGuard Meteorological Early-Warning Operations
+                </h1>
+                <span className="flex items-center gap-1 rounded-full border border-emerald-500/30 bg-emerald-500/10 px-2 py-0.5 text-[10px] font-bold text-emerald-400">
+                  <span className="h-1.5 w-1.5 rounded-full bg-emerald-500 animate-pulse" />
+                  LIVE GROUND TELEMETRY
+                </span>
+              </div>
+              <p className="mt-0.5 text-xs text-ink-secondary">
+                Medium-range numerical forecast bust risk detection powered by live ground telemetry divergence, ensemble dispersion, and IMD early-warning protocols.
+              </p>
+            </div>
           </div>
-          <div className="flex gap-2">
+
+          <div className="flex flex-wrap items-center gap-2">
+            <div className="hidden lg:flex items-center gap-3 rounded border border-edge/60 bg-surface-2/80 px-3 py-1.5 text-2xs text-ink-secondary">
+              <div>
+                <span className="text-ink-muted">Monitored: </span>
+                <strong className="text-ink-primary">{net ? `${net.network_size} Synoptic Sites` : '10 Sites'}</strong>
+              </div>
+              <span className="text-edge">|</span>
+              <div>
+                <span className="text-ink-muted">Active Alerts: </span>
+                <strong className="text-amber-400">{alerts ? alerts.alerts.length : '--'}</strong>
+              </div>
+              <span className="text-edge">|</span>
+              <div>
+                <span className="text-ink-muted">Confidence: </span>
+                <strong className="text-cyan-400">{net ? `${net.mean_model_confidence.toFixed(0)}%` : '--'}</strong>
+              </div>
+            </div>
+
             <button
               type="button"
               onClick={() => navigate('/analysis')}
-              className="rounded border border-accent/50 bg-accent/12 px-3 py-1.5 text-xs
-                         font-semibold text-accent transition-colors hover:bg-accent/20"
+              className="rounded border border-accent/50 bg-accent/15 px-3 py-1.5 text-xs font-semibold text-accent transition-colors hover:bg-accent/25"
             >
-              Analyze Forecast
+              Deep Analysis
             </button>
             <button
               type="button"
               onClick={() => navigate('/map')}
-              className="rounded border border-edge-strong px-3 py-1.5 text-xs font-medium
-                         text-ink-secondary transition-colors hover:text-ink-primary"
+              className="rounded border border-edge-strong bg-surface-2 px-3 py-1.5 text-xs font-medium text-ink-secondary transition-colors hover:border-accent hover:text-ink-primary"
             >
-              View Risk Map
+              Interactive Map
+            </button>
+            <button
+              type="button"
+              onClick={() => setReportOpen(true)}
+              className="rounded border border-edge-strong bg-surface-2 px-3 py-1.5 text-xs font-medium text-ink-secondary transition-colors hover:border-accent hover:text-ink-primary"
+            >
+              Export Report
             </button>
           </div>
         </div>
@@ -236,42 +284,124 @@ export function Dashboard() {
         />
       </MetricStrip>
 
-      <div className="grid items-start gap-4 xl:grid-cols-[minmax(0,1fr)_400px]">
-        {/* Map */}
-        <Panel
-          title="National Weather Warning & Forecast Bust Risk"
-          subtitle={
-            r
-              ? `Day ${r.forecast_horizon} ${r.variable.label.toLowerCase()} · ${r.model.label} · Official IMD Early-Warning Factors`
-              : 'Loading network'
-          }
-          tip="Official IMD four-colour warning map (Green/Yellow/Orange/Red) with complete meteorological hazard factors (Thunderstorm, Heavy Rain, Winds, Heat Wave, etc.). Click any state or marker to inspect."
-          updated={selection ? formatDate(selection.base_date) : undefined}
-          bodyClassName="p-0"
-          className="min-h-[580px]"
-        >
-          <div className="w-full p-1">
-            {network.error ? (
-              <div className="p-3">
-                <ErrorState message={network.error} onRetry={reload} />
+      <div className="grid items-start gap-4 xl:grid-cols-[minmax(0,1.25fr)_420px]">
+        {/* Left Column: National Map + Early Warning Station Watchlist */}
+        <div className="space-y-4">
+          <Panel
+            title="National Weather Warning & Forecast Bust Risk"
+            subtitle={
+              r
+                ? `Day ${r.forecast_horizon} ${r.variable.label.toLowerCase()} · ${r.model.label} · Official IMD Early-Warning Factors`
+                : 'Loading network'
+            }
+            tip="Official IMD four-colour warning map (Green/Yellow/Orange/Red) with complete meteorological hazard factors (Thunderstorm, Heavy Rain, Winds, Heat Wave, etc.). Click any state or marker to inspect."
+            updated={selection ? formatDate(selection.base_date) : undefined}
+            bodyClassName="p-0"
+          >
+            <div className="w-full p-1">
+              {network.error ? (
+                <div className="p-3">
+                  <ErrorState message={network.error} onRetry={reload} />
+                </div>
+              ) : warningsLoading && !warnings ? (
+                <div className="p-3">
+                  <LoadingState label="Loading IMD warning map and meteorological factors" rows={5} />
+                </div>
+              ) : (
+                <ImdWeatherMap
+                  warnings={warnings}
+                  sites={net?.sites}
+                  selectedLocationId={selection?.location_id}
+                  onSelectSite={setLocation}
+                  height={500}
+                  horizon={selection?.horizon}
+                  baseDate={selection?.base_date}
+                />
+              )}
+            </div>
+          </Panel>
+
+          {/* National Early Warning Watchlist */}
+          <Panel
+            title="National Early-Warning Station Watchlist & Live Telemetry"
+            subtitle={`${sortedSites.length} synoptic stations ranked by AI bust probability · Lead Time: Day ${selection?.horizon ?? 5}`}
+            tip="Operational overview of forecast reliability across all monitored Indian cities. Click any station to focus its forecast and live telemetry."
+          >
+            <div className="space-y-2">
+              <div className="flex items-center justify-between gap-2 pb-1 text-2xs">
+                <div className="flex items-center gap-1 rounded bg-surface-2 p-0.5">
+                  {(['ALL', 'ALERT', 'NORMAL'] as const).map((filter) => (
+                    <button
+                      key={filter}
+                      type="button"
+                      onClick={() => setSiteFilter(filter)}
+                      className={`rounded px-2.5 py-0.5 font-medium transition-colors ${
+                        siteFilter === filter
+                          ? 'bg-accent text-surface-0 font-bold'
+                          : 'text-ink-secondary hover:text-ink-primary'
+                      }`}
+                    >
+                      {filter === 'ALL' ? 'All Stations (10)' : filter === 'ALERT' ? 'Alerts (High/Severe)' : 'Normal (Low/Mod)'}
+                    </button>
+                  ))}
+                </div>
+                <span className="text-[10px] text-ink-muted">
+                  Click any station to focus
+                </span>
               </div>
-            ) : warningsLoading && !warnings ? (
-              <div className="p-3">
-                <LoadingState label="Loading IMD warning map and meteorological factors" rows={5} />
+
+              <div className="grid gap-1.5 max-h-[380px] overflow-y-auto pr-1">
+                {sortedSites.map((site) => {
+                  const isCurrent = selection?.location_id === site.id;
+                  const color = riskColor(site.risk_category);
+                  return (
+                    <div
+                      key={site.id}
+                      onClick={() => setLocation(site.id)}
+                      className={`flex cursor-pointer items-center justify-between rounded-md border p-2.5 text-2xs transition-all ${
+                        isCurrent
+                          ? 'border-accent bg-accent/15 ring-1 ring-accent/60 shadow-sm'
+                          : 'border-edge/70 bg-surface-2/60 hover:border-edge-strong hover:bg-surface-2'
+                      }`}
+                    >
+                      <div className="flex items-center gap-2.5 min-w-0">
+                        <span
+                          className="h-2.5 w-2.5 shrink-0 rounded-full shadow-sm"
+                          style={{ backgroundColor: color }}
+                        />
+                        <div className="min-w-0">
+                          <div className="flex items-center gap-1.5">
+                            <span className={`text-xs font-bold truncate ${isCurrent ? 'text-accent' : 'text-ink-primary'}`}>
+                              {site.name}
+                            </span>
+                            <span className="text-[10px] text-ink-muted truncate">
+                              · {site.state}
+                            </span>
+                          </div>
+                          <div className="mt-0.5 text-[10px] text-ink-muted truncate">
+                            Regime: <span className="text-ink-secondary">{site.regime}</span> · Driver: <span className="text-ink-secondary">{site.top_driver}</span>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div className="flex items-center gap-3 shrink-0">
+                        <div className="text-right">
+                          <div className="text-xs font-black tabular-nums" style={{ color }}>
+                            {site.risk_score.toFixed(0)}%
+                          </div>
+                          <div className="text-[9px] text-ink-muted">
+                            Confidence: {site.model_confidence.toFixed(0)}%
+                          </div>
+                        </div>
+                        <RiskChip category={site.risk_category} size="sm" />
+                      </div>
+                    </div>
+                  );
+                })}
               </div>
-            ) : (
-              <ImdWeatherMap
-                warnings={warnings}
-                sites={net?.sites}
-                selectedLocationId={selection?.location_id}
-                onSelectSite={setLocation}
-                height={520}
-                horizon={selection?.horizon}
-                baseDate={selection?.base_date}
-              />
-            )}
-          </div>
-        </Panel>
+            </div>
+          </Panel>
+        </div>
 
         {/* Risk panel */}
         <div className="space-y-4">
@@ -653,24 +783,85 @@ export function Dashboard() {
         </div>
       </div>
 
-      {/* Explanation + ensemble */}
+      {/* Explanation + Multi-Model Comparison on Left | Ensemble + Timeline on Right */}
       <div className="grid gap-4 xl:grid-cols-2">
-        <Panel
-          title="Why is this forecast at risk?"
-          subtitle="Contribution of each monitored driver to the assessed risk"
-          tip="Each bar shows how far this driver sits from its dataset average, weighted by its importance in the model. Red raises the assessed risk; blue lowers it."
-        >
-          {r ? (
-            <ShapExplanation
-              contributions={r.feature_contributions}
-              explanation={r.explanation}
-              method={r.explanation_method}
-              label={r.explanation_label}
-            />
-          ) : (
-            <LoadingState label="Computing contributions" rows={6} />
+        <div className="space-y-4">
+          <Panel
+            title="Why is this forecast at risk?"
+            subtitle="Contribution of each monitored driver to the assessed risk"
+            tip="Each bar shows how far this driver sits from its dataset average, weighted by its importance in the model. Red raises the assessed risk; blue lowers it."
+          >
+            {r ? (
+              <ShapExplanation
+                contributions={r.feature_contributions}
+                explanation={r.explanation}
+                method={r.explanation_method}
+                label={r.explanation_label}
+              />
+            ) : (
+              <LoadingState label="Computing contributions" rows={6} />
+            )}
+          </Panel>
+
+          {/* Numerical Weather Prediction Multi-Model Consensus */}
+          {r && (
+            <Panel
+              title="Numerical Weather Prediction Multi-Model Consensus"
+              subtitle={`ECMWF vs NCMRWF-NCUM vs GFS · Day ${r.forecast_horizon} ${r.variable.label}`}
+              tip="Comparison of major global and regional NWP centres. Large disagreement between deterministic models signals elevated atmospheric unpredictability."
+            >
+              <div className="space-y-3">
+                {/* Disagreement / Agreement Banner */}
+                <div
+                  className={`flex items-center justify-between rounded-md border px-3 py-2 text-2xs ${
+                    r.model_comparison.disagreement
+                      ? 'border-amber-500/40 bg-amber-500/10 text-amber-300'
+                      : 'border-emerald-500/30 bg-emerald-500/10 text-emerald-300'
+                  }`}
+                >
+                  <span className="font-semibold flex items-center gap-1.5">
+                    <span>{r.model_comparison.disagreement ? '⚠️' : '✓'}</span>
+                    {r.model_comparison.message}
+                  </span>
+                  <span className="font-mono text-[11px] text-ink-secondary">
+                    Inter-Model Spread: <strong>{r.model_comparison.spread_between_models} {r.variable.unit}</strong>
+                  </span>
+                </div>
+
+                {/* Model Rows */}
+                <div className="grid gap-2">
+                  {r.model_comparison.rows.map((row) => (
+                    <div
+                      key={row.model_id}
+                      className={`flex flex-wrap items-center justify-between gap-2 rounded border p-2 text-2xs transition-colors ${
+                        selection?.model_id === row.model_id
+                          ? 'border-accent bg-accent/10 ring-1 ring-accent/50'
+                          : 'border-edge bg-surface-2/60 hover:bg-surface-2'
+                      }`}
+                    >
+                      <div className="flex items-center gap-2">
+                        <span className="font-bold text-ink-primary">{row.model}</span>
+                        <span className="text-[10px] text-ink-muted hidden sm:inline">({row.centre})</span>
+                      </div>
+                      <div className="flex items-center gap-3">
+                        <span className="font-mono font-bold text-ink-primary">
+                          {row.forecast_value} {row.unit}
+                        </span>
+                        <span className="text-[10px] text-ink-secondary">
+                          Spread: <strong className="text-ink-primary">{row.ensemble_spread}</strong> ({row.spread_label})
+                        </span>
+                        <RiskChip category={row.risk_category} size="sm" />
+                        <span className="text-[10px] text-ink-muted">
+                          Skill: {row.historical_skill}%
+                        </span>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </Panel>
           )}
-        </Panel>
+        </div>
 
         <div className="space-y-4">
           <Panel
@@ -696,7 +887,7 @@ export function Dashboard() {
         </div>
       </div>
 
-      {/* Analogues */}
+      {/* Analogues + Horizon Profile with Operational Verification */}
       <div className="grid gap-4 xl:grid-cols-2">
         <Panel
           title="Historical analogue analysis"
@@ -721,30 +912,83 @@ export function Dashboard() {
           tip="Risk generally grows with lead time, but a pattern transition inside the window can make one specific lead time far riskier than its neighbours."
         >
           {r ? (
-            <ul className="space-y-2">
-              {r.horizon_profile.map((row) => (
-                <li key={row.horizon} className="flex items-center gap-3">
-                  <span className="w-12 shrink-0 text-2xs font-medium text-ink-secondary">
-                    {row.label}
-                  </span>
-                  <span className="h-5 flex-1 overflow-hidden rounded-sm bg-surface-2">
-                    <span
-                      className="flex h-full items-center justify-end rounded-sm px-1.5
-                                 text-[10px] font-bold text-surface-0 transition-all duration-300"
-                      style={{
-                        width: `${Math.max(row.risk_score, 8)}%`,
-                        background: riskColor(row.risk_category),
-                      }}
-                    >
-                      {row.risk_score.toFixed(0)}%
+            <div className="space-y-4">
+              <ul className="space-y-2">
+                {r.horizon_profile.map((row) => (
+                  <li key={row.horizon} className="flex items-center gap-3">
+                    <span className="w-12 shrink-0 text-2xs font-medium text-ink-secondary">
+                      {row.label}
                     </span>
+                    <span className="h-5 flex-1 overflow-hidden rounded-sm bg-surface-2">
+                      <span
+                        className="flex h-full items-center justify-end rounded-sm px-1.5
+                                   text-[10px] font-bold text-surface-0 transition-all duration-300"
+                        style={{
+                          width: `${Math.max(row.risk_score, 8)}%`,
+                          background: riskColor(row.risk_category),
+                        }}
+                      >
+                        {row.risk_score.toFixed(0)}%
+                      </span>
+                    </span>
+                    <span className="w-20 shrink-0 text-right">
+                      <RiskChip category={row.risk_category} size="sm" />
+                    </span>
+                  </li>
+                ))}
+              </ul>
+
+              {/* Operational Verification Scorecard */}
+              <div className="rounded-lg border border-edge/80 bg-surface-2/70 p-3 text-2xs">
+                <div className="flex items-center justify-between pb-2 border-b border-edge/60">
+                  <span className="font-bold uppercase tracking-wider text-ink-primary flex items-center gap-1.5">
+                    <span>📊</span> Operational Verification Scorecard
                   </span>
-                  <span className="w-20 shrink-0 text-right">
-                    <RiskChip category={row.risk_category} size="sm" />
+                  <span className="text-[10px] text-ink-muted">
+                    {r.observation_source.verified_against}
                   </span>
-                </li>
-              ))}
-            </ul>
+                </div>
+
+                <div className="mt-2.5 grid grid-cols-2 sm:grid-cols-4 gap-2 text-center">
+                  <div className="rounded bg-surface-1/80 p-2 border border-edge/50">
+                    <p className="text-[10px] text-ink-muted">RMSE</p>
+                    <p className="text-xs font-black text-ink-primary">
+                      {r.verification.metrics.rmse} {r.variable.unit}
+                    </p>
+                    <p className="text-[9px] text-ink-muted mt-0.5">MAE: {r.verification.metrics.mae}</p>
+                  </div>
+
+                  <div className="rounded bg-surface-1/80 p-2 border border-edge/50">
+                    <p className="text-[10px] text-ink-muted">Accuracy (ACC)</p>
+                    <p className="text-xs font-black text-emerald-400">
+                      {(r.verification.metrics.acc * 100).toFixed(1)}%
+                    </p>
+                    <p className="text-[9px] text-ink-muted mt-0.5">Anomaly Corr</p>
+                  </div>
+
+                  <div className="rounded bg-surface-1/80 p-2 border border-edge/50">
+                    <p className="text-[10px] text-ink-muted">Forecast Skill</p>
+                    <p className="text-xs font-black text-cyan-400">
+                      {(r.verification.metrics.skill * 100).toFixed(1)}%
+                    </p>
+                    <p className="text-[9px] text-ink-muted mt-0.5">vs Climatology</p>
+                  </div>
+
+                  <div className="rounded bg-surface-1/80 p-2 border border-edge/50">
+                    <p className="text-[10px] text-ink-muted">Verified Busts</p>
+                    <p className="text-xs font-black text-amber-400">
+                      {r.verification.metrics.bust_count} / {r.verification.metrics.sample_size}
+                    </p>
+                    <p className="text-[9px] text-ink-muted mt-0.5">Obs Window</p>
+                  </div>
+                </div>
+
+                <div className="mt-2 text-[10px] text-ink-muted flex flex-wrap items-center justify-between gap-1">
+                  <span>Window: {formatDate(r.observation_source.window[0])} – {formatDate(r.observation_source.window[1])}</span>
+                  <span>Reference: {r.verification.metrics.reference || 'IMD published daily normal'}</span>
+                </div>
+              </div>
+            </div>
           ) : (
             <LoadingState rows={5} />
           )}
