@@ -6,7 +6,7 @@
  * ensemble is doing. On first load this is the Jaipur Day 5 rainfall case.
  */
 
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { api } from '../api/client';
@@ -48,7 +48,7 @@ const BUST_COLOR: Record<string, string> = {
 };
 
 export function Dashboard() {
-  const { meta, risk, network, selection, setLocation, reload } = useAppState();
+  const { meta, risk, network, selection, setLocation, setHorizon, reload } = useAppState();
   const navigate = useNavigate();
   const [reportOpen, setReportOpen] = useState(false);
   const [alerts, setAlerts] = useState<AlertsResponse | null>(null);
@@ -56,6 +56,41 @@ export function Dashboard() {
   const [warningsLoading, setWarningsLoading] = useState(false);
   const [imdBust, setImdBust] = useState<ImdBustResponse | null>(null);
   const [imdBustLoading, setImdBustLoading] = useState(false);
+  const [countdown, setCountdown] = useState(60);
+  const [isSyncing, setIsSyncing] = useState(false);
+
+  // Manual or timer-triggered live telemetry sync
+  const handleSync = useCallback(
+    async (force = true) => {
+      if (!selection?.location_id) return;
+      setIsSyncing(true);
+      try {
+        const data = await api.imdBust(selection.location_id, force);
+        setImdBust(data);
+        reload();
+      } catch {
+        // preserve current state on network error
+      } finally {
+        setIsSyncing(false);
+        setCountdown(60);
+      }
+    },
+    [selection?.location_id, reload]
+  );
+
+  // Real-time 60-second polling heartbeat
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCountdown((prev) => {
+        if (prev <= 1) {
+          handleSync(true);
+          return 60;
+        }
+        return prev - 1;
+      });
+    }, 1000);
+    return () => clearInterval(timer);
+  }, [handleSync]);
 
   // The alert count is not the same thing as the high-risk-area count: the
   // alert engine scans every monitored variable and lead time, while the map
@@ -240,26 +275,52 @@ export function Dashboard() {
         {/* Risk panel */}
         <div className="space-y-4">
           <Panel
-            title="Forecast Bust Risk"
+            title="Meteorological Command Center & AI Bust Assessment"
             subtitle={
               imdBust
-                ? `${imdBust.location_name} · IMD Live: ${imdBust.matched_station}`
+                ? `${imdBust.location_name} · IMD Station: ${imdBust.matched_station} (${imdBust.distance_km} km)`
                 : r
                 ? `${r.location.name}, ${r.location.state}`
                 : undefined
             }
             tip={RISK_DEFINITION}
             actions={
-              r && (
+              <div className="flex items-center gap-2">
                 <button
                   type="button"
-                  onClick={() => setReportOpen(true)}
-                  className="rounded border border-edge-strong px-2 py-1 text-2xs font-medium
-                             text-ink-secondary transition-colors hover:border-accent hover:text-accent"
+                  onClick={() => handleSync(true)}
+                  disabled={isSyncing}
+                  className="inline-flex items-center gap-1.5 rounded border border-edge-strong bg-surface-2 px-2.5 py-1 text-2xs font-semibold
+                             text-ink-primary transition-all hover:border-accent hover:text-accent disabled:opacity-60"
+                  title="Force refresh real-time ground telemetry from OpenWeatherMap and IMD"
                 >
-                  Report
+                  <svg
+                    className={`h-3 w-3 ${isSyncing ? 'animate-spin text-accent' : 'text-cyan-400'}`}
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"
+                    />
+                  </svg>
+                  <span>{isSyncing ? 'Syncing…' : 'Sync Telemetry'}</span>
+                  <span className="text-[10px] text-ink-muted">({countdown}s)</span>
                 </button>
-              )
+                {r && (
+                  <button
+                    type="button"
+                    onClick={() => setReportOpen(true)}
+                    className="rounded border border-edge-strong px-2 py-1 text-2xs font-medium
+                               text-ink-secondary transition-colors hover:border-accent hover:text-accent"
+                  >
+                    Report
+                  </button>
+                )}
+              </div>
             }
           >
             <div className="mb-3 space-y-3">
@@ -267,264 +328,314 @@ export function Dashboard() {
               <DemoScenarios />
             </div>
 
-            {/* ── IMD LIVE ANALYSIS CARD ── */}
-            {imdBustLoading ? (
-              <LoadingState label="Fetching live IMD data…" rows={3} />
-            ) : imdBust ? (
-              <div className="mb-4 rounded-lg border border-edge overflow-hidden">
-                {/* Header bar */}
-                <div
-                  className="flex items-center justify-between px-3 py-2"
-                  style={{ backgroundColor: (WARNING_COLOR[imdBust.day_1_warning_color] ?? '#22c55e') + '22', borderBottom: `2px solid ${WARNING_COLOR[imdBust.day_1_warning_color] ?? '#22c55e'}` }}
-                >
+            {imdBustLoading && !imdBust ? (
+              <LoadingState label="Fetching live multi-source telemetry…" rows={5} />
+            ) : (
+              <div className="space-y-3">
+                {/* ── LIVE TELEMETRY & STATION BAR ── */}
+                <div className="flex flex-wrap items-center justify-between gap-2 rounded-md border border-edge/60 bg-surface-2/80 px-2.5 py-1.5">
                   <div className="flex items-center gap-2">
                     <span className="relative flex h-2.5 w-2.5">
-                      <span
-                        className="absolute inline-flex h-full w-full animate-ping rounded-full opacity-75"
-                        style={{ backgroundColor: WARNING_COLOR[imdBust.day_1_warning_color] ?? '#22c55e' }}
-                      />
-                      <span
-                        className="relative inline-flex h-2.5 w-2.5 rounded-full"
-                        style={{ backgroundColor: WARNING_COLOR[imdBust.day_1_warning_color] ?? '#22c55e' }}
-                      />
+                      <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-cyan-400 opacity-75" />
+                      <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-cyan-500" />
                     </span>
-                    <span className="text-xs font-bold uppercase tracking-wide text-ink-primary">
-                      IMD Live Analysis
+                    <span className="text-2xs font-bold uppercase tracking-wider text-cyan-400">
+                      Live Telemetry Stream
+                    </span>
+                    <span className="text-2xs text-ink-muted hidden sm:inline">
+                      · {imdBust ? `${imdBust.matched_station} (${imdBust.distance_km} km)` : r?.location.name}
                     </span>
                   </div>
-                  <span className="text-2xs text-ink-muted">
-                    {imdBust.matched_station} · {imdBust.distance_km} km
-                  </span>
+                  <div className="flex items-center gap-1.5 text-[10px]">
+                    <span className="rounded border border-edge/60 bg-surface-1 px-1.5 py-0.5 font-medium text-ink-secondary">
+                      OWM + MSN Gateway
+                    </span>
+                    <span className="rounded border border-emerald-500/20 bg-emerald-500/10 px-1.5 py-0.5 font-semibold text-emerald-400">
+                      ● IMD Ground Truth
+                    </span>
+                  </div>
                 </div>
 
-                {/* Live Bust Score — big number */}
-                <div className="px-3 pt-3">
-                  <div className="flex items-end justify-between mb-1">
-                    <span className="text-2xs font-medium uppercase tracking-wider text-ink-muted">AI Bust Probability</span>
-                    <span
-                      className="text-2xl font-black tabular-nums"
-                      style={{ color: BUST_COLOR[imdBust.bust_category] ?? '#22c55e' }}
-                    >
-                      {imdBust.bust_risk_score}%
-                    </span>
-                  </div>
-                  {/* Animated progress bar */}
-                  <div className="relative h-3 w-full overflow-hidden rounded-full bg-surface-2 mb-1">
-                    <div
-                      className="absolute inset-y-0 left-0 rounded-full transition-all duration-700"
-                      style={{
-                        width: `${imdBust.bust_risk_score}%`,
-                        backgroundColor: BUST_COLOR[imdBust.bust_category] ?? '#22c55e',
-                      }}
-                    />
-                  </div>
-                  <div className="flex justify-between text-2xs text-ink-muted mb-3">
-                    <span>LOW</span><span>MODERATE</span><span>HIGH</span><span>SEVERE</span>
-                  </div>
-
-                  {/* Risk category badge & dynamic bulletin date info */}
-                  <div className="mb-3 flex flex-wrap items-center justify-between gap-2">
-                    <div className="flex items-center gap-2">
-                      <span
-                        className="rounded px-2 py-0.5 text-xs font-bold uppercase tracking-wide text-white"
-                        style={{ backgroundColor: BUST_COLOR[imdBust.bust_category] ?? '#22c55e' }}
-                      >
-                        {imdBust.bust_category} RISK
-                      </span>
-                      <span className="text-2xs font-medium text-emerald-400">
-                        ● IMD Bulletin {formatDate(imdBust.bulletin_date || imdBust.date)} (Today)
-                      </span>
-                    </div>
-                    <span className="text-[11px] text-ink-muted">
-                      {imdBust.last_updated ? `Synced: ${imdBust.last_updated}` : 'Live feed'}
-                    </span>
-                  </div>
-
-                  {/* Forecast window banner */}
-                  <div className="mb-3 rounded border border-edge/60 bg-surface-2/70 px-2.5 py-1.5 text-[11px] text-ink-secondary flex items-center justify-between">
-                    <span>
-                      <strong className="text-ink-primary">Forecast Window:</strong> Day 1 to Day 7
-                      {imdBust.forecast_valid_to ? ` (${formatDate(imdBust.bulletin_date || imdBust.date)} – ${formatDate(imdBust.forecast_valid_to)})` : ''}
-                    </span>
-                    <span className="text-accent text-[10px] uppercase font-semibold">Live Operational</span>
-                  </div>
-
-                  {/* Current conditions grid */}
-                  <div className="grid grid-cols-2 gap-2 mb-3">
-                    <div className="rounded bg-surface-2 px-2 py-1.5">
-                      <p className="text-2xs text-ink-muted">24-hr Rainfall</p>
-                      <p className="text-sm font-semibold text-ink-primary">
-                        {imdBust.past_24_hrs_rainfall === 'NIL' || !imdBust.past_24_hrs_rainfall
-                          ? '0 mm'
-                          : `${imdBust.past_24_hrs_rainfall} mm`}
-                      </p>
-                    </div>
-                    <div className="rounded bg-surface-2 px-2 py-1.5">
-                      <p className="text-2xs text-ink-muted">IMD Warning</p>
-                      <p
-                        className="text-sm font-semibold capitalize"
-                        style={{ color: WARNING_COLOR[imdBust.day_1_warning_color] ?? '#22c55e' }}
-                      >
-                        {imdBust.day_1_warning_color.toUpperCase()}
-                      </p>
-                    </div>
-                    {imdBust.today_max_temp && (
-                      <div className="rounded bg-surface-2 px-2 py-1.5">
-                        <p className="text-2xs text-ink-muted">Max Temp</p>
-                        <p className="text-sm font-semibold text-ink-primary">{imdBust.today_max_temp}&deg;C</p>
-                      </div>
-                    )}
-                    {imdBust.humidity_0830 && (
-                      <div className="rounded bg-surface-2 px-2 py-1.5">
-                        <p className="text-2xs text-ink-muted">Humidity 0830</p>
-                        <p className="text-sm font-semibold text-ink-primary">{imdBust.humidity_0830}%</p>
-                      </div>
-                    )}
-                  </div>
-
-                  {/* Real-time Ground Observation Telemetry (WMO + Microsoft MSN Gateway) */}
-                  {imdBust.live_current && (
-                    <div className="mb-3 rounded-md border border-cyan-500/30 bg-surface-2/90 p-2.5 shadow-sm">
-                      <div className="flex items-center justify-between mb-2">
-                        <div className="flex items-center gap-1.5">
-                          <span className="relative flex h-2 w-2">
-                            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-cyan-400 opacity-75"></span>
-                            <span className="relative inline-flex rounded-full h-2 w-2 bg-cyan-500"></span>
-                          </span>
-                          <span className="text-[11px] font-bold uppercase tracking-wider text-cyan-400">
-                            Live Observation Telemetry
-                          </span>
-                        </div>
-                        <span className="text-[10px] rounded px-1.5 py-0.5 bg-cyan-500/10 text-cyan-300 font-medium border border-cyan-500/20">
-                          Multi-Source (WMO / MSN)
+                {/* ── HERO AI BUST ASSESSMENT GAUGE ── */}
+                {risk.error ? (
+                  <ErrorState message={risk.error} onRetry={reload} />
+                ) : r ? (
+                  <div
+                    className="relative overflow-hidden rounded-lg border border-edge/80 p-3"
+                    style={{
+                      background: `radial-gradient(ellipse at top, ${(BUST_COLOR[imdBust?.bust_category ?? r.risk_category] ?? '#22c55e')}16 0%, transparent 70%)`,
+                    }}
+                  >
+                    <div className="flex flex-col items-center">
+                      <RiskGauge
+                        score={imdBust?.bust_risk_score ?? r.risk_score}
+                        category={imdBust?.bust_category ?? r.risk_category}
+                        forecastConfidence={r.forecast_confidence}
+                        horizon={selection?.horizon ?? r.forecast_horizon}
+                      />
+                      {/* Risk Category Pill & Validity Window */}
+                      <div className="mt-2 flex flex-wrap items-center justify-center gap-2">
+                        <span
+                          className="rounded-full px-3 py-0.5 text-xs font-black uppercase tracking-wider text-white shadow-sm"
+                          style={{
+                            backgroundColor: BUST_COLOR[imdBust?.bust_category ?? r.risk_category] ?? '#22c55e',
+                            boxShadow: `0 0 14px ${(BUST_COLOR[imdBust?.bust_category ?? r.risk_category] ?? '#22c55e')}55`,
+                          }}
+                        >
+                          {imdBust?.bust_category ?? r.risk_category} BUST RISK
+                        </span>
+                        <span className="rounded border border-edge bg-surface-2 px-2 py-0.5 text-2xs font-semibold text-ink-secondary">
+                          Day {selection?.horizon ?? r.forecast_horizon} · Valid {formatDate(r.valid_date)}
                         </span>
                       </div>
+                    </div>
 
-                      <div className="grid grid-cols-4 gap-1.5 mb-2 text-center">
-                        <div className="rounded bg-surface-1/60 p-1.5">
-                          <p className="text-[10px] text-ink-muted">Live Temp</p>
-                          <p className="text-xs font-bold text-ink-primary">
-                            {imdBust.live_current.temperature !== null ? `${imdBust.live_current.temperature}°C` : 'N/A'}
-                          </p>
-                        </div>
-                        <div className="rounded bg-surface-1/60 p-1.5">
-                          <p className="text-[10px] text-ink-muted">Humidity</p>
-                          <p className="text-xs font-bold text-ink-primary">
-                            {imdBust.live_current.relative_humidity !== null ? `${imdBust.live_current.relative_humidity}%` : 'N/A'}
-                          </p>
-                        </div>
-                        <div className="rounded bg-surface-1/60 p-1.5">
-                          <p className="text-[10px] text-ink-muted">Live Rain</p>
-                          <p className="text-xs font-bold text-ink-primary">
-                            {imdBust.live_current.precipitation_mm !== null ? `${imdBust.live_current.precipitation_mm} mm` : '0 mm'}
-                          </p>
-                        </div>
-                        <div className="rounded bg-surface-1/60 p-1.5">
-                          <p className="text-[10px] text-ink-muted">Wind</p>
-                          <p className="text-xs font-bold text-ink-primary">
-                            {imdBust.live_current.wind_speed_kmh !== null ? `${imdBust.live_current.wind_speed_kmh} km/h` : 'N/A'}
-                          </p>
-                        </div>
+                    {/* Operational Telemetry Summary Bar */}
+                    <div className="mt-3 grid grid-cols-3 gap-1.5 border-t border-edge/60 pt-2.5 text-center text-2xs">
+                      <div className="rounded bg-surface-2/70 p-1.5">
+                        <p className="text-[10px] text-ink-muted">Model Confidence</p>
+                        <p className="font-bold text-ink-primary">{r.model_confidence.toFixed(0)}%</p>
                       </div>
+                      <div className="rounded bg-surface-2/70 p-1.5">
+                        <p className="text-[10px] text-ink-muted">Synoptic Regime</p>
+                        <p className="font-bold text-ink-primary truncate">{r.synoptic.regime}</p>
+                      </div>
+                      <div className="rounded bg-surface-2/70 p-1.5">
+                        <p className="text-[10px] text-ink-muted">IMD Warning</p>
+                        <p
+                          className="font-bold uppercase"
+                          style={{ color: WARNING_COLOR[imdBust?.day_1_warning_color ?? 'green'] ?? '#22c55e' }}
+                        >
+                          {imdBust?.day_1_warning_color?.toUpperCase() ?? 'GREEN'}
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                ) : (
+                  <LoadingState label="Computing AI bust probability…" rows={4} />
+                )}
 
-                      <div className="flex items-center justify-between text-[11px] text-ink-secondary pt-1 border-t border-edge/40">
-                        <span className="flex items-center gap-1">
-                          <span className="text-cyan-400">☁</span> Condition: <strong className="text-ink-primary">{imdBust.live_current.weather_description}</strong>
+                {/* ── 7-DAY HORIZON OUTLOOK SEGMENTED STRIP ── */}
+                <div className="rounded-lg border border-edge/70 bg-surface-2/60 p-2.5">
+                  <div className="mb-2 flex items-center justify-between text-2xs font-medium">
+                    <span className="flex items-center gap-1.5 font-bold uppercase tracking-wider text-ink-primary">
+                      <span>📅</span> 7-Day Horizon Trajectory
+                    </span>
+                    <span className="text-[10px] font-semibold text-accent">Select Lead Time</span>
+                  </div>
+                  <div className="grid grid-cols-7 gap-1">
+                    {(imdBust?.forecast_7days && imdBust.forecast_7days.length > 0
+                      ? imdBust.forecast_7days
+                      : [1, 2, 3, 4, 5, 6, 7].map((d) => ({
+                          day: d,
+                          max_temp: null,
+                          min_temp: null,
+                          forecast: '',
+                          warning: '',
+                          warning_color: 'green',
+                        }))
+                    ).map((day) => {
+                      const isSelected = selection?.horizon === day.day;
+                      const warnCol = WARNING_COLOR[day.warning_color?.toLowerCase() ?? 'green'] ?? '#22c55e';
+                      return (
+                        <button
+                          key={day.day}
+                          type="button"
+                          onClick={() => setHorizon(day.day)}
+                          className={`flex flex-col items-center justify-between rounded p-1.5 text-center transition-all ${
+                            isSelected
+                              ? 'border-2 border-accent bg-accent/20 shadow-sm ring-1 ring-accent/60'
+                              : 'border border-edge bg-surface-1/70 hover:border-edge-strong hover:bg-surface-2'
+                          }`}
+                          title={`Day ${day.day}: ${day.forecast || 'Official Forecast'} (Warning: ${day.warning || day.warning_color || 'Green'})`}
+                        >
+                          <div className="flex w-full items-center justify-between">
+                            <span className={`text-[10px] font-bold ${isSelected ? 'text-accent' : 'text-ink-secondary'}`}>
+                              D{day.day}
+                            </span>
+                            <span className="h-2 w-2 rounded-full shrink-0" style={{ backgroundColor: warnCol }} />
+                          </div>
+                          <span className="my-0.5 text-xs font-black text-ink-primary">
+                            {day.max_temp !== null && day.max_temp !== undefined ? `${Math.round(day.max_temp)}°` : '--'}
+                          </span>
+                          <span className="text-[9px] text-ink-muted">
+                            {day.min_temp !== null && day.min_temp !== undefined ? `${Math.round(day.min_temp)}°` : ''}
+                          </span>
+                        </button>
+                      );
+                    })}
+                  </div>
+                </div>
+
+                {/* ── GROUND TRUTH VS NWP MODEL DIVERGENCE MATRIX ── */}
+                <div className="rounded-lg border border-cyan-500/30 bg-surface-2/70 p-2.5">
+                  <div className="mb-2 flex items-center justify-between">
+                    <span className="flex items-center gap-1.5 text-2xs font-bold uppercase tracking-wider text-cyan-400">
+                      <span>⚡</span> Ground Truth vs NWP Divergence
+                    </span>
+                    <span className="rounded border border-cyan-500/20 bg-cyan-500/10 px-1.5 py-0.5 text-[10px] font-medium text-cyan-300">
+                      OpenWeatherMap + MSN
+                    </span>
+                  </div>
+                  <div className="grid grid-cols-2 gap-2 text-2xs">
+                    {/* Temperature Tile */}
+                    <div className="rounded-md border border-edge/60 bg-surface-1/80 p-2">
+                      <div className="flex items-center justify-between text-ink-muted">
+                        <span className="font-semibold text-ink-secondary">Surface Temp</span>
+                        <span className="text-[10px]">ΔT Anomaly</span>
+                      </div>
+                      <div className="mt-1 flex items-baseline gap-1.5">
+                        <span className="text-sm font-black text-ink-primary">
+                          {imdBust?.live_current?.temperature !== null && imdBust?.live_current?.temperature !== undefined
+                            ? `${imdBust.live_current.temperature.toFixed(1)}°C`
+                            : imdBust?.today_max_temp
+                            ? `${imdBust.today_max_temp}°C`
+                            : 'N/A'}
+                        </span>
+                        {imdBust?.live_current?.feels_like !== null && imdBust?.live_current?.feels_like !== undefined && (
+                          <span className="text-[10px] text-ink-muted">
+                            (Feels {imdBust.live_current.feels_like.toFixed(1)}°)
+                          </span>
+                        )}
+                      </div>
+                      <div className="mt-0.5 flex items-center justify-between text-[10px] text-ink-muted">
+                        <span>
+                          NWP:{' '}
+                          {imdBust?.today_max_temp
+                            ? `${imdBust.today_max_temp}°C`
+                            : r?.base_value !== undefined
+                            ? `${r.base_value.toFixed(1)}${r.variable.unit}`
+                            : '--'}
+                        </span>
+                        {imdBust?.live_current?.temperature !== null &&
+                          imdBust?.live_current?.temperature !== undefined &&
+                          imdBust?.today_max_temp && (
+                            <span
+                              className={`rounded px-1 text-[9px] font-bold ${
+                                Math.abs(imdBust.live_current.temperature - parseFloat(imdBust.today_max_temp)) >= 2.5
+                                  ? 'bg-rose-500/20 text-rose-400'
+                                  : 'bg-emerald-500/20 text-emerald-400'
+                              }`}
+                            >
+                              {(imdBust.live_current.temperature - parseFloat(imdBust.today_max_temp)) > 0 ? '+' : ''}
+                              {(imdBust.live_current.temperature - parseFloat(imdBust.today_max_temp)).toFixed(1)}°C
+                            </span>
+                          )}
+                      </div>
+                    </div>
+
+                    {/* Moisture & Rain Tile */}
+                    <div className="rounded-md border border-edge/60 bg-surface-1/80 p-2">
+                      <div className="flex items-center justify-between text-ink-muted">
+                        <span className="font-semibold text-ink-secondary">Moisture & Rain</span>
+                        <span className="text-[10px]">
+                          {imdBust?.live_current?.dew_point !== null && imdBust?.live_current?.dew_point !== undefined
+                            ? `Dew ${imdBust.live_current.dew_point.toFixed(0)}°`
+                            : 'RH'}
+                        </span>
+                      </div>
+                      <div className="mt-1 flex items-baseline gap-1.5">
+                        <span className="text-sm font-black text-ink-primary">
+                          {imdBust?.live_current?.relative_humidity !== null && imdBust?.live_current?.relative_humidity !== undefined
+                            ? `${imdBust.live_current.relative_humidity}%`
+                            : imdBust?.humidity_0830
+                            ? `${imdBust.humidity_0830}%`
+                            : 'N/A'}
                         </span>
                         <span className="text-[10px] text-ink-muted">
-                          {imdBust.live_current.msn_connector?.status === 'connected' ? 'MSN Active' : 'Bing/MSN Gateway + WMO'}
+                          Live: {imdBust?.live_current?.precipitation_mm ?? '0.0'} mm
+                        </span>
+                      </div>
+                      <div className="mt-0.5 flex items-center justify-between text-[10px] text-ink-muted">
+                        <span>Past 24h: {imdBust?.past_24_hrs_rainfall || '0 mm'}</span>
+                        <span className="font-medium text-cyan-400">
+                          {(imdBust?.live_current?.relative_humidity ?? 50) > 75 ? 'High Vapor Inflow' : 'Standard Moisture'}
                         </span>
                       </div>
                     </div>
-                  )}
 
-                  {/* Today's official forecast */}
-                  {imdBust.todays_forecast && (
-                    <div className="mb-3 rounded bg-surface-2 px-2.5 py-2">
-                      <p className="text-2xs text-ink-muted mb-0.5">IMD Official Forecast</p>
-                      <p className="text-xs text-ink-secondary leading-snug">{imdBust.todays_forecast}</p>
+                    {/* Barometric Pressure Tile */}
+                    <div className="rounded-md border border-edge/60 bg-surface-1/80 p-2">
+                      <div className="flex items-center justify-between text-ink-muted">
+                        <span className="font-semibold text-ink-secondary">Surface Pressure</span>
+                        <span className="text-[10px]">Tendency</span>
+                      </div>
+                      <div className="mt-1 flex items-baseline gap-1.5">
+                        <span className="text-sm font-black text-ink-primary">
+                          {imdBust?.live_current?.pressure_hpa ? `${imdBust.live_current.pressure_hpa} hPa` : '1010 hPa'}
+                        </span>
+                      </div>
+                      <div className="mt-0.5 flex items-center justify-between text-[10px] text-ink-muted">
+                        <span>
+                          {(imdBust?.live_current?.pressure_hpa ?? 1010) < 1006 ? 'Depression Flow' : 'Equilibrium Field'}
+                        </span>
+                        <span
+                          className={`font-semibold ${
+                            (imdBust?.live_current?.pressure_hpa ?? 1010) < 1006 ? 'text-amber-400' : 'text-emerald-400'
+                          }`}
+                        >
+                          {(imdBust?.live_current?.pressure_hpa ?? 1010) < 1006 ? 'Convective' : 'Stable'}
+                        </span>
+                      </div>
                     </div>
-                  )}
 
-                  {/* Bust drivers */}
-                  {imdBust.bust_drivers.length > 0 && (
-                    <div className="mb-3">
-                      <p className="text-2xs font-medium uppercase tracking-wider text-ink-muted mb-1.5">Risk Drivers</p>
-                      <ul className="space-y-1">
-                        {imdBust.bust_drivers.map((d, i) => (
-                          <li key={i} className="flex items-start gap-1.5 text-2xs text-ink-secondary">
-                            <span style={{ color: BUST_COLOR[imdBust.bust_category] }}>▶</span>
-                            <span>{d}</span>
-                          </li>
-                        ))}
-                      </ul>
+                    {/* Boundary Layer Wind & Sky Tile */}
+                    <div className="rounded-md border border-edge/60 bg-surface-1/80 p-2">
+                      <div className="flex items-center justify-between text-ink-muted">
+                        <span className="font-semibold text-ink-secondary">Wind & Sky</span>
+                        <span className="text-[10px]">Cloud {imdBust?.live_current?.cloud_cover ?? '--'}%</span>
+                      </div>
+                      <div className="mt-1 flex items-baseline gap-1.5">
+                        <span className="text-sm font-black text-ink-primary">
+                          {imdBust?.live_current?.wind_speed_kmh !== null && imdBust?.live_current?.wind_speed_kmh !== undefined
+                            ? `${imdBust.live_current.wind_speed_kmh} km/h`
+                            : 'N/A'}
+                        </span>
+                        <span className="text-[10px] text-ink-muted truncate max-w-[80px]">
+                          {imdBust?.live_current?.wind_deg ? `${imdBust.live_current.wind_deg}°` : ''}
+                        </span>
+                      </div>
+                      <div className="mt-0.5 truncate text-[10px] text-ink-secondary">
+                        {imdBust?.live_current?.weather_description || imdBust?.todays_forecast || 'Clear Sky'}
+                      </div>
                     </div>
-                  )}
+                  </div>
+                </div>
 
-                  {/* Recommendation */}
-                  {imdBust.recommendation && (
-                    <div
-                      className="mb-3 rounded px-2.5 py-2 text-2xs"
-                      style={{
-                        backgroundColor: (BUST_COLOR[imdBust.bust_category] ?? '#22c55e') + '18',
-                        borderLeft: `3px solid ${BUST_COLOR[imdBust.bust_category] ?? '#22c55e'}`,
-                        color: BUST_COLOR[imdBust.bust_category] ?? '#22c55e',
-                      }}
-                    >
-                      {imdBust.recommendation}
-                    </div>
-                  )}
-
-                  {/* Day-1 warning text */}
-                  {imdBust.day_1_warning && (
-                    <p className="text-2xs text-ink-muted mb-2">
-                      <span className="font-medium">Day 1 Warning:</span> {imdBust.day_1_warning}
+                {/* ── PHYSICAL BUST DRIVERS ── */}
+                {imdBust?.bust_drivers && imdBust.bust_drivers.length > 0 && (
+                  <div>
+                    <p className="mb-1 text-2xs font-bold uppercase tracking-wider text-ink-muted">
+                      Telemetry & Anomaly Risk Drivers
                     </p>
-                  )}
-                </div>
-              </div>
-            ) : null}
+                    <ul className="space-y-1">
+                      {imdBust.bust_drivers.map((d, i) => (
+                        <li key={i} className="flex items-start gap-1.5 text-2xs text-ink-secondary">
+                          <span style={{ color: BUST_COLOR[imdBust.bust_category ?? 'LOW'] }}>▶</span>
+                          <span>{d}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
 
-            {/* ── Original model gauge (kept) ── */}
-            {risk.error ? (
-              <ErrorState message={risk.error} onRetry={reload} />
-            ) : r ? (
-              <>
-                <div className="mb-2 flex items-center justify-between">
-                  <p className="text-2xs font-bold uppercase tracking-wider text-ink-primary flex items-center gap-1.5">
-                    <span className="h-2 w-2 rounded-full bg-emerald-500 animate-pulse" />
-                    IMD Operational Risk Assessment
-                  </p>
-                  <span className="text-[10px] text-emerald-400 font-semibold" title="Grounded in official IMD observations and warnings">
-                    Live IMD Telemetry
-                  </span>
-                </div>
-                <RiskGauge
-                  score={r.risk_score}
-                  category={r.risk_category}
-                  forecastConfidence={r.forecast_confidence}
-                  horizon={r.forecast_horizon}
-                />
-                <dl className="mt-3 space-y-1.5 border-t border-edge pt-3 text-2xs">
-                  <Row term="Risk category" value={<RiskChip category={r.risk_category} size="sm" />} />
-                  <Row
-                    term="Variable & Lead Time"
-                    value={<span className="font-semibold text-ink-primary">{r.variable.label} · Day {r.forecast_horizon} ({formatDate(r.valid_date)})</span>}
-                  />
-                  <Row
-                    term="IMD Warning Level"
-                    value={
-                      <span className="font-semibold uppercase" style={{ color: WARNING_COLOR[imdBust?.day_1_warning_color || 'green'] ?? '#22c55e' }}>
-                        {imdBust?.day_1_warning_color?.toUpperCase() || 'GREEN (NO WARNING)'}
-                      </span>
-                    }
-                  />
-                  <Row term="Synoptic regime" value={<span className="text-right">{r.synoptic.regime}</span>} />
-                  <Row term="Assessment Date" value={`${formatDate(r.base_date)} (Today)`} />
-                </dl>
-              </>
-            ) : (
-              <LoadingState label="Assessing forecast" rows={4} />
+                {/* ── OPERATIONAL DIRECTIVE & RECOMMENDATION ── */}
+                {imdBust?.recommendation && (
+                  <div
+                    className="rounded-md px-3 py-2 text-2xs leading-relaxed"
+                    style={{
+                      backgroundColor: (BUST_COLOR[imdBust.bust_category ?? 'LOW'] ?? '#22c55e') + '18',
+                      borderLeft: `3px solid ${BUST_COLOR[imdBust.bust_category ?? 'LOW'] ?? '#22c55e'}`,
+                      color: BUST_COLOR[imdBust.bust_category ?? 'LOW'] ?? '#22c55e',
+                    }}
+                  >
+                    <strong className="mb-0.5 block font-bold uppercase tracking-wider">
+                      IMD Operational Directive:
+                    </strong>
+                    {imdBust.recommendation}
+                  </div>
+                )}
+              </div>
             )}
           </Panel>
 
@@ -637,15 +748,6 @@ export function Dashboard() {
       </div>
 
       {reportOpen && r && <ReportExport risk={r} onClose={() => setReportOpen(false)} />}
-    </div>
-  );
-}
-
-function Row({ term, value }: { term: string; value: React.ReactNode }) {
-  return (
-    <div className="flex items-center justify-between gap-3">
-      <dt className="text-ink-muted">{term}</dt>
-      <dd className="font-medium text-ink-primary">{value}</dd>
     </div>
   );
 }

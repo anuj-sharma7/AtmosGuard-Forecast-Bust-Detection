@@ -1024,13 +1024,23 @@ export interface LiveWeatherResponse {
   lon: number;
   location_name?: string;
   temperature: number | null;
+  feels_like?: number | null;
+  temp_min?: number | null;
+  temp_max?: number | null;
   relative_humidity: number | null;
+  dew_point?: number | null;
   precipitation_mm: number | null;
   wind_speed_kmh: number | null;
+  wind_deg?: number | null;
+  pressure_hpa?: number | null;
+  cloud_cover?: number | null;
+  visibility_km?: number | null;
   weather_code: number;
   weather_description: string;
+  weather_icon?: string;
   time: string | null;
   source: string;
+  provider?: string;
   msn_connector?: {
     endpoint: string;
     status: string;

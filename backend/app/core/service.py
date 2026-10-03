@@ -159,6 +159,7 @@ def risk_bundle(
     model_id: str,
     base_date: date,
     horizon: int,
+    force_refresh: bool = False,
 ) -> dict[str, object]:
     """The full assessment payload behind /api/risk."""
     site = ALL_SITES_BY_ID[location_id]
@@ -192,7 +193,9 @@ def risk_bundle(
             days_7 = matched.get("forecast_7days", [])
 
             # Fetch multi-source ground observation telemetry (OpenWeatherMap + WMO)
-            live_obs = live_weather.fetch_live_weather(site.lat, site.lon, location_name=site.name)
+            live_obs = live_weather.fetch_live_weather(
+                site.lat, site.lon, location_name=site.name, force_refresh=force_refresh
+            )
             curr_temp = live_obs.get("temperature")
             curr_rh = live_obs.get("relative_humidity")
             curr_rain = live_obs.get("precipitation_mm") or 0.0

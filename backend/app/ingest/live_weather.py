@@ -19,7 +19,7 @@ logger = logging.getLogger(__name__)
 
 # Cache: (rounded_lat, rounded_lon) -> (timestamp, data_dict)
 _CACHE: dict[tuple[float, float], tuple[float, dict[str, Any]]] = {}
-CACHE_TTL = 900  # 15 minutes
+CACHE_TTL = 120  # 2 minutes for real-time telemetry freshness
 
 # WMO Weather interpretation codes (WW)
 WMO_CODES: dict[int, str] = {
@@ -58,10 +58,7 @@ def fetch_openweathermap(
     api_key: str | None = None,
     timeout_sec: float = 3.5,
 ) -> dict[str, Any] | None:
-    """Fetch live weather observation from OpenWeatherMap API.
-
-    Can be enabled or disabled cleanly via environment variable OPENWEATHERMAP_API_KEY.
-    """
+    """Fetch live weather observation from OpenWeatherMap API with full atmospheric telemetry."""
     from ..config import settings
 
     key = api_key if api_key is not None else settings.openweathermap_api_key
@@ -92,13 +89,26 @@ def fetch_openweathermap(
                 rain_obj = data.get("rain", {})
                 precip = rain_obj.get("1h", rain_obj.get("3h", 0.0))
 
+                t = round(float(main.get("temp", 0)), 1)
+                rh = float(main.get("humidity", 0))
+                # Magnus-Tetens approximation for dew point
+                dew_point = round(t - ((100.0 - rh) / 5.0), 1) if rh else None
+
                 return {
-                    "temperature": round(float(main.get("temp", 0)), 1),
-                    "relative_humidity": float(main.get("humidity", 0)),
+                    "temperature": t,
+                    "feels_like": round(float(main.get("feels_like", t)), 1),
+                    "temp_min": round(float(main.get("temp_min", t)), 1),
+                    "temp_max": round(float(main.get("temp_max", t)), 1),
+                    "relative_humidity": rh,
+                    "dew_point": dew_point,
                     "precipitation_mm": float(precip),
                     "wind_speed_kmh": round(float(wind.get("speed", 0)) * 3.6, 1),
+                    "wind_deg": int(wind.get("deg", 0)),
                     "pressure_hpa": float(main.get("pressure", 1013)),
+                    "cloud_cover": int(data.get("clouds", {}).get("all", 0)),
+                    "visibility_km": round(float(data.get("visibility", 10000)) / 1000.0, 1),
                     "weather_description": desc,
+                    "weather_icon": weather_arr[0].get("icon", "01d") if weather_arr else "01d",
                     "station_name": data.get("name"),
                     "source": "OpenWeatherMap Realtime Telemetry",
                     "status": "live_owm",
@@ -167,17 +177,18 @@ def fetch_live_weather(
     lon: float,
     location_name: str = "",
     timeout_sec: float = 4.0,
+    force_refresh: bool = False,
 ) -> dict[str, Any]:
     """Fetch current live weather conditions for given coordinates with caching.
 
     Integrates OpenWeatherMap, MSN / Microsoft Weather connector with high-frequency WMO/Open-Meteo
-    telemetry fallback.
+    telemetry fallback. Supports force_refresh to immediately bypass cache.
     """
     key = (round(lat, 2), round(lon, 2))
     now = time.monotonic()
 
     cached = _CACHE.get(key)
-    if cached and (now - cached[0] < CACHE_TTL):
+    if not force_refresh and cached and (now - cached[0] < CACHE_TTL):
         return cached[1]
 
     # 1. Attempt OpenWeatherMap if configured (can be toggled / removed anytime)
@@ -188,12 +199,21 @@ def fetch_live_weather(
             "lon": lon,
             "location_name": owm_data.get("station_name") or location_name,
             "temperature": owm_data["temperature"],
+            "feels_like": owm_data.get("feels_like", owm_data["temperature"]),
+            "temp_min": owm_data.get("temp_min"),
+            "temp_max": owm_data.get("temp_max"),
             "relative_humidity": owm_data["relative_humidity"],
+            "dew_point": owm_data.get("dew_point"),
             "precipitation_mm": owm_data["precipitation_mm"],
             "wind_speed_kmh": owm_data["wind_speed_kmh"],
+            "wind_deg": owm_data.get("wind_deg", 0),
+            "pressure_hpa": owm_data.get("pressure_hpa", 1013.0),
+            "cloud_cover": owm_data.get("cloud_cover", 0),
+            "visibility_km": owm_data.get("visibility_km", 10.0),
             "weather_code": 0,
             "weather_description": owm_data["weather_description"],
-            "time": time.strftime("%Y-%m-%d %H:%M"),
+            "weather_icon": owm_data.get("weather_icon", "01d"),
+            "time": time.strftime("%Y-%m-%d %H:%M:%S IST"),
             "source": "OpenWeatherMap Realtime Telemetry",
             "provider": "openweathermap",
             "msn_connector": {

@@ -100,7 +100,7 @@ export function AppStateProvider({ children }: { children: ReactNode }) {
     return () => {
       cancelled = true;
     };
-  }, [selection]);
+  }, [selection, nonce]);
 
   useEffect(() => {
     if (!selection) return;
@@ -117,7 +117,7 @@ export function AppStateProvider({ children }: { children: ReactNode }) {
     return () => {
       cancelled = true;
     };
-  }, [selection]);
+  }, [selection, nonce]);
 
   // Any manual change leaves the curated scenario behind - the selection no
   // longer matches it, and pretending otherwise would mislabel the view.

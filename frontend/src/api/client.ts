@@ -211,14 +211,19 @@ async function request<T>(
 export const api = {
   meta: () => request<Meta>('/meta'),
 
-  risk: (selection: Selection) =>
-    request<RiskResponse>('/risk', {
-      location: selection.location_id,
-      variable: selection.variable_id,
-      model: selection.model_id,
-      horizon: selection.horizon,
-      forecast_date: selection.base_date,
-    }),
+  risk: (selection: Selection, refresh = false) =>
+    request<RiskResponse>(
+      '/risk',
+      {
+        location: selection.location_id,
+        variable: selection.variable_id,
+        model: selection.model_id,
+        horizon: selection.horizon,
+        forecast_date: selection.base_date,
+        refresh: refresh ? 'true' : undefined,
+      },
+      { cache: !refresh }
+    ),
 
   scenario: (id: string) => request<RiskResponse>(`/scenario/${id}`),
 
@@ -266,8 +271,12 @@ export const api = {
     request<ImdCityForecastResponse>('/imd/cityforecast', undefined, { cache: false }),
 
   /** Live IMD bust prediction for the nearest station to a given dashboard location */
-  imdBust: (locationId: string) =>
-    request<ImdBustResponse>(`/imd/bust/${locationId}`, undefined, { cache: false }),
+  imdBust: (locationId: string, refresh = false) =>
+    request<ImdBustResponse>(
+      `/imd/bust/${locationId}`,
+      { refresh: refresh ? 'true' : undefined },
+      { cache: false }
+    ),
 
   /** Real-time early-warning alerts generated from official IMD city forecasts */
   imdAlerts: (threshold = 50, severity?: string) =>

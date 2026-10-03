@@ -117,10 +117,13 @@ def risk(
     variable: str = Query("rainfall"),
     model: str = Query("ecmwf"),
     forecast_date: str | None = Query(None, description="Initialisation date (ISO)"),
+    refresh: bool = Query(False, description="Force fresh live telemetry fetch"),
 ) -> dict:
     """Forecast bust risk, explanation, ensemble, analogues and verification."""
     _validate(location, variable, model, horizon)
-    return service.risk_bundle(location, variable, model, _parse_date(forecast_date), horizon)
+    return service.risk_bundle(
+        location, variable, model, _parse_date(forecast_date), horizon, force_refresh=refresh
+    )
 
 
 @router.get("/scenario/{scenario_id}", response_model=RiskResponse)
@@ -767,7 +770,10 @@ def imd_city_forecast() -> dict:
 
 
 @router.get("/imd/bust/{location_id}")
-def imd_bust_for_location(location_id: str) -> dict:
+def imd_bust_for_location(
+    location_id: str,
+    refresh: bool = Query(False, description="Force fresh live telemetry fetch"),
+) -> dict:
     """Return live IMD bust prediction for the nearest station to a dashboard location."""
     import math
 
@@ -825,6 +831,7 @@ def imd_bust_for_location(location_id: str) -> dict:
             best.get("lat", 20.0),
             best.get("lon", 78.0),
             location_name=best.get("station_name", ref_name),
+            force_refresh=refresh,
         ),
         "source": payload.get("source"),
         "updated_at": payload.get("updated_at"),
@@ -858,8 +865,10 @@ def get_live_weather(
     lat: float = Query(..., description="Latitude in decimal degrees"),
     lon: float = Query(..., description="Longitude in decimal degrees"),
     location: str = Query("", description="City or station name"),
+    refresh: bool = Query(False, description="Force bypass cache"),
 ) -> dict:
     """Fetch current real-time atmospheric observations (temperature, rainfall, humidity, wind) with MSN connector & WMO telemetry."""
-    return live_weather.fetch_live_weather(lat, lon, location_name=location)
+    return live_weather.fetch_live_weather(lat, lon, location_name=location, force_refresh=refresh)
+
 
 
