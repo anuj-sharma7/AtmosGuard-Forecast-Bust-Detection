@@ -1,0 +1,16 @@
+services:
+  - type: web
+    name: atmosguard
+    env: docker
+    region: oregon
+    plan: free
+    dockerfilePath: Dockerfile
+    dockerContext: .
+    healthCheckPath: /api/health
+    envVars:
+      - key: ATMOSGUARD_DATA_MODE
+        value: demo
+      - key: ATMOSGUARD_SERVE_FRONTEND
+        value: "true"
+      - key: ATMOSGUARD_CORS_ORIGINS
+        value: "*"

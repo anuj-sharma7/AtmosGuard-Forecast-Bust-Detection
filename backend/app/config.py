@@ -72,7 +72,11 @@ class Settings:
     # baseline model is used and every response is labelled accordingly.
     model_path: str | None = field(default_factory=lambda: os.getenv("ATMOSGUARD_MODEL_PATH"))
 
-    cors_origins: tuple[str, ...] = ("http://localhost:5173", "http://127.0.0.1:5173")
+    cors_origins: tuple[str, ...] = field(
+        default_factory=lambda: tuple(
+            [origin.strip() for origin in os.getenv("ATMOSGUARD_CORS_ORIGINS", "*").split(",") if origin.strip()]
+        )
+    )
 
     serve_frontend: bool = field(default_factory=lambda: _env_bool("ATMOSGUARD_SERVE_FRONTEND", True))
 
