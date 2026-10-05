@@ -249,6 +249,22 @@ export function HistoricalReplayPage() {
     return <ErrorState message={error} onRetry={() => window.location.reload()} />;
   }
 
+  const retryStationReplay = () => {
+    if (!stationsMeta) {
+      api.stationsMeta().then(setStationsMeta).catch((e) => setStationError(describe(e)));
+    }
+    setStationBusy(true);
+    setStationError(null);
+    api
+      .stationReplay(stationDate, stationId)
+      .then((res) => setStationRun(res))
+      .catch((e) => {
+        setStationRun(null);
+        setStationError(describe(e));
+      })
+      .finally(() => setStationBusy(false));
+  };
+
   return (
     <div className="space-y-4">
       {/* -------------------------------- Tabs -------------------------------- */}
@@ -285,6 +301,7 @@ export function HistoricalReplayPage() {
           onStationChange={setStationId}
           busy={stationBusy}
           error={stationError}
+          onRetry={retryStationReplay}
         />
       ) : tab === 'monthly' ? (
         <MonthlyReplayPanel

@@ -225,11 +225,19 @@ export function MonthlyReplayPanel({
         </header>
         <div className="-mx-0 overflow-x-auto px-4 pb-4">
           {busy && !data ? (
-            <p className="py-8 text-center text-[11px] text-ink-muted">Running replay…</p>
+            <div className="space-y-3 py-6 text-center">
+              <div className="mx-auto flex h-8 w-8 items-center justify-center rounded-full border-2 border-cyan-400 border-t-transparent animate-spin" />
+              <p className="text-[12px] font-medium text-ink-primary">Aggregating Sub-Divisional Historical Rainfall Archives...</p>
+              <div className="space-y-2 px-6">
+                {[1, 2, 3, 4, 5].map((i) => (
+                  <div key={i} className="h-7 w-full animate-pulse rounded bg-surface-2/60" />
+                ))}
+              </div>
+            </div>
           ) : rows.length === 0 ? (
-            <p className="py-8 text-center text-[11px] text-ink-muted">
-              Nothing to show for this month.
-            </p>
+            <div className="py-8 text-center text-[12px] text-ink-muted">
+              No archived sub-division records available for this selected month.
+            </div>
           ) : (
             <table className="w-full min-w-[820px] border-collapse text-[11px]">
               <thead>
